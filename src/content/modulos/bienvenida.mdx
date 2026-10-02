@@ -2,15 +2,110 @@
 title: Bienvenida y mapa del curso
 order: 0
 block: contexto
-summary: Qué ha pasado con la IA en los últimos cuatro años, en un minuto, y cómo aprovechar este curso.
+summary: Qué ha cambiado con la IA en los últimos cuatro años, en un vistazo, y cómo sacar partido a este curso.
 minutes: 5
 ---
 
+import BeforeAfter from "@/components/interactive/BeforeAfter.tsx";
+import VizFrame from "@/components/ui/VizFrame.astro";
 import ParaLlevar from "@/components/ui/ParaLlevar.astro";
+import Analogia from "@/components/ui/Analogia.astro";
 import Term from "@/components/ui/Term.astro";
 
-## En construcción
+En noviembre de 2022 una empresa llamada OpenAI publicó gratis un chat llamado **ChatGPT**. En dos meses lo usaban unos cien millones de personas. Desde entonces la inteligencia artificial ha pasado de ser un tema de laboratorio a estar en casi todas las presentaciones de proyectos, presupuestos de innovación y titulares.
 
-Este módulo se completará en el siguiente paso. Prueba de término: <Term id="llm" />.
+Si has estado fuera estos años, no te has perdido una evolución gradual: te has perdido **una explosión**. La buena noticia es que las ideas de fondo son pocas y se pueden entender sin saber programar.
 
-<ParaLlevar>- La estructura del curso ya está lista.</ParaLlevar>
+## Cuatro años en un interruptor
+
+Mueve el interruptor para comparar cómo estaban las cosas a finales de 2021 con cómo están hoy.
+
+<VizFrame
+  title="Antes y ahora"
+  caption="Cada tarjeta resume un cambio que verás explicado en detalle más adelante."
+>
+  <BeforeAfter
+    client:visible
+    items={[
+      {
+        topic: "Hablar con una IA",
+        before:
+          "Asistentes como Siri o Alexa entendían órdenes simples y fallaban en cuanto la conversación se complicaba.",
+        after:
+          "Cientos de millones de personas conversan a diario con ChatGPT, Claude o Gemini, que redactan, resumen, traducen y razonan.",
+      },
+      {
+        topic: "Crear imágenes",
+        before: "Las imágenes generadas eran borrosas o extrañas: curiosidades de laboratorio.",
+        after:
+          "Imágenes de calidad profesional a partir de una frase, y edición conversando: «mismo personaje, ahora de perfil».",
+      },
+      {
+        topic: "Vídeo",
+        before: "Prácticamente inexistente fuera de demos de investigación.",
+        after:
+          "Planos cinematográficos de varios segundos, con diálogo y sonido, generados desde texto o desde una imagen.",
+      },
+      {
+        topic: "Trabajo autónomo",
+        before: "La IA respondía; nunca actuaba por su cuenta.",
+        after:
+          "Agentes que programan, investigan en la web o rellenan documentos durante horas, usando herramientas y pidiendo aprobación.",
+      },
+      {
+        topic: "Quién compite",
+        before: "Google y unos pocos laboratorios de investigación.",
+        after:
+          "OpenAI, Anthropic, Google, Meta, xAI… y una potente ola china (DeepSeek, Qwen, Kimi) con modelos abiertos y baratos.",
+      },
+      {
+        topic: "Coste",
+        before: "Usar IA avanzada requería equipos de datos y proyectos de meses.",
+        after:
+          "Cualquier equipo puede conectar un modelo de primer nivel en días, pagando por uso. El precio por tarea no deja de caer.",
+      },
+      {
+        topic: "Regulación",
+        before: "Ninguna ley específica sobre IA.",
+        after: "La UE aplica por fases el AI Act, la primera ley integral de IA del mundo.",
+      },
+      {
+        topic: "En tu trabajo",
+        before: "«IA» en un proyecto solía significar análisis de datos o predicción.",
+        after:
+          "Muchos proyectos se construyen sobre un modelo de un tercero; valorar bien qué aportan de verdad es clave.",
+      },
+    ]}
+  />
+</VizFrame>
+
+## Cómo está organizado el curso
+
+El curso tiene cuatro bloques, pensados para leerse en orden, aunque puedes saltar a lo que necesites:
+
+1. **Contexto.** De dónde viene todo esto: historia de la IA y un mapa para no perderse entre siglas.
+2. **Cómo funciona.** Qué hay dentro de un <Term id="llm" />, cómo un <Term id="difusion">modelo de difusión</Term> crea imágenes desde ruido y qué diferencia a un chatbot de un <Term id="agente" />. Sin matemáticas.
+3. **Estado del arte.** Quién es quién en EE. UU. y China, qué ofrece cada uno y cómo leer las comparativas.
+4. **Aplicación a tu trabajo.** Los dos proyectos que tienes sobre la mesa (generación de imágenes para animación y un agente para cine), y una lista de comprobación para valorar cualquier proyecto de IA.
+
+Al final tienes un **glosario**. Las palabras <Term id="token">subrayadas con puntos</Term> muestran su definición al pasar el ratón (o al tocarlas) y te llevan al glosario.
+
+<Analogia title="La idea que lo resume todo">
+  Los modelos actuales no se **programan**, se **entrenan**. Nadie le ha escrito a ChatGPT las
+  reglas de la gramática ni a Midjourney cómo dibujar una mano: han aprendido de miles de millones
+  de ejemplos. Por eso son tan versátiles… y por eso a veces fallan de formas sorprendentes.
+</Analogia>
+
+## Cómo usar cada módulo
+
+- Cada módulo dura **5–15 minutos**.
+- Las animaciones son interactivas: **tócalas**. Están pensadas para que entiendas un concepto, no para decorar.
+- Al final de cada módulo hay un bloque **«Para llevar»** con lo esencial y, cuando aplica, **«Qué preguntar en una reunión»**.
+- Puedes marcar los módulos como leídos; el progreso se guarda en este navegador.
+
+<ParaLlevar>
+  - Desde noviembre de 2022 la IA generativa ha pasado de curiosidad a herramienta de trabajo
+  masiva. - Las ideas de fondo son pocas: modelos entrenados con muchísimos datos que predicen o
+  generan contenido. - Tu objetivo no es construir IA, sino **tener criterio** para valorar
+  proyectos que la usan.
+</ParaLlevar>

@@ -1,0 +1,104 @@
+---
+title: El mapa de la IA
+order: 2
+block: contexto
+summary: IA, machine learning, deep learning, IA generativa… Qué es cada cosa, cómo encajan y la diferencia entre IA predictiva y generativa.
+minutes: 8
+---
+
+import NestedSets from "@/components/viz/NestedSets.tsx";
+import Classify from "@/components/interactive/Classify.tsx";
+import VizFrame from "@/components/ui/VizFrame.astro";
+import ParaLlevar from "@/components/ui/ParaLlevar.astro";
+import QuePreguntar from "@/components/ui/QuePreguntar.astro";
+import Analogia from "@/components/ui/Analogia.astro";
+import Term from "@/components/ui/Term.astro";
+
+En las presentaciones de proyectos verás estas palabras usadas casi como sinónimos. No lo son: son **conjuntos que se contienen unos a otros**, como las muñecas rusas.
+
+<VizFrame
+  title="Las muñecas rusas de la IA"
+  caption="Cada nivel es un tipo particular del anterior. Toda la IA generativa es deep learning, pero no todo el deep learning es generativo."
+>
+  <NestedSets client:visible />
+</VizFrame>
+
+## Dos grandes familias: predecir y generar
+
+Para tu trabajo, la distinción más útil es esta:
+
+- **<Term id="ia-predictiva" />**: responde a «¿qué va a pasar?» o «¿qué es esto?». Devuelve una etiqueta, una probabilidad o un número. Ejemplo: «este cliente tiene un 73 % de probabilidad de darse de baja».
+- **<Term id="ia-generativa" />**: responde a «créame esto». Devuelve contenido nuevo: un texto, una imagen, un vídeo, una voz, código.
+
+<Analogia>
+  La IA predictiva es un **analista**: mira datos y te da un diagnóstico. La IA generativa es un
+  **creativo**: le das un briefing y te entrega una propuesta.
+</Analogia>
+
+Ambas siguen conviviendo. Muchos proyectos «de IA» que verás combinan las dos: por ejemplo, un modelo predictivo decide a qué clientes escribir y uno generativo redacta el mensaje.
+
+## Pon a prueba la distinción
+
+<VizFrame
+  title="¿Predictiva o generativa?"
+  caption="Ejemplos tomados del día a día de marketing e innovación."
+>
+  <Classify
+    client:visible
+    question="¿Qué tipo de IA hay detrás de cada caso?"
+    options={["Predictiva", "Generativa"]}
+    items={[
+      {
+        text: "Estimar qué clientes tienen más probabilidad de comprar en la próxima campaña.",
+        answer: "Predictiva",
+        explain: "Devuelve una probabilidad por cliente, no crea contenido.",
+      },
+      {
+        text: "Redactar diez variantes de un titular para un test A/B.",
+        answer: "Generativa",
+        explain: "Crea texto nuevo a partir de unas instrucciones.",
+      },
+      {
+        text: "Crear el storyboard de un anuncio a partir del guion.",
+        answer: "Generativa",
+        explain: "Genera imágenes nuevas; es exactamente lo que hacen los modelos de difusión.",
+      },
+      {
+        text: "Detectar si un comentario en redes es positivo, negativo o neutro.",
+        answer: "Predictiva",
+        explain:
+          "Clasifica un texto existente en categorías. Ojo: hoy a menudo se hace con un LLM, pero la tarea sigue siendo predictiva.",
+      },
+      {
+        text: "Previsión de ventas del próximo trimestre por tienda.",
+        answer: "Predictiva",
+        explain: "Estima un número a partir de datos históricos.",
+      },
+      {
+        text: "Doblar un vídeo corporativo a cinco idiomas con la voz del portavoz.",
+        answer: "Generativa",
+        explain:
+          "Genera audio nuevo imitando una voz. Requiere consentimiento expreso de esa persona.",
+      },
+    ]}
+  />
+</VizFrame>
+
+## Otras palabras que oirás
+
+- **<Term id="modelo" />**: el resultado del entrenamiento, el «cerebro» que se usa. Cuando alguien dice «hemos entrenado un modelo», pregunta si lo han entrenado desde cero (muy raro y caro) o han ajustado uno existente (lo habitual).
+- **<Term id="entrenamiento" /> e <Term id="inferencia">inferencia</Term>**: entrenar es enseñar al modelo (caro, se hace una vez); inferencia es usarlo (barato por uso, pero se paga cada vez).
+- **<Term id="agi" />**: la hipotética IA capaz de hacer cualquier tarea intelectual humana. Los grandes laboratorios dicen perseguirla; nadie se pone de acuerdo en cuándo llegará ni en cómo reconocerla. Para valorar proyectos concretos, es irrelevante.
+
+<QuePreguntar>
+  - Cuando decís «IA», ¿se trata de predecir algo, de generar contenido o de ambas cosas? - ¿El
+  modelo es propio, ajustado a partir de uno existente o se usa el de un proveedor? - ¿Qué parte del
+  coste es entrenamiento (una vez) y qué parte es uso (cada vez)?
+</QuePreguntar>
+
+<ParaLlevar>
+  - IA ⊃ machine learning ⊃ deep learning ⊃ IA generativa. - La distinción práctica: la IA
+  **predictiva** diagnostica; la **generativa** crea. - «Hemos entrenado un modelo» casi siempre
+  significa que han **ajustado** uno ya existente. - Entrenar es una inversión puntual; usar el
+  modelo (inferencia) es un coste recurrente.
+</ParaLlevar>

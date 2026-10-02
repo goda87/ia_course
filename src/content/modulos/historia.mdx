@@ -1,0 +1,71 @@
+---
+title: Historia de la IA
+order: 1
+block: contexto
+summary: Setenta años de promesas, inviernos y saltos. Una línea de tiempo interactiva para entender por qué todo se aceleró a partir de 2017.
+minutes: 12
+verifiedAt: "2026-10-02"
+---
+
+import Timeline from "@/components/interactive/Timeline.tsx";
+import VizFrame from "@/components/ui/VizFrame.astro";
+import ParaLlevar from "@/components/ui/ParaLlevar.astro";
+import Analogia from "@/components/ui/Analogia.astro";
+import Callout from "@/components/ui/Callout.astro";
+import Term from "@/components/ui/Term.astro";
+import { timeline } from "@/data";
+
+La inteligencia artificial no nació con ChatGPT. Es un campo con más de setenta años, que ha pasado por épocas de euforia y por «inviernos» en los que casi nadie quería financiarlo. Entender esos ciclos ayuda a leer el momento actual con algo de perspectiva.
+
+## La línea de tiempo
+
+Pulsa en cada punto para ver qué pasó, por qué importa y, cuando aplica, qué significa para el negocio. Los puntos con borde de color son de 2022 en adelante: el periodo que no viviste de cerca.
+
+<VizFrame
+  title="70 años de IA"
+  caption="Puedes filtrar por etapa o ver solo los hitos clave. Cada hito incluye su fuente."
+>
+  <Timeline client:visible items={timeline} />
+</VizFrame>
+
+## Las tres ideas que explican la historia
+
+### 1. De las reglas a los ejemplos
+
+Durante décadas, la IA consistió en **escribir reglas**: «si el correo contiene "gratis" y "urgente", es spam». Funcionaba en problemas muy acotados, pero el mundo real tiene demasiadas excepciones. El gran cambio fue el <Term id="machine-learning">machine learning</Term>: en lugar de escribir las reglas, se le dan al sistema miles de ejemplos y él descubre los patrones.
+
+### 2. Tres ingredientes que coincidieron en 2012
+
+Las <Term id="red-neuronal">redes neuronales</Term> existían desde los años 50, pero no funcionaban bien. En 2012 coincidieron tres cosas:
+
+- **Datos masivos**: internet había generado miles de millones de textos e imágenes.
+- **Potencia de cálculo**: las <Term id="gpu">GPU</Term> de los videojuegos resultaron perfectas para entrenar redes neuronales.
+- **Mejores técnicas** para entrenar redes de muchas capas: el <Term id="deep-learning">deep learning</Term>.
+
+<Analogia>
+  Es como la cocina: la receta (redes neuronales) existía desde hacía décadas, pero hasta 2012 no
+  hubo ingredientes suficientes (datos) ni un horno lo bastante potente (GPU).
+</Analogia>
+
+### 3. El Transformer y las «leyes de escala»
+
+En 2017 Google publicó el <Term id="transformer" />, una arquitectura que entiende el contexto de cada palabra de forma muy eficiente. Poco después, OpenAI comprobó algo sorprendente: **cuanto más grande el modelo, más datos y más cálculo, mejor funciona**, de forma bastante predecible. Eso desató una carrera de inversión que todavía continúa: centros de datos de miles de millones de dólares, acuerdos con eléctricas y una demanda de chips que ha convertido a NVIDIA en una de las mayores empresas del mundo.
+
+<Callout variant="dato" title="Por qué ahora va tan rápido">
+  Desde 2024 se suman dos aceleradores más: los **modelos de razonamiento** (que mejoran dándoles
+  más tiempo para «pensar») y los **agentes** (que mejoran conectándolos a herramientas). Ya no
+  depende solo de hacer modelos más grandes.
+</Callout>
+
+## Qué nos enseña la historia para valorar proyectos
+
+- **Las promesas van por delante de la realidad.** Pasó en 1956, en los 80 y puede volver a pasar. Desconfía de los plazos milagrosos.
+- **Pero esta vez hay uso real y masivo.** A diferencia de otros ciclos, hoy cientos de millones de personas usan la IA a diario y hay productos que facturan miles de millones.
+- **Las ventajas duran poco.** Lo que un proyecto presenta como único puede estar disponible gratis en ChatGPT dentro de seis meses. Pregunta siempre qué es realmente propio.
+
+<ParaLlevar>
+  - La IA tiene 70 años de historia con ciclos de euforia y desencanto. - El salto moderno se debe a
+  tres ingredientes: muchos datos, GPU y redes neuronales profundas. - 2017 (Transformer) y 2022
+  (ChatGPT) son las dos fechas clave para entender el presente. - Desde 2024 la IA mejora también
+  «pensando más» (razonamiento) y «haciendo» (agentes).
+</ParaLlevar>
