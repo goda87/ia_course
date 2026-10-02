@@ -96,7 +96,7 @@ export const costItem = z.object({
   label: z.string(),
   unit: z.string(),
   range,
-  currency: z.literal("USD"),
+  currency: z.enum(["USD", "EUR"]),
   note: z.string().optional(),
   sources,
   verifiedAt: isoDate,

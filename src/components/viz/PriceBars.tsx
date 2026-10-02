@@ -70,9 +70,9 @@ export default function PriceBars({ models }: Props) {
         ))}
       </div>
       <p className="mt-3 text-sm text-muted">
-        Coste de <strong className="text-fg">1.000</strong> tareas de tipo «{sc.label.toLowerCase()}
-        »: {sc.desc} ({sc.input.toLocaleString("es-ES")} tokens de entrada y{" "}
-        {sc.output.toLocaleString("es-ES")} de salida cada una).
+        Coste de <strong className="text-fg">1.000</strong> tareas de tipo{" "}
+        {`«${sc.label.toLowerCase()}»`}: {sc.desc} ({sc.input.toLocaleString("es-ES")} tokens de
+        entrada y {sc.output.toLocaleString("es-ES")} de salida cada una).
       </p>
       <ul className="mt-4 space-y-1.5">
         {rows.map(({ m, cost }) => (

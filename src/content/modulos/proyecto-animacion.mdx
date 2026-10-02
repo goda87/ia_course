@@ -1,0 +1,269 @@
+---
+title: "Proyecto A: imágenes para animación con un modelo propio"
+order: 7
+block: aplicacion
+summary: Qué puede significar «un modelo entrenado específicamente para animación», de lo más sencillo a lo más ambicioso, cuánto cuesta cada opción y qué preguntar al equipo.
+minutes: 15
+verifiedAt: "2026-10-02"
+---
+
+import InvestmentLadder from "@/components/interactive/InvestmentLadder.tsx";
+import AnimationCostSimulator from "@/components/interactive/AnimationCostSimulator.tsx";
+import ConsistencyStrip from "@/components/viz/ConsistencyStrip.tsx";
+import PipelineFlow from "@/components/viz/PipelineFlow.tsx";
+import VizFrame from "@/components/ui/VizFrame.astro";
+import CostSources from "@/components/ui/CostSources.astro";
+import ParaLlevar from "@/components/ui/ParaLlevar.astro";
+import QuePreguntar from "@/components/ui/QuePreguntar.astro";
+import Aviso from "@/components/ui/Aviso.astro";
+import Callout from "@/components/ui/Callout.astro";
+import Term from "@/components/ui/Term.astro";
+import { costs, cost } from "@/data";
+import { moneyRange } from "@/lib/format";
+
+export const lora = cost("lora-entrenamiento");
+export const ft = cost("finetuning-completo");
+export const scratch = cost("entrenamiento-desde-cero");
+export const img = cost("api-imagen");
+export const vid = cost("api-video");
+export const ml = cost("ingeniero-ml");
+
+Aún no conocemos los detalles de este proyecto. Sabemos que se centra en **generar imágenes para animación con un modelo entrenado específicamente para ello**. Esa frase puede describir cosas muy distintas, que cuestan desde unos cientos hasta varios millones. Este módulo te da el mapa para **situar la propuesta** en cuanto la recibas.
+
+<Callout variant="dato" title="Antes de nada: ¿qué quiere decir «entrenado específicamente»?">
+  En la gran mayoría de los casos significa que han **ajustado** un modelo existente (normalmente
+  con
+  <Term id="lora">LoRA</Term>) con imágenes de sus personajes y su estilo. Entrenar un modelo
+  **desde cero** es rarísimo y carísimo. Las dos opciones son legítimas, pero no son el mismo
+  proyecto ni tienen el mismo coste ni el mismo riesgo.
+</Callout>
+
+## La escalera de opciones
+
+Cinco niveles, de menos a más inversión. Pulsa cada peldaño.
+
+<VizFrame
+  title="¿En qué peldaño está el proyecto?"
+  caption="Costes orientativos de mercado (2026) en dólares, que es como facturan los proveedores. Los de personal dependen del equipo y del país."
+>
+  <InvestmentLadder
+    client:visible
+    rungs={[
+      {
+        level: 1,
+        name: "Modelo comercial con referencias",
+        what: "No se entrena nada. Se usan modelos comerciales (Nano Banana, GPT Image, Seedream, Firefly…) con imágenes de referencia de los personajes y el estilo.",
+        cost: `${moneyRange(img.range.min, img.range.max)} por imagen; ${moneyRange(vid.range.min, vid.range.max)} por segundo de vídeo. Puesta en marcha mínima.`,
+        time: "Días o semanas",
+        pros: [
+          "Barato y rápido de probar",
+          "Calidad alta sin infraestructura",
+          "Siempre a la última",
+        ],
+        cons: [
+          "Control limitado de estilo y consistencia",
+          "Dependencia del proveedor (precios, condiciones, cierre)",
+          "Los datos salen de la empresa",
+        ],
+        when: "se quiere explorar, hacer concept art, animatics o previsualización, o validar la idea antes de invertir.",
+      },
+      {
+        level: 2,
+        name: "LoRA sobre un modelo abierto",
+        what: "Se entrena un adaptador ligero (LoRA) con decenas o cientos de imágenes de cada personaje y del estilo, sobre un modelo abierto (FLUX.2, Qwen-Image; Wan para vídeo).",
+        cost: `Cómputo: ${moneyRange(lora.range.min, lora.range.max)} por entrenamiento, y se hacen decenas. El coste real está en preparar el dataset: semanas de artistas y un perfil técnico.`,
+        time: "Semanas",
+        pros: [
+          "Estilo y personajes propios",
+          "Se puede alojar en servidores propios",
+          "Cómputo muy barato",
+        ],
+        cons: [
+          "Requiere un dataset limpio y con derechos",
+          "Hay que repetirlo cuando sale un modelo base mejor",
+          "Revisar la licencia del modelo base",
+        ],
+        when: "el estilo de la casa es la seña de identidad y hay suficientes dibujos propios para enseñarlo.",
+      },
+      {
+        level: 3,
+        name: "Pipeline de producción",
+        what: "LoRA + control de pose (ControlNet) + referencias de personaje + interpolación de fotogramas + revisión humana, integrado con las herramientas del estudio. Es lo que suele hacer falta para producir de verdad.",
+        cost: `Desarrollo: 1–3 perfiles técnicos durante meses (un ingeniero de ML en España cuesta ${moneyRange(ml.range.min, ml.range.max, "EUR")} brutos al año). Más GPU para producción.`,
+        time: "3–9 meses",
+        pros: [
+          "Control real: pose, cámara, consistencia",
+          "Integrado en el flujo del estudio",
+          "Ventaja difícil de copiar",
+        ],
+        cons: [
+          "Inversión en personas y mantenimiento",
+          "Complejidad técnica",
+          "Requiere un responsable técnico estable",
+        ],
+        when: "hay producción recurrente (series, campañas) en la que el ahorro se repite muchas veces.",
+      },
+      {
+        level: 4,
+        name: "Ajuste completo de un modelo abierto",
+        what: "Se reentrena todo el modelo (no solo un adaptador) con miles o decenas de miles de imágenes propias.",
+        cost: `Cómputo: ${moneyRange(ft.range.min, ft.range.max)} por ciclo, más equipo especializado y un dataset grande.`,
+        time: "Meses",
+        pros: ["Máxima adaptación a un estilo muy particular"],
+        cons: [
+          "Caro y lento de iterar",
+          "Rara vez mejora mucho respecto a un buen LoRA",
+          "Se queda obsoleto con cada generación de modelos",
+        ],
+        when: "el estilo es muy distinto de todo lo existente y hay un archivo enorme de material propio.",
+      },
+      {
+        level: 5,
+        name: "Modelo propio desde cero",
+        what: "Se diseña y entrena un modelo base nuevo.",
+        cost: `${moneyRange(scratch.range.min, scratch.range.max)} solo en cómputo, más millones de imágenes con derechos y un equipo de investigación.`,
+        time: "6–18 meses",
+        pros: ["Control total y propiedad completa"],
+        cons: [
+          "Coste enorme",
+          "Difícilmente superará a los modelos abiertos existentes",
+          "Necesita datos masivos con derechos",
+        ],
+        when: "casi nunca para un estudio de animación. Si te lo proponen, pide una justificación muy sólida.",
+      },
+    ]}
+  />
+</VizFrame>
+
+## Cómo sería un flujo de producción realista
+
+La mayoría de proyectos serios del nivel 2–3 se parecen a esto:
+
+<VizFrame
+  title="Un pipeline típico de animación asistida por IA"
+  caption="Las personas siguen en los pasos creativos clave: diseño, layout, actuación y revisión final."
+>
+  <PipelineFlow
+    client:visible
+    autoplay={4000}
+    steps={[
+      {
+        icon: "🎨",
+        title: "Diseño y dataset",
+        text: "Los artistas definen personajes y estilo y preparan el material de entrenamiento: hojas de modelo, poses, expresiones, fondos. Es el paso más importante y el más infravalorado.",
+      },
+      {
+        icon: "🧠",
+        title: "Entrenamiento",
+        text: "Se entrenan LoRA por personaje y por estilo sobre un modelo abierto, y se prueban hasta que el parecido es consistente.",
+      },
+      {
+        icon: "✏️",
+        title: "Layout y claves",
+        text: "El animador fija poses clave (bocetos, esqueletos de pose o 3D básico). La IA no decide la actuación: la sigue.",
+      },
+      {
+        icon: "⚙️",
+        title: "Generación",
+        text: "El sistema genera fotogramas o clips respetando pose, personaje y estilo (LoRA + ControlNet + referencias), e intercala fotogramas intermedios.",
+      },
+      {
+        icon: "🔍",
+        title: "Revisión y retoque",
+        text: "Los artistas revisan, descartan y retocan: manos, líneas, colores, continuidad. Aquí se juega la rentabilidad del proyecto.",
+      },
+      {
+        icon: "🎬",
+        title: "Composición",
+        text: "Se integra en las herramientas habituales del estudio (Toon Boom, TVPaint, Blender, After Effects…) y se etiqueta como contenido generado con IA cuando corresponda.",
+      },
+    ]}
+  />
+</VizFrame>
+
+## El gran reto: la consistencia
+
+Lo viste en el módulo 04. En animación, un personaje que cambia ligeramente de un fotograma a otro es inaceptable. Es el criterio número uno para evaluar el proyecto: **pide ver secuencias, no imágenes sueltas**.
+
+<VizFrame
+  title="Consistencia entre fotogramas"
+  caption="Una imagen suelta bonita no demuestra nada. Una secuencia de 5–10 segundos con el personaje idéntico, sí."
+>
+  <ConsistencyStrip client:visible />
+</VizFrame>
+
+Otros retos específicos de la animación:
+
+- **Estilo 2D**: la línea limpia y el color plano perdonan menos errores que el realismo.
+- **Actuación y timing**: el arte del animador. La IA genera movimiento, pero no necesariamente buena actuación.
+- **Intercalado (<Term id="in-betweening">in-betweening</Term>)**: es donde la IA puede ahorrar más trabajo repetitivo, partiendo de los <Term id="keyframe">fotogramas clave</Term> del animador.
+- **Integración**: si el resultado no entra limpio en las herramientas del estudio (capas, vectores, formatos), el ahorro se evapora.
+
+## Simulador de costes de producción
+
+Juega con los supuestos. Verás que la conclusión casi siempre es la misma.
+
+<VizFrame
+  title="¿Cuánto cuesta producir con IA?"
+  caption="Coste variable de producción. No incluye la puesta en marcha (nivel elegido en la escalera) ni el resto del equipo."
+>
+  <AnimationCostSimulator client:visible costs={costs} />
+</VizFrame>
+
+<CostSources
+  ids={[
+    "api-imagen",
+    "api-video",
+    "gpu-h100",
+    "imagenes-por-hora-gpu",
+    "lora-entrenamiento",
+    "finetuning-completo",
+    "entrenamiento-desde-cero",
+    "ingeniero-ml",
+  ]}
+/>
+
+## Costes ocultos
+
+Lo que no suele aparecer en la primera presentación:
+
+- **El dataset**: seleccionar, limpiar, etiquetar y, a veces, dibujar expresamente cientos de imágenes. Son semanas de artistas.
+- **La iteración**: decenas de entrenamientos y miles de generaciones de prueba antes de producir.
+- **El retoque humano**, que suele ser el mayor coste variable.
+- **El mantenimiento**: cada pocos meses sale un modelo base mejor; mantenerse al día implica reentrenar.
+- **La infraestructura y las personas** que la mantienen (<Term id="mlops">MLOps</Term>).
+- **El cumplimiento legal**: revisión de licencias, derechos y etiquetado.
+
+## Licencias, derechos y regulación
+
+<Aviso title="Puntos legales a revisar sí o sí">
+
+- **Licencia del modelo base.** No todos los modelos «abiertos» permiten uso comercial. Por ejemplo, FLUX.2 [dev] es no comercial salvo licencia; FLUX.2 [klein] y Wan 2.7 son Apache 2.0. Hay que comprobarlo modelo a modelo.
+- **Derechos del dataset.** ¿Las imágenes de entrenamiento son del estudio? ¿Hay dibujos de artistas externos, de clientes o de licencias de terceros? Entrenar con material sin derechos es un riesgo serio.
+- **Imitar estilos ajenos.** Entrenar para imitar el estilo reconocible de otro estudio o artista es jurídicamente y reputacionalmente delicado.
+- **Autoría del resultado.** La protección por derechos de autor de lo generado por IA depende de la aportación humana; es una zona gris que conviene revisar con asesoría jurídica.
+- **AI Act.** Desde agosto de 2026 aplican obligaciones de transparencia sobre contenido generado o manipulado con IA, y el marcado legible por máquina del contenido generado es exigible desde diciembre de 2026.
+- **Convenios y gremios.** Los acuerdos con animadores, guionistas o actores de voz pueden incluir cláusulas sobre IA.
+
+</Aviso>
+
+<QuePreguntar title="Preguntas para el equipo del proyecto">
+  - ¿Qué significa exactamente «entrenado específicamente»: referencias, LoRA, ajuste completo o
+  modelo desde cero? - ¿Qué modelo base usáis y con qué licencia? ¿Permite nuestro uso comercial? -
+  ¿Con cuántas imágenes se entrena, de quién son y quién las prepara? - ¿Podéis enseñar
+  **secuencias** de 5–10 segundos con el personaje consistente, no solo imágenes sueltas? - ¿Qué
+  control tiene el animador: pose, cámara, timing? - ¿Qué porcentaje de lo generado se descarta y
+  qué porcentaje hay que retocar a mano? - ¿Cuál es el coste por segundo de animación final,
+  comparado con el proceso actual? - ¿Cómo se integra con nuestras herramientas actuales? - ¿Qué
+  pasa cuando salga un modelo base mejor o si el proveedor cambia la licencia o cierra? - ¿Cómo vais
+  a cumplir el etiquetado del AI Act?
+</QuePreguntar>
+
+<ParaLlevar>
+  - «Entrenado específicamente» casi siempre significa **ajustar** un modelo existente (LoRA), no
+  crear uno desde cero. - El cómputo es barato; lo caro son **las personas**: preparar el dataset,
+  desarrollar el flujo y, sobre todo, **retocar** lo generado. - El criterio técnico número uno es
+  la **consistencia** del personaje en secuencias, no la belleza de una imagen. - Licencia del
+  modelo, derechos del dataset y AI Act son innegociables. - La propuesta más sensata suele ser
+  empezar por el nivel 1–2 como piloto y subir de peldaño solo si los números salen.
+</ParaLlevar>

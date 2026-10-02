@@ -1,0 +1,48 @@
+---
+/** Tabla de precios de referencia (src/data/costs.json) con sus fuentes. */
+import { costs } from "@/data";
+import { moneyRange } from "@/lib/format";
+
+interface Props {
+  ids?: string[];
+}
+const { ids } = Astro.props;
+const list = ids ? costs.filter((c) => ids.includes(c.id)) : costs;
+---
+
+<div class="not-prose my-6 overflow-x-auto rounded-xl border border-line">
+  <table class="w-full min-w-[36rem] text-left text-sm">
+    <caption class="border-b border-line bg-bg-soft px-4 py-2 text-left text-xs text-muted">
+      Precios de referencia usados en este módulo. Rangos orientativos, verificados el
+      {list[0]?.verifiedAt}.
+    </caption>
+    <thead class="text-xs tracking-wider text-muted uppercase">
+      <tr>
+        <th class="px-4 py-2 font-semibold">Concepto</th>
+        <th class="px-4 py-2 font-semibold">Rango</th>
+        <th class="px-4 py-2 font-semibold">Detalle y fuentes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {list.map((c) => (
+        <tr class="border-t border-line align-top">
+          <td class="px-4 py-2 font-medium">{c.label}</td>
+          <td class="px-4 py-2 whitespace-nowrap tabular-nums">
+            {c.unit === "imágenes/hora"
+              ? `${c.range.min}–${c.range.max}`
+              : moneyRange(c.range.min, c.range.max, c.currency)}{" "}
+            <span class="text-muted">/ {c.unit}</span>
+          </td>
+          <td class="px-4 py-2 text-muted">
+            {c.note}{" "}
+            {c.sources.map((s, i) => (
+              <a href={s} target="_blank" rel="noreferrer" class="underline">
+                [{i + 1}]
+              </a>
+            ))}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

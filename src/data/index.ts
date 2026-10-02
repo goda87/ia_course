@@ -4,6 +4,7 @@ import timelineRaw from "./timeline.json";
 import glossaryRaw from "./glossary.json";
 import companiesRaw from "./companies.json";
 import modelsRaw from "./models.json";
+import costsRaw from "./costs.json";
 
 export const timeline = s.timeline
   .parse(timelineRaw)
@@ -16,6 +17,14 @@ export const companies = s.companies.parse(companiesRaw);
 export const models = s.models
   .parse(modelsRaw)
   .sort((a, b) => b.released.localeCompare(a.released));
+
+export const costs = s.costs.parse(costsRaw);
+
+export function cost(id: string) {
+  const c = costs.find((x) => x.id === id);
+  if (!c) throw new Error(`Coste desconocido: "${id}"`);
+  return c;
+}
 
 export function glossaryEntry(id: string) {
   const entry = glossary.find((g) => g.id === id);

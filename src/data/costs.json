@@ -1,0 +1,119 @@
+[
+  {
+    "id": "api-imagen",
+    "label": "Generar una imagen con un modelo comercial por API",
+    "unit": "imagen",
+    "range": {
+      "min": 0.03,
+      "max": 0.1
+    },
+    "currency": "USD",
+    "note": "Nano Banana 2: 0,067 $ por imagen 1K (0,034 $ en lote); versión Lite, 0,034 $. Otros modelos de gama alta cuestan algo más.",
+    "sources": ["https://ai.google.dev/gemini-api/docs/pricing"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "api-video",
+    "label": "Generar un segundo de vídeo por API",
+    "unit": "segundo",
+    "range": {
+      "min": 0.1,
+      "max": 0.5
+    },
+    "currency": "USD",
+    "note": "Veo 3.1 Fast: de 0,10 $ (720p) a 0,30 $ (4K) por segundo; Wan 2.7 desde 0,10 $. Los modelos de máxima calidad cuestan más.",
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/pricing",
+      "https://www.cliprise.app/news/wan-2-7-video-release"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gpu-h100",
+    "label": "Alquiler de una GPU H100 en la nube",
+    "unit": "hora",
+    "range": {
+      "min": 2,
+      "max": 4
+    },
+    "currency": "USD",
+    "note": "RunPod de 1,99 a 2,99 $/h; Lambda de 3,29 a 3,99 $/h (agosto de 2026). Las grandes nubes suelen ser más caras.",
+    "sources": [
+      "https://www.spheron.network/blog/runpod-vs-lambda-labs-2026/",
+      "https://intuitionlabs.ai/articles/h100-rental-prices-cloud-comparison"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "imagenes-por-hora-gpu",
+    "label": "Imágenes generadas por hora en una GPU propia",
+    "unit": "imágenes/hora",
+    "range": {
+      "min": 300,
+      "max": 1500
+    },
+    "currency": "USD",
+    "note": "Estimación: entre 2,5 y 12 segundos por imagen según modelo, resolución y número de pasos. Sirve para calcular el coste por imagen con GPU alquilada.",
+    "sources": ["https://fluxnote.io/guides/flux-2"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "lora-entrenamiento",
+    "label": "Un entrenamiento de LoRA de imagen en un servicio gestionado",
+    "unit": "entrenamiento",
+    "range": {
+      "min": 2,
+      "max": 10
+    },
+    "currency": "USD",
+    "note": "fal.ai: unos 2 $ por entrenamiento rápido de FLUX; 8 $ por 1.000 pasos con FLUX.2 [dev]. En la práctica se hacen decenas de pruebas hasta dar con el resultado.",
+    "sources": [
+      "https://fal.ai/models/fal-ai/flux-lora-fast-training",
+      "https://fal.ai/models/fal-ai/flux-2/lora"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "finetuning-completo",
+    "label": "Cómputo de un ajuste completo de un modelo abierto de imagen o vídeo",
+    "unit": "proyecto",
+    "range": {
+      "min": 1000,
+      "max": 30000
+    },
+    "currency": "USD",
+    "note": "Estimación propia: de 1 a 8 GPU H100 durante entre 100 y 1.000 horas a 2–4 $/h, más pruebas fallidas. No incluye personas ni datos.",
+    "sources": ["https://intuitionlabs.ai/articles/h100-rental-prices-cloud-comparison"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "entrenamiento-desde-cero",
+    "label": "Entrenar un modelo de imagen desde cero",
+    "unit": "modelo",
+    "range": {
+      "min": 500000,
+      "max": 5000000
+    },
+    "currency": "USD",
+    "note": "El Stable Diffusion original (2022) costó unos 600.000 $ en cómputo (150.000 horas de GPU A100). Un modelo competitivo hoy cuesta bastante más, sin contar datos ni equipo.",
+    "sources": ["https://en.wikipedia.org/wiki/Stable_Diffusion"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "ingeniero-ml",
+    "label": "Salario bruto anual de un ingeniero/a de machine learning en España",
+    "unit": "año",
+    "range": {
+      "min": 50000,
+      "max": 85000
+    },
+    "currency": "EUR",
+    "note": "Medias de 50.000–69.000 € según la fuente; perfiles sénior y Madrid/Barcelona, 75.000–85.000 €. El coste para la empresa es mayor (cotizaciones).",
+    "sources": [
+      "https://www.glassdoor.es/Sueldos/madrid-machine-learning-engineer-sueldo-SRCH_IL.0,6_IM1030_KO7,32.htm",
+      "https://es.indeed.com/career/machine-learning-engineer/salaries",
+      "https://www.obsbusiness.school/blog/salarios-ia"
+    ],
+    "verifiedAt": "2026-10-02"
+  }
+]

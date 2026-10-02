@@ -1,0 +1,324 @@
+---
+title: "Proyecto B: un agente para crear películas"
+order: 8
+block: aplicacion
+summary: Cómo está construido probablemente un asistente especializado en producción audiovisual, qué aporta de verdad, cuánto cuesta usarlo y cómo valorarlo.
+minutes: 15
+verifiedAt: "2026-10-02"
+---
+
+import AgentArchitecture from "@/components/viz/AgentArchitecture.tsx";
+import AgentLoop from "@/components/viz/AgentLoop.tsx";
+import AgentCostCalculator from "@/components/interactive/AgentCostCalculator.tsx";
+import Classify from "@/components/interactive/Classify.tsx";
+import VizFrame from "@/components/ui/VizFrame.astro";
+import ParaLlevar from "@/components/ui/ParaLlevar.astro";
+import QuePreguntar from "@/components/ui/QuePreguntar.astro";
+import Aviso from "@/components/ui/Aviso.astro";
+import Analogia from "@/components/ui/Analogia.astro";
+import Callout from "@/components/ui/Callout.astro";
+import Term from "@/components/ui/Term.astro";
+import { models, costs } from "@/data";
+
+El segundo proyecto es **una herramienta completa de ayuda a la creación de películas**. Por su descripción, lo más probable es que sea un **<Term id="agente" /> especializado**: un modelo de lenguaje de un proveedor, con <Term id="system-prompt">instrucciones</Term> y <Term id="skill">skills</Term> preconfiguradas para cada fase de la producción, conectado a herramientas (generación de imagen, documentos, calendario…).
+
+Es una hipótesis razonable, no una certeza: la primera tarea al valorarlo será **confirmar qué hay realmente dentro**. Este módulo te da el esquema para hacerlo.
+
+<Analogia>
+  Piensa en el agente como un **equipo de producción virtual**: un jefe de producción (agente
+  principal) que reparte tareas entre especialistas (subagentes), cada uno con su manual de
+  procedimientos (skills), acceso a ciertas herramientas y una memoria compartida del proyecto. La
+  directora y el productor (las personas) aprueban cada entrega.
+</Analogia>
+
+## La arquitectura probable, capa a capa
+
+<VizFrame
+  title="Anatomía de un agente para cine"
+  caption="Pulsa cada capa. Cuanto más arriba, más cerca de la persona usuaria; cuanto más abajo, más cerca del modelo de IA."
+>
+  <AgentArchitecture
+    client:visible
+    layers={[
+      {
+        id: "humano",
+        icon: "🎬",
+        name: "Personas al mando",
+        short: "Dirección, producción, guion: aprueban cada entrega",
+        detail:
+          "Las personas definen objetivos y revisan. Un buen producto deja claro qué decide la IA y qué decide el equipo, y pide aprobación en los puntos críticos (presupuesto, cambios de guion, envíos externos).",
+        examples: [
+          "Aprobar un desglose",
+          "Validar un presupuesto",
+          "Elegir entre tres versiones de storyboard",
+        ],
+        question:
+          "¿En qué puntos tiene que aprobar una persona? ¿Puede el agente enviar o modificar algo sin permiso?",
+      },
+      {
+        id: "interfaz",
+        icon: "🖥️",
+        name: "Interfaz y flujos",
+        short: "Pantallas, plantillas y formatos del sector",
+        detail:
+          "La parte visible: pantallas adaptadas a cada rol, plantillas de la industria, exportación a formatos estándar. Suele ser donde más valor aporta un producto especializado frente a un chat genérico.",
+        examples: [
+          "Formato de guion estándar",
+          "Hojas de desglose",
+          "Plan de rodaje",
+          "Exportación a PDF y hojas de cálculo",
+        ],
+        question:
+          "¿Qué puedo hacer aquí que no pueda hacer con ChatGPT o Claude y una buena plantilla?",
+      },
+      {
+        id: "orquestador",
+        icon: "🧭",
+        name: "Agente principal y subagentes",
+        short: "Reparte el trabajo entre especialistas",
+        detail:
+          "Un agente coordinador entiende la petición, la divide en tareas y las delega en subagentes especializados (guion, producción, arte, marketing). Cada uno con su propio system prompt.",
+        examples: [
+          "Subagente de guion",
+          "Subagente de producción",
+          "Subagente de arte",
+          "Subagente de marketing",
+        ],
+        question:
+          "¿Cuántos pasos da de media una tarea y cuánto cuesta? ¿Se puede ver qué hizo cada subagente?",
+      },
+      {
+        id: "skills",
+        icon: "📚",
+        name: "Skills por fase",
+        short: "El saber hacer del oficio, empaquetado",
+        detail:
+          "Instrucciones, plantillas y pequeños programas para tareas concretas del sector. Aquí está gran parte del conocimiento experto del producto, y es lo que conviene examinar con profesionales.",
+        examples: [
+          "Logline y sinopsis",
+          "Biblia de personajes",
+          "Desglose de guion",
+          "Lista de planos",
+          "Presupuesto",
+          "Plan de rodaje",
+          "Continuidad",
+          "Dossier de venta",
+        ],
+        question:
+          "¿Quién ha diseñado las skills? ¿Profesionales del sector? ¿Se pueden adaptar a nuestra forma de trabajar?",
+      },
+      {
+        id: "herramientas",
+        icon: "🛠️",
+        name: "Herramientas conectadas",
+        short: "Imagen, vídeo, voz, documentos, calendario…",
+        detail:
+          "Conectores (a menudo vía MCP) para generar imágenes de storyboard, vídeos de previsualización y voces, leer y escribir documentos, consultar calendarios o bases de datos de localizaciones.",
+        examples: [
+          "Generador de imágenes",
+          "Generador de vídeo",
+          "Síntesis de voz",
+          "Drive o SharePoint",
+          "Calendario",
+        ],
+        question:
+          "¿A qué sistemas accede y con qué permisos? ¿Qué proveedores de imagen y vídeo usa y con qué licencias?",
+      },
+      {
+        id: "memoria",
+        icon: "🗂️",
+        name: "Memoria del proyecto",
+        short: "Guion, biblia, decisiones: el universo de la película",
+        detail:
+          "Una base de documentos del proyecto (con RAG) y notas de decisiones que el agente consulta para ser coherente: nombres, rasgos de personajes, decisiones de arte, presupuesto aprobado.",
+        examples: [
+          "Guion versionado",
+          "Biblia de personajes",
+          "Decisiones de dirección de arte",
+          "Presupuesto aprobado",
+        ],
+        question:
+          "¿Dónde se guardan nuestros guiones inéditos? ¿Quién tiene acceso? ¿Se usan para entrenar modelos?",
+      },
+      {
+        id: "modelo",
+        icon: "🧠",
+        name: "Modelo de lenguaje",
+        short: "Normalmente de un proveedor: Anthropic, OpenAI, Google…",
+        detail:
+          "El motor que razona y redacta. Casi seguro es un modelo de un tercero usado por API. La calidad del producto depende en gran parte de él, y también su coste por uso.",
+        examples: ["Claude", "GPT", "Gemini", "Modelos abiertos alojados en Europa"],
+        question: "¿Qué modelo usa? ¿Se puede cambiar? ¿Dónde se procesan los datos?",
+      },
+    ]}
+  />
+</VizFrame>
+
+## Así trabajaría con un encargo real
+
+Un ejemplo simplificado de cómo resolvería el agente una petición típica de preproducción. Fíjate en qué skill y qué herramienta usa en cada paso:
+
+<VizFrame
+  title="«Haz el desglose de la escena 12 y propón un storyboard»"
+  caption="Ejemplo ilustrativo. Los nombres de skills y herramientas son genéricos."
+>
+  <AgentLoop
+    client:visible
+    scenario={{
+      goal: "Desglosa la escena 12 del guion (personajes, localización, atrezo, vestuario, efectos) y propón un storyboard de 6 viñetas.",
+      steps: [
+        {
+          phase: "pensar",
+          text: "Necesito el texto de la escena 12, la biblia de personajes y la plantilla de desglose del estudio.",
+        },
+        {
+          phase: "actuar",
+          tool: "memoria: buscar",
+          text: "Recupero la escena 12 del guion v7 y las fichas de los personajes que aparecen.",
+        },
+        {
+          phase: "observar",
+          text: "Escena 12: interior de una cafetería de noche, tres personajes, lluvia en el exterior.",
+        },
+        {
+          phase: "actuar",
+          tool: "skill: desglose-guion",
+          text: "Aplico la plantilla de desglose del estudio: reparto, figuración, atrezo, vestuario, efectos, notas de producción.",
+        },
+        {
+          phase: "observar",
+          text: "Detecto un posible problema: en la escena 9 la protagonista llevaba gafas y aquí el guion no lo menciona.",
+        },
+        {
+          phase: "humano",
+          text: "«¿Mantengo las gafas por continuidad?» → Respuesta de la directora: sí, mantenlas.",
+        },
+        {
+          phase: "actuar",
+          tool: "skill: lista-de-planos",
+          text: "Propongo 6 planos con encuadre, movimiento de cámara y duración estimada.",
+        },
+        {
+          phase: "actuar",
+          tool: "generar_imagen",
+          text: "Genero 6 viñetas de storyboard con el estilo de referencia del proyecto.",
+        },
+        {
+          phase: "observar",
+          text: "La viñeta 4 no respeta el vestuario de la biblia. La regenero con la ficha del personaje como referencia.",
+        },
+        {
+          phase: "actuar",
+          tool: "crear_documento",
+          text: "Compongo el documento de desglose y el storyboard y los guardo en la carpeta del proyecto.",
+        },
+        {
+          phase: "fin",
+          text: "Entrego el desglose y el storyboard para revisión, con la nota de continuidad sobre las gafas.",
+        },
+      ],
+    }}
+  />
+</VizFrame>
+
+## ¿Producto con valor o envoltorio?
+
+Muchos productos de IA son un <Term id="wrapper">envoltorio</Term>: una interfaz sobre el modelo de otro. No es necesariamente malo, pero el valor tiene que estar en algo difícil de replicar. Pon a prueba tu criterio:
+
+<VizFrame
+  title="¿Aporta valor o es fácil de copiar?"
+  caption="No hay respuestas absolutas, pero sí tendencias claras."
+>
+  <Classify
+    client:visible
+    question="¿Esta característica es una ventaja difícil de copiar o algo que cualquiera puede replicar con un chat genérico?"
+    options={["Valor diferencial", "Fácil de copiar"]}
+    items={[
+      {
+        text: "Responde preguntas sobre cine con un tono profesional.",
+        answer: "Fácil de copiar",
+        explain: "Es lo que hace cualquier modelo de lenguaje con un buen system prompt.",
+      },
+      {
+        text: "Exporta desgloses y planes de rodaje en los formatos que usan las productoras y se integra con su software.",
+        answer: "Valor diferencial",
+        explain:
+          "Las integraciones y formatos del sector cuestan tiempo y conocimiento del oficio.",
+      },
+      {
+        text: "Skills diseñadas y validadas por jefes de producción con experiencia, con plantillas del sector.",
+        answer: "Valor diferencial",
+        explain:
+          "El conocimiento experto bien empaquetado y probado es un activo, aunque haya que verificar su calidad.",
+      },
+      {
+        text: "Usa «el modelo más avanzado del mercado».",
+        answer: "Fácil de copiar",
+        explain:
+          "Ese modelo está disponible para cualquiera por API. Y dentro de unas semanas habrá otro mejor.",
+      },
+      {
+        text: "Mantiene la coherencia de todo el proyecto: guion, biblia, decisiones de arte y presupuesto, con control de versiones.",
+        answer: "Valor diferencial",
+        explain:
+          "La memoria del proyecto bien diseñada y su integración en el flujo de trabajo son difíciles de replicar.",
+      },
+      {
+        text: "Genera imágenes de storyboard.",
+        answer: "Fácil de copiar",
+        explain:
+          "Hoy lo hace cualquier asistente. El valor estaría en la consistencia con el proyecto y el control, no en generar imágenes.",
+      },
+    ]}
+  />
+</VizFrame>
+
+## Cuánto cuesta usarlo
+
+Además de lo que cobre el proveedor del producto, alguien paga el uso del modelo y de la generación de imágenes. Si el producto se licencia por usuario, ese coste está incluido en la cuota; si se desarrolla a medida, lo pagáis directamente. Estima el orden de magnitud:
+
+<VizFrame
+  title="Calculadora de coste mensual"
+  caption="Precios de lista de los proveedores verificados a la fecha del módulo. El coste real depende mucho de cómo esté diseñado el agente."
+>
+  <AgentCostCalculator client:visible models={models} costs={costs} />
+</VizFrame>
+
+<Callout variant="dato" title="Cómo leer el resultado">
+  En la mayoría de configuraciones el coste del modelo es **pequeño comparado con una hora de
+  trabajo profesional**. La pregunta económica relevante no es «¿cuánto cuesta la IA?», sino
+  «¿cuántas horas ahorra de verdad, y cuánto tiempo hay que dedicar a revisar lo que produce?». Ojo
+  con las sesiones intensas: un agente mal diseñado puede multiplicar el coste.
+</Callout>
+
+## Riesgos específicos del sector
+
+<Aviso title="A vigilar en producción audiovisual">
+
+- **Confidencialidad**: guiones inéditos, presupuestos y contratos viajan a servidores de terceros. Hay que revisar condiciones de uso de datos, residencia en la UE y que no se usen para entrenar modelos.
+- **Derechos**: autoría de textos e imágenes generados; posibles parecidos con obras protegidas; cláusulas sobre IA en convenios de guionistas, actores y doblaje.
+- **Calidad profesional**: un presupuesto o un plan de rodaje con errores tiene consecuencias económicas reales. Hay que medirlo con casos reales y profesionales.
+- **Dependencia**: si el producto se basa en un único proveedor de modelos o de vídeo, su continuidad no está garantizada (recuerda el cierre de Sora).
+- **Seguridad del agente**: si puede enviar correos o modificar documentos compartidos, un documento malicioso podría manipularlo (<Term id="prompt-injection" />).
+
+</Aviso>
+
+<QuePreguntar title="Preguntas para el equipo del proyecto">
+  - ¿Qué modelo o modelos hay debajo? ¿Se pueden cambiar sin rehacer el producto? - ¿Qué skills
+  incluye, quién las ha diseñado y cómo se han validado con profesionales? - ¿Qué hace el producto
+  que no pueda hacer un equipo con Claude o ChatGPT y buenas plantillas? - ¿Con qué software del
+  sector se integra? ¿En qué formatos exporta? - ¿Dónde se guardan y procesan nuestros guiones? ¿Se
+  usan para entrenar? - ¿En qué pasos aprueba una persona? ¿Queda registro de lo que hace el agente?
+  - ¿Cuánto cuesta por usuario y por proyecto? ¿Qué pasa con el coste en tareas largas? - ¿Cómo
+  miden la calidad? ¿Tienen un conjunto de pruebas (<Term id="evals">evals</Term>) con casos reales?
+  - ¿Qué proveedores de imagen y vídeo usa y con qué licencias comerciales?
+</QuePreguntar>
+
+<ParaLlevar>
+  - Lo más probable es que sea un agente sobre un modelo de terceros, con system prompts, skills por
+  fase, herramientas y memoria del proyecto. - El valor diferencial está en las skills validadas por
+  profesionales, las integraciones y formatos del sector y la memoria del proyecto, no en «usar el
+  mejor modelo». - El coste de uso del modelo suele ser bajo frente al trabajo que ahorra; lo
+  importante es medir horas ahorradas y horas de revisión. - Confidencialidad, derechos, dependencia
+  de proveedor y aprobación humana son los puntos críticos.
+</ParaLlevar>
