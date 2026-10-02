@@ -15,11 +15,8 @@ const tipId = `tip-${id}-${Math.random().toString(36).slice(2, 7)}`;
 const hasSlot = Astro.slots.has("default");
 ---
 
-<span class="term group relative inline">
-  <a href={`${base}/modulos/glosario/#${id}`} class="term-link" aria-describedby={tipId}>
-    {hasSlot ? <slot /> : entry.term}
-  </a>
-  <span
+<!-- prettier-ignore -->
+<span class="term group relative inline"><a href={`${base}/modulos/glosario/#${id}`} class="term-link" aria-describedby={tipId}>{hasSlot ? <slot /> : entry.term}</a><span
     id={tipId}
     role="tooltip"
     class="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 hidden w-72 -translate-x-1/2 rounded-xl border border-line bg-card p-3 text-left text-sm leading-snug font-normal text-fg shadow-lg group-focus-within:block group-hover:block"

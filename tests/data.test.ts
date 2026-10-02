@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import * as s from "../src/data/schemas";
 
-const dataDir = join(__dirname, "../src/data");
+const dataDir = join(import.meta.dirname, "../src/data");
 const load = (f: string) => JSON.parse(readFileSync(join(dataDir, f), "utf8"));
 const exists = (f: string) => readdirSync(dataDir).includes(f);
 
