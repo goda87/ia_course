@@ -1,4 +1,5 @@
-import { MotionConfig, useReducedMotion } from "motion/react";
+import { MotionConfig } from "motion/react";
+import { useReducedMotionSafe } from "@/lib/motion";
 import { useEffect, useState } from "react";
 
 const USER_MSG = "Necesito un nombre para nuestra nueva bebida de té frío con limón.";
@@ -31,7 +32,7 @@ const PERSONAS = [
 ];
 
 export default function SystemPromptDemo() {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [id, setId] = useState(PERSONAS[0]!.id);
   const p = PERSONAS.find((x) => x.id === id)!;
   const [shown, setShown] = useState(p.answer.length);

@@ -66,6 +66,8 @@ pnpm test          # vitest: valida los datos de src/data contra sus esquemas
 ```
 
 > TypeScript está fijado en la versión 6 porque `astro check` todavía no soporta TypeScript 7.
+>
+> En la máquina de desarrollo original Node no estaba instalado en el sistema: se instaló en `~/.local/share/node` (añádelo al `PATH` con `export PATH=~/.local/share/node/bin:$PATH`).
 
 ---
 
@@ -86,13 +88,18 @@ pnpm test          # vitest: valida los datos de src/data contra sus esquemas
 │  │  ├─ models.json         # modelos y capacidades
 │  │  ├─ glossary.json       # glosario
 │  │  └─ costs.json          # rangos de costes usados en los módulos de proyectos
+│  │  ├─ schemas.ts          # esquemas zod de todos los JSON
+│  │  └─ index.ts            # punto único de acceso: valida al importar (un dato mal formado rompe el build)
 │  ├─ components/
-│  │  ├─ ui/                 # botones, tarjetas, tooltips, callouts («Para llevar», «Qué preguntar»)
-│  │  ├─ viz/                # visualizaciones animadas (una por concepto)
-│  │  └─ interactive/        # simuladores, comparadores, quizzes
-│  ├─ layouts/
-│  ├─ pages/
-│  └─ styles/
+│  │  ├─ ui/                 # Astro: Callout, ParaLlevar, QuePreguntar, Analogia, Aviso, Term, VizFrame, CompanyGrid, CostSources, Glossary…
+│  │  ├─ viz/                # React: visualizaciones animadas (una por concepto)
+│  │  └─ interactive/        # React: simuladores, comparadores, ejercicios, checklist, glosario
+│  ├─ content.config.ts      # colección «modulos» (frontmatter: title, order, block, summary, minutes, verifiedAt?)
+│  ├─ layouts/BaseLayout.astro
+│  ├─ lib/                   # blocks.ts, modules.ts, format.ts (dinero y números), motion.ts
+│  ├─ pages/                 # index.astro, modulos/[slug].astro, 404.astro
+│  ├─ scripts/               # progress.ts (progreso en localStorage), nav.ts (menú móvil)
+│  └─ styles/global.css      # tokens de color (claro/oscuro) y color por bloque
 └─ tests/                    # validación de datos (esquemas) y tests de componentes clave
 ```
 
@@ -106,7 +113,7 @@ pnpm test          # vitest: valida los datos de src/data contra sus esquemas
   "name": "Claude Opus X",
   "company": "anthropic",            // id en companies.json
   "country": "US",                   // US | CN | EU | other
-  "type": ["llm"],                   // llm | image | video | audio | multimodal | agent
+  "type": ["llm"],                   // llm | razonamiento | imagen | video | audio | multimodal
   "released": "2026-05",
   "openWeights": false,
   "license": "propietaria",
@@ -118,7 +125,7 @@ pnpm test          # vitest: valida los datos de src/data contra sus esquemas
 }
 ```
 
-Validar todos los JSON con **zod** en `tests/` y en el build.
+Validar todos los JSON con **zod** en `tests/` y en el build. Los esquemas completos están en `src/data/schemas.ts`; los tests comprueban además que no haya ids duplicados, que cada modelo apunte a una empresa existente, que cada `<Term id>` exista en el glosario y que ningún dato publicado contenga `TODO-VERIFICAR`.
 
 ---
 
@@ -303,6 +310,16 @@ La IA cambia cada semana. Esta web pierde todo su valor si contiene datos falsos
 
 ## 10. Forma de trabajar para los agentes
 
+### Convenciones técnicas aprendidas
+
+- **Nada de contenido oculto antes de hidratar.** Las islas usan `client:visible`: hasta que se hidratan, se ve el HTML del servidor. No pongas `initial={{ opacity: 0 }}` en texto o contenido clave; usa `initial={false}` o `AnimatePresence initial={false}`.
+- **Preferencia de movimiento:** usa `useReducedMotionSafe()` de `src/lib/motion.ts` (no `useReducedMotion` directamente) si el resultado cambia lo que se renderiza; evita errores de hidratación. Envuelve cada visualización en `<MotionConfig reducedMotion="user">`.
+- **Colores:** usa los tokens (`bg-card`, `text-muted`, `border-line`…) y `var(--accent)` / `var(--accent-soft)`, que cambian según el bloque del módulo. No uses colores de Motion con `var()`: anima con clases y transiciones CSS.
+- **Términos:** `<Term id="…" />` muestra el término en minúscula en mitad de frase; si va al inicio de frase o necesita otra forma, pásale el texto: `<Term id="modelo">Modelo</Term>`.
+- **Cifras:** formatea con `money`, `moneyRange` y `num` de `src/lib/format.ts`. Prettier puede partir texto entre «» y JSX: construye esas cadenas con plantillas.
+- **`localStorage`** solo para comodidades del lector (progreso, tema, checklist), siempre dentro de `try/catch`.
+- **Verificación visual:** antes de cerrar un módulo, haz capturas a 390 px y 1300 px en claro y oscuro, comprueba que no hay desbordamiento horizontal ni errores en consola y pasa axe (WCAG A/AA).
+
 - Trabajar **módulo a módulo**: contenido MDX + datos + visualización + revisión. No dejar módulos a medias en `main`.
 - Antes de crear un componente nuevo, revisar si existe uno reutilizable en `src/components/`.
 - Cada visualización en `components/viz/` es autónoma, recibe datos por props y tiene su variante estática para reduced-motion.
@@ -314,13 +331,21 @@ La IA cambia cada semana. Esta web pierde todo su valor si contiene datos falsos
 
 ---
 
-## 11. Hoja de ruta sugerida
+## 11. Hoja de ruta
 
-1. Inicializar Astro + MDX + React + Tailwind + Motion; layout, navegación y componentes `ui/`.
-2. Esquemas zod y primera carga de `src/data/` (timeline, glosario) verificada.
-3. Módulos 01–02 (historia y mapa).
-4. Módulos 03–05 (LLM, difusión, agentes) con sus visualizaciones.
-5. Investigación verificada y módulo 06 (estado del arte + comparador).
-6. Módulos 07–08 (proyectos) con simulador y calculadora de costes.
-7. Módulo 09 (checklist) y 10 (glosario).
-8. Revisión de accesibilidad, rendimiento y lectura completa con la usuaria final.
+1. ✅ Inicializar Astro + MDX + React + Tailwind + Motion; layout, navegación y componentes `ui/`.
+2. ✅ Esquemas zod y primera carga de `src/data/` (timeline, glosario) verificada.
+3. ✅ Módulos 00–02 (bienvenida, historia y mapa).
+4. ✅ Módulos 03–05 (LLM, difusión, agentes) con sus visualizaciones.
+5. ✅ Investigación verificada (2 de octubre de 2026) y módulo 06 (estado del arte + comparador).
+6. ✅ Módulos 07–08 (proyectos) con simulador y calculadora de costes.
+7. ✅ Módulo 09 (checklist) y 10 (glosario).
+8. ✅ Revisión técnica de accesibilidad (axe sin violaciones A/AA), rendimiento (Lighthouse 99–100) y móvil.
+9. ⏳ Lectura completa con la usuaria final y ajustes de contenido según su feedback.
+10. ⏳ Cuando haya detalles reales de los proyectos A y B, actualizar los módulos 07–08 con su caso concreto.
+
+### Mantenimiento periódico (cada 1–3 meses)
+
+- Revisar `models.json`, `companies.json` y `costs.json` con fuentes primarias; actualizar `verifiedAt` y los `verifiedAt` del frontmatter de los módulos 01, 06, 07, 08 y 09.
+- Añadir los nuevos hitos a `timeline.json`.
+- Revisar el calendario del AI Act (módulos 07 y 09).

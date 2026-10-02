@@ -8,10 +8,14 @@ function setOpen(open: boolean) {
   sidebar.dataset.open = String(open);
   btn.setAttribute("aria-expanded", String(open));
   backdrop.classList.toggle("hidden", !open);
+  if (open) sidebar.querySelector<HTMLElement>("a")?.focus();
 }
 
 btn?.addEventListener("click", () => setOpen(sidebar?.dataset.open !== "true"));
 backdrop?.addEventListener("click", () => setOpen(false));
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") setOpen(false);
+  if (e.key === "Escape" && sidebar?.dataset.open === "true") {
+    setOpen(false);
+    btn?.focus();
+  }
 });

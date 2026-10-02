@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useReducedMotion } from "motion/react";
+import { useReducedMotionSafe } from "@/lib/motion";
 
 const SIZE = 192;
 const STEPS = 30;
@@ -120,7 +120,7 @@ function makeNoise(seed: number) {
 }
 
 export default function DiffusionCanvas() {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const canvas = useRef<HTMLCanvasElement>(null);
   const [mode, setMode] = useState<"generar" | "entrenar">("generar");
   const [promptId, setPromptId] = useState(PROMPTS[0]!.id);

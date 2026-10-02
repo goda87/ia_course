@@ -1,4 +1,5 @@
-import { MotionConfig, motion, useReducedMotion } from "motion/react";
+import { MotionConfig, motion } from "motion/react";
+import { useReducedMotionSafe } from "@/lib/motion";
 import { useEffect, useState } from "react";
 import Character, { type CharacterProps } from "./Character";
 
@@ -15,7 +16,7 @@ const DRIFT: CharacterProps[] = [
 ];
 
 export default function ConsistencyStrip() {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [controlled, setControlled] = useState(false);
   const [frame, setFrame] = useState(0);
 

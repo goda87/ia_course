@@ -1,4 +1,5 @@
-import { AnimatePresence, MotionConfig, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, MotionConfig, motion } from "motion/react";
+import { useReducedMotionSafe } from "@/lib/motion";
 import { useEffect, useState } from "react";
 
 export interface PipelineStep {
@@ -15,7 +16,7 @@ interface Props {
 
 /** Diagrama de flujo por pasos: resalta un paso cada vez y explica lo que ocurre en él. */
 export default function PipelineFlow({ steps, autoplay = 0 }: Props) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [i, setI] = useState(0);
   const [auto, setAuto] = useState(autoplay > 0);
 

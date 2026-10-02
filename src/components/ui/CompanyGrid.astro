@@ -23,10 +23,10 @@ const OPEN: Record<Company["openWeights"], string> = {
 
 <section class="not-prose my-8">
   <h3 class="mb-3 font-display text-xl font-semibold">{title}</h3>
-  <div class="grid gap-2 sm:grid-cols-2">
+  <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
     {list.map((c) => (
       <details
-        class="group rounded-xl border border-line bg-card open:sm:col-span-2"
+        class="group min-w-0 rounded-xl border border-line bg-card open:sm:col-span-2"
         id={`empresa-${c.id}`}
       >
         <summary class="flex cursor-pointer list-none items-center gap-3 p-4">

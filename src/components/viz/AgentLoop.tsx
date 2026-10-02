@@ -1,4 +1,5 @@
-import { AnimatePresence, MotionConfig, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, MotionConfig, motion } from "motion/react";
+import { useReducedMotionSafe } from "@/lib/motion";
 import { useEffect, useRef, useState } from "react";
 
 type Phase = "pensar" | "actuar" | "observar" | "humano" | "fin";
@@ -39,7 +40,7 @@ interface Props {
 
 /** El bucle de un agente: pensar → actuar → observar, hasta cumplir el objetivo. */
 export default function AgentLoop({ scenario }: Props) {
-  const reduce = useReducedMotion();
+  const reduce = useReducedMotionSafe();
   const [i, setI] = useState(-1);
   const [auto, setAuto] = useState(false);
   const logRef = useRef<HTMLOListElement>(null);

@@ -74,7 +74,7 @@ export default function Embeddings() {
         <svg
           viewBox="0 0 100 100"
           className="aspect-square w-full rounded-xl bg-bg-soft"
-          role="img"
+          role="group"
           aria-label="Mapa de palabras: las de significado parecido aparecen cerca"
         >
           <defs>

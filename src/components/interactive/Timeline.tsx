@@ -84,18 +84,16 @@ export default function Timeline({ items }: Props) {
 
         {/* Línea con puntos */}
         <div className="relative">
-          <div
-            ref={scrollerRef}
-            className="overflow-x-auto pb-3"
-            role="listbox"
-            aria-label="Hitos de la historia de la IA"
-          >
+          <div ref={scrollerRef} className="overflow-x-auto pb-3">
             <div className="relative min-w-max">
               <div
                 className="absolute right-0 bottom-[19px] left-0 h-0.5 bg-line"
                 aria-hidden="true"
               />
-              <ol className="relative flex items-end gap-1 px-2 pt-8">
+              <ol
+                className="relative flex items-end gap-1 px-2 pt-8"
+                aria-label="Hitos de la historia de la IA"
+              >
                 {visible.map((item, i) => {
                   const active = item.id === selected?.id;
                   const missed = item.year >= MISSED_FROM;
@@ -111,8 +109,7 @@ export default function Timeline({ items }: Props) {
                       </span>
                       <button
                         ref={active ? activeRef : undefined}
-                        role="option"
-                        aria-selected={active}
+                        aria-pressed={active}
                         aria-label={`${item.year}: ${item.title}`}
                         onClick={() => setSelectedId(item.id)}
                         className="relative z-10 grid size-10 place-items-center rounded-full"

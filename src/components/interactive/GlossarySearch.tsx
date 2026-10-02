@@ -25,7 +25,13 @@ export default function GlossarySearch({ items, modules, base }: Props) {
     );
   }, [q, items]);
 
-  const letters = [...new Set(items.map((g) => norm(g.term[0]!).toUpperCase()))];
+  const letterOf = (g: GlossaryItem) => norm(g.term[0]!).toUpperCase();
+  const letters = [...new Set(items.map(letterOf))];
+  const groups = useMemo(() => {
+    const m = new Map<string, GlossaryItem[]>();
+    for (const g of list) m.set(letterOf(g), [...(m.get(letterOf(g)) ?? []), g]);
+    return [...m.entries()];
+  }, [list]);
 
   return (
     <div>
@@ -51,21 +57,20 @@ export default function GlossarySearch({ items, modules, base }: Props) {
           {list.length} términos
         </p>
       </div>
-      <dl className="mt-4 space-y-3">
-        {list.map((g, i) => {
-          const letter = norm(g.term[0]!).toUpperCase();
-          const first = !q && (i === 0 || norm(list[i - 1]!.term[0]!).toUpperCase() !== letter);
-          return (
-            <div key={g.id}>
-              {first && (
-                <p
-                  id={`letra-${letter}`}
-                  className="mt-6 mb-2 scroll-mt-40 font-display text-2xl font-semibold text-[var(--accent)]"
-                >
-                  {letter}
-                </p>
-              )}
+      {groups.map(([letter, entries]) => (
+        <section key={letter} aria-labelledby={q ? undefined : `letra-${letter}`}>
+          {!q && (
+            <h3
+              id={`letra-${letter}`}
+              className="mt-6 mb-2 scroll-mt-40 font-display text-2xl font-semibold text-[var(--accent)]"
+            >
+              {letter}
+            </h3>
+          )}
+          <dl className="mt-3 space-y-3">
+            {entries.map((g) => (
               <div
+                key={g.id}
                 id={g.id}
                 className="scroll-mt-40 rounded-xl border border-line bg-card p-4 target:border-[var(--accent)] target:bg-[var(--accent-soft)]"
               >
@@ -93,10 +98,10 @@ export default function GlossarySearch({ items, modules, base }: Props) {
                   </dd>
                 )}
               </div>
-            </div>
-          );
-        })}
-      </dl>
+            ))}
+          </dl>
+        </section>
+      ))}
       {list.length === 0 && (
         <p className="mt-6 text-muted">No hay resultados. Prueba con otra palabra.</p>
       )}
