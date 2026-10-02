@@ -16,7 +16,11 @@ pnpm lint && pnpm test
 
 ## Publicación
 
-`dist/` es un sitio estático: se puede servir desde GitHub Pages, Netlify, Vercel o cualquier servidor web. Si se publica en un subdirectorio (por ejemplo GitHub Pages de un repositorio), configura `site` y `base` en `astro.config.mjs`.
+Se despliega automáticamente en **GitHub Pages** (https://goda87.github.io/ia_course/) con cada push a `main`, mediante el workflow `.github/workflows/deploy.yml` (tests + build + despliegue). También se puede lanzar a mano desde la pestaña _Actions_.
+
+Requisito, una sola vez: en GitHub, _Settings → Pages → Build and deployment → Source_, elegir **GitHub Actions**.
+
+La ruta base (`/ia_course`) está en `astro.config.mjs` (`site` y `base`). En local, `pnpm dev` y `pnpm preview` sirven también bajo `/ia_course/`.
 
 ## Actualizar los datos
 

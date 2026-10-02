@@ -49,7 +49,7 @@ Tras recorrer la web, la usuaria debe poder:
 | Diagramas/gráficas | SVG propio animado; **D3** solo para visualizaciones de datos | Control total y ligereza |
 | Lenguaje | **TypeScript** estricto (v6) | |
 | Gestor de paquetes | **pnpm** | |
-| Despliegue | Estático (GitHub Pages / Netlify / Vercel) | Sin backend |
+| Despliegue | **GitHub Pages** vía GitHub Actions (`.github/workflows/deploy.yml`), en `https://goda87.github.io/ia_course/` | Sin backend. Todos los enlaces internos deben usar `import.meta.env.BASE_URL` (base `/ia_course`) |
 
 No añadir backend, base de datos ni llamadas a APIs de IA en tiempo real salvo petición explícita. Las «demos» de modelos son **simulaciones** con datos pregrabados (respuestas, imágenes de ejemplo), para que la web sea gratis, rápida y determinista.
 
