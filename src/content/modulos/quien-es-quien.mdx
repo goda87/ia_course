@@ -1,0 +1,124 @@
+---
+title: "Quién es quién: EE. UU., China y Europa"
+order: 6
+block: estado
+summary: Las empresas que dominan la IA, sus modelos de texto, imagen y vídeo, cuánto cuestan y cómo leer las comparativas sin perderse.
+minutes: 15
+verifiedAt: "2026-10-02"
+---
+
+import ModelComparator from "@/components/interactive/ModelComparator.tsx";
+import PriceBars from "@/components/viz/PriceBars.tsx";
+import CompanyGrid from "@/components/ui/CompanyGrid.astro";
+import VizFrame from "@/components/ui/VizFrame.astro";
+import ParaLlevar from "@/components/ui/ParaLlevar.astro";
+import QuePreguntar from "@/components/ui/QuePreguntar.astro";
+import Aviso from "@/components/ui/Aviso.astro";
+import Callout from "@/components/ui/Callout.astro";
+import Term from "@/components/ui/Term.astro";
+import { models, companies } from "@/data";
+
+La IA avanza tan rápido que cualquier ranking caduca en semanas. Solo en septiembre de 2026, OpenAI, Anthropic y Google lanzaron nuevas generaciones de modelos. Por eso este módulo tiene dos objetivos: darte **una foto actual** (con fecha y fuentes) y, sobre todo, **un mapa mental** que siga siendo útil cuando la foto cambie.
+
+## El mapa en una frase
+
+- **EE. UU.** lidera los modelos más potentes (los llamados <Term id="modelo-frontera">modelos frontera</Term>), casi todos **cerrados**: se usan por <Term id="api">API</Term> o suscripción.
+- **China** compite muy de cerca con modelos **de pesos abiertos** y precios mucho más bajos, y está entre los líderes mundiales en **vídeo generativo**.
+- **Europa** tiene actores relevantes (Mistral, Black Forest Labs) y, sobre todo, **la regulación** (el AI Act).
+
+## Cerrado frente a abierto: la decisión clave
+
+<Callout variant="dato" title="Dos formas de usar un modelo">
+
+- **Cerrado (por API)**: pagas por uso al proveedor; él aloja el modelo y lo mejora. Rápido de empezar, pero dependes de sus precios, sus condiciones y su continuidad.
+- **<Term id="pesos-abiertos">Pesos abiertos</Term>**: descargas el modelo y lo ejecutas en tus servidores (o en una nube que elijas). Más control, privacidad y posibilidad de ajustarlo; a cambio, necesitas infraestructura y un equipo que lo mantenga.
+
+Ojo: «abierto» no siempre significa uso comercial libre. **Hay que leer la licencia**: algunas versiones (por ejemplo, FLUX.2 [dev]) solo permiten uso no comercial.
+
+</Callout>
+
+## Las empresas
+
+Pulsa cada empresa para ver qué hace, su estrategia y sus productos.
+
+<CompanyGrid country="US" title="🇺🇸 Estados Unidos" />
+<CompanyGrid country="CN" title="🇨🇳 China" />
+<CompanyGrid country="EU" title="🇪🇺 Europa" />
+
+## Los modelos
+
+Filtra por país, tipo y licencia. Pulsa un modelo para ver sus puntos fuertes, limitaciones, licencia y fuentes.
+
+<VizFrame
+  title="Comparador de modelos"
+  caption="Selección de los modelos más relevantes a la fecha de verificación. No es exhaustiva: cada empresa tiene más variantes."
+>
+  <ModelComparator client:visible models={models} companies={companies} />
+</VizFrame>
+
+## Cuánto cuesta usar un modelo de texto
+
+Los precios por millón de tokens son abstractos. Esta gráfica los traduce a algo tangible: **cuánto cuestan 1.000 tareas iguales** con cada modelo.
+
+<VizFrame
+  title="El coste de 1.000 tareas"
+  caption="Cálculo a partir de los precios publicados por cada proveedor. Cambia el tipo de tarea: las diferencias entre modelos se mantienen, pero el orden de magnitud cambia muchísimo."
+>
+  <PriceBars client:visible models={models} />
+</VizFrame>
+
+Tres lecciones de esta gráfica:
+
+1. **Las diferencias de precio son enormes**: de decenas a cientos de veces entre el modelo más caro y el más barato.
+2. **El tipo de tarea importa más que el modelo**: un agente que trabaja durante muchos pasos puede costar cientos de veces más que una consulta.
+3. **No siempre hace falta el mejor modelo.** Muchos productos combinan un modelo potente para lo difícil y uno barato para lo rutinario.
+
+## Imagen y vídeo: el estado de la cuestión
+
+Para los proyectos que vas a valorar, esto es lo más relevante:
+
+- **Imagen.** Compiten los generadores integrados en asistentes (GPT Image de OpenAI, Nano Banana de Google), que destacan en edición conversacional y coherencia con referencias; **Midjourney**, referente estético; **FLUX.2** (Black Forest Labs), la base abierta más usada para entrenar estilos y personajes propios; **Seedream** (ByteDance); y **Adobe Firefly**, que apuesta por la seguridad jurídica con datos licenciados.
+- **Vídeo.** Lideran **Veo 3.1** (Google), **Kling 3.0** (Kuaishou), **Seedance 2.5** (ByteDance), **Hailuo H3** (MiniMax) y **Runway Gen-4.5**. **Wan 2.7** (Alibaba) es la referencia abierta, con licencia Apache 2.0: se puede alojar y ajustar en casa.
+- **Sora, de OpenAI, cerró en 2026**, pese a ser uno de los referentes. Es un recordatorio de que el vídeo generativo es carísimo de servir y de que **los proveedores pueden desaparecer**.
+- **3D.** Tencent (Hunyuan 3D) y otros generan ya modelos 3D y escenarios a partir de texto o imágenes, algo relevante para animación 3D y videojuegos.
+
+## Cómo leer las comparativas
+
+Verás muchos rankings. Úsalos como orientación, no como verdad:
+
+- **LMArena** ([lmarena.ai](https://lmarena.ai)): personas comparan a ciegas dos respuestas y votan la mejor. Mide preferencia humana, no exactitud.
+- **Artificial Analysis** ([artificialanalysis.ai](https://artificialanalysis.ai)): compara calidad, precio y velocidad, también para imagen y vídeo.
+- **<Term id="benchmark">Benchmarks</Term> concretos** (de programación, matemáticas, agentes…): útiles si coinciden con tu caso de uso.
+
+<Aviso title="Cuidado con">
+
+- Los benchmarks que publica **la propia empresa** el día del lanzamiento.
+- Las diferencias de uno o dos puntos: suelen ser ruido.
+- Las comparativas que no dicen **la fecha**: en este sector, tres meses son una eternidad.
+- La mejor prueba es siempre **tu propio caso**, con tus datos y tus criterios de calidad.
+
+</Aviso>
+
+## Usar modelos chinos desde Europa
+
+Es una pregunta frecuente y legítima:
+
+- Usar la **API** de un proveedor chino implica enviar los datos a sus servidores, sujetos a la legislación china. Para datos personales o confidenciales, es difícil de justificar con el RGPD.
+- Usar sus **pesos abiertos** alojados en una nube europea o en servidores propios evita ese problema: el modelo es solo un archivo. Muchas empresas europeas lo hacen.
+- Conviene evaluar posibles sesgos o censuras en temas sensibles y revisar la licencia de cada modelo.
+
+<QuePreguntar>
+  - ¿Por qué ese modelo y no otro? ¿Habéis comparado al menos dos o tres alternativas con nuestros
+  casos reales? - ¿Es cerrado o abierto? ¿Qué licencia tiene y permite nuestro uso comercial? -
+  ¿Dónde se procesan los datos? ¿Hay datos personales o confidenciales? - ¿Qué pasa si el proveedor
+  sube precios, cambia el modelo o cierra el servicio, como pasó con Sora? - ¿Se puede cambiar de
+  modelo sin rehacer el producto?
+</QuePreguntar>
+
+<ParaLlevar>
+  - EE. UU. lidera en modelos cerrados de máxima potencia; China en modelos abiertos baratos y en
+  vídeo; Europa en regulación. - La decisión **cerrado o abierto** condiciona coste, control,
+  privacidad y dependencia. - Los precios varían en factores de 100 entre modelos; el tipo de tarea
+  multiplica aún más. - Los rankings caducan en semanas: lo que cuenta es probar con tus propios
+  casos. - Los proveedores pueden cambiar o desaparecer: exige siempre un plan B.
+</ParaLlevar>

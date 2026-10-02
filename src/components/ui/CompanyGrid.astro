@@ -1,0 +1,74 @@
+---
+import { companies } from "@/data";
+import type { Company } from "@/data";
+
+interface Props {
+  country: Company["country"];
+  title: string;
+}
+const { country, title } = Astro.props;
+const list = companies.filter((c) => c.country === country);
+const KIND: Record<Company["kind"], string> = {
+  laboratorio: "Laboratorio de IA",
+  "big-tech": "Gran tecnológica",
+  especialista: "Especialista",
+  infraestructura: "Infraestructura",
+};
+const OPEN: Record<Company["openWeights"], string> = {
+  si: "Publica pesos abiertos",
+  no: "Solo modelos cerrados",
+  parcial: "Abiertos y cerrados",
+};
+---
+
+<section class="not-prose my-8">
+  <h3 class="mb-3 font-display text-xl font-semibold">{title}</h3>
+  <div class="grid gap-2 sm:grid-cols-2">
+    {list.map((c) => (
+      <details
+        class="group rounded-xl border border-line bg-card open:sm:col-span-2"
+        id={`empresa-${c.id}`}
+      >
+        <summary class="flex cursor-pointer list-none items-center gap-3 p-4">
+          <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-[var(--accent-soft)] text-sm font-bold text-[var(--accent)]">
+            {c.name.slice(0, 2)}
+          </span>
+          <span class="min-w-0 flex-1">
+            <span class="block font-semibold">{c.name}</span>
+            <span class="block truncate text-xs text-muted">
+              {KIND[c.kind]} · {c.hq} · {OPEN[c.openWeights]}
+            </span>
+          </span>
+          <span class="text-muted transition group-open:rotate-45" aria-hidden="true">
+            +
+          </span>
+        </summary>
+        <div class="border-t border-line px-4 pt-3 pb-4 text-sm leading-relaxed">
+          <p>{c.summary}</p>
+          <p class="mt-2">
+            <strong>Estrategia:</strong> {c.strategy}
+          </p>
+          <p class="mt-2 flex flex-wrap gap-1">
+            {c.products.map((p) => (
+              <span class="rounded-full bg-bg-soft px-2 py-0.5 text-xs">{p}</span>
+            ))}
+          </p>
+          <p class="mt-2 text-xs text-muted">
+            <a href={c.url} target="_blank" rel="noreferrer" class="underline">
+              Web oficial
+            </a>{" "}
+            · Fuentes:{" "}
+            {c.sources.map((s, i) => (
+              <>
+                {i > 0 && ", "}
+                <a href={s} target="_blank" rel="noreferrer" class="underline">
+                  {new URL(s).hostname.replace("www.", "")}
+                </a>
+              </>
+            ))}
+          </p>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>

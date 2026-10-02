@@ -1,0 +1,685 @@
+[
+  {
+    "id": "gpt-6-astra",
+    "name": "GPT-6 Astra",
+    "company": "openai",
+    "country": "US",
+    "type": ["llm", "razonamiento", "multimodal"],
+    "released": "2026-09",
+    "openWeights": false,
+    "license": "Propietaria (API y ChatGPT de pago)",
+    "strengths": ["Programación", "Automatización del ordenador y navegador", "Ciberseguridad"],
+    "limitations": ["Precio alto", "Críticas por la opacidad de su razonamiento interno"],
+    "context": null,
+    "pricing": {
+      "unit": "1M tokens",
+      "input": 10,
+      "output": 50,
+      "currency": "USD",
+      "note": "Precio para contexto corto"
+    },
+    "sources": [
+      "https://techcrunch.com/2026/09/03/openai-launches-astra-its-powerful-and-controversial-new-model/",
+      "https://developers.openai.com/api/docs/pricing"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gpt-6-1-sol",
+    "name": "GPT-6.1 Sol",
+    "company": "openai",
+    "country": "US",
+    "type": ["llm", "razonamiento", "multimodal"],
+    "released": "2026-09",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": ["Equilibrio calidad/precio", "Velocidad", "Uso general en empresa"],
+    "limitations": ["Menos capaz que Astra en las tareas más difíciles"],
+    "context": null,
+    "pricing": {
+      "unit": "1M tokens",
+      "input": 2,
+      "output": 10,
+      "currency": "USD"
+    },
+    "sources": ["https://developers.openai.com/api/docs/pricing", "https://llmgateway.io/timeline"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gpt-6-luna",
+    "name": "GPT-6 Luna",
+    "company": "openai",
+    "country": "US",
+    "type": ["llm"],
+    "released": "2026-09",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": ["Muy barato", "Rápido", "Tareas de gran volumen (clasificar, extraer, resumir)"],
+    "limitations": ["Razonamiento limitado frente a los modelos grandes"],
+    "context": null,
+    "pricing": {
+      "unit": "1M tokens",
+      "input": 0.1,
+      "output": 0.5,
+      "currency": "USD"
+    },
+    "sources": ["https://developers.openai.com/api/docs/pricing"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "claude-fable-5-1",
+    "name": "Claude Fable 5.1",
+    "company": "anthropic",
+    "country": "US",
+    "type": ["llm", "razonamiento", "multimodal"],
+    "released": "2026-09",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": ["Tareas agénticas largas", "Programación", "Análisis complejo"],
+    "limitations": [
+      "El más caro de la gama Claude",
+      "Salvaguardas que limitan ámbitos de alto riesgo"
+    ],
+    "context": null,
+    "pricing": {
+      "unit": "1M tokens",
+      "input": 10,
+      "output": 50,
+      "currency": "USD"
+    },
+    "sources": ["https://claude.com/pricing", "https://en.wikipedia.org/wiki/Claude_(AI)"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "claude-opus-5-5",
+    "name": "Claude Opus 5.5",
+    "company": "anthropic",
+    "country": "US",
+    "type": ["llm", "razonamiento", "multimodal"],
+    "released": "2026-09",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": [
+      "Programación y agentes",
+      "Escritura y documentos largos",
+      "Muy bien valorado por usuarios en comparativas a ciegas"
+    ],
+    "limitations": ["Precio medio-alto"],
+    "context": null,
+    "pricing": {
+      "unit": "1M tokens",
+      "input": 4,
+      "output": 20,
+      "currency": "USD"
+    },
+    "sources": ["https://claude.com/pricing", "https://en.wikipedia.org/wiki/Claude_(AI)"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "claude-sonnet-5-5",
+    "name": "Claude Sonnet 5.5",
+    "company": "anthropic",
+    "country": "US",
+    "type": ["llm", "razonamiento", "multimodal"],
+    "released": "2026-09",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": [
+      "Equilibrio calidad/precio",
+      "Más de un 30 % más rápido que Sonnet 5",
+      "Uso general y agentes"
+    ],
+    "limitations": ["Por debajo de Opus y Fable en las tareas más exigentes"],
+    "context": null,
+    "pricing": {
+      "unit": "1M tokens",
+      "input": 2,
+      "output": 10,
+      "currency": "USD"
+    },
+    "sources": [
+      "https://claude.com/pricing",
+      "https://9to5mac.com/2026/09/28/anthropic-upgrades-claude-with-new-sonnet-5-5-model-details-here/"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gemini-3-1-pro",
+    "name": "Gemini 3.1 Pro",
+    "company": "google",
+    "country": "US",
+    "type": ["llm", "razonamiento", "multimodal"],
+    "released": "2026-02",
+    "openWeights": false,
+    "license": "Propietaria (versión preliminar)",
+    "strengths": [
+      "Multimodal nativo: texto, imagen, audio y vídeo",
+      "Problemas complejos y agentes",
+      "Integración con Google Workspace"
+    ],
+    "limitations": ["Sigue en versión preliminar en la API"],
+    "context": null,
+    "pricing": null,
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/models",
+      "https://techinformed.com/google-rolls-out-gemini-3-1-pro-preview/"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gemini-3-8-flash",
+    "name": "Gemini 3.8 Flash",
+    "company": "google",
+    "country": "US",
+    "type": ["llm", "razonamiento", "multimodal"],
+    "released": "2026-09",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": [
+      "Muy buena relación calidad/precio",
+      "Agentes y flujos de trabajo empresariales",
+      "Rápido"
+    ],
+    "limitations": ["Precio promocional hasta el 31/12/2026"],
+    "context": null,
+    "pricing": {
+      "unit": "1M tokens",
+      "input": 1.5,
+      "output": 7.5,
+      "currency": "USD",
+      "note": "Precio estándar; promoción a mitad de precio hasta el 31/12/2026"
+    },
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/pricing",
+      "https://ai.google.dev/gemini-api/docs/models",
+      "https://9to5google.com/2026/09/02/gemini-3-8-flash-launch/"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "grok-4-7",
+    "name": "Grok 4.7",
+    "company": "xai",
+    "country": "US",
+    "type": ["llm", "razonamiento", "multimodal"],
+    "released": "2026-09",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": ["Acceso en tiempo real a X", "Razonamiento"],
+    "limitations": [
+      "Polémicas de seguridad y deepfakes en 2026",
+      "Menos adopción empresarial en Europa"
+    ],
+    "context": null,
+    "pricing": null,
+    "sources": [
+      "https://geotoolbox.ai/blog/grok-5",
+      "https://en.wikipedia.org/wiki/Grok_(chatbot)"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "muse-glimmer",
+    "name": "Muse Glimmer",
+    "company": "meta",
+    "country": "US",
+    "type": ["llm"],
+    "released": "2026-08",
+    "openWeights": true,
+    "license": "Apache 2.0",
+    "strengths": [
+      "Pesos abiertos con licencia muy permisiva",
+      "Tamaño manejable (30.000 millones de parámetros)"
+    ],
+    "limitations": ["No compite con los modelos frontera"],
+    "context": null,
+    "pricing": null,
+    "sources": ["https://en.wikipedia.org/wiki/Meta_Superintelligence_Labs"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "deepseek-v4-pro",
+    "name": "DeepSeek V4-Pro",
+    "company": "deepseek",
+    "country": "CN",
+    "type": ["llm", "razonamiento"],
+    "released": "2026-04",
+    "openWeights": true,
+    "license": "MIT",
+    "strengths": [
+      "Pesos abiertos y licencia MIT",
+      "Precio muy bajo",
+      "Programación y agentes",
+      "1 millón de tokens de contexto"
+    ],
+    "limitations": ["Sin visión", "Usar su API implica enviar datos a servidores en China"],
+    "context": 1000000,
+    "pricing": {
+      "unit": "1M tokens",
+      "input": 1.32,
+      "output": 3.96,
+      "currency": "USD",
+      "note": "Precio en hora punta; mitad de precio en horas valle"
+    },
+    "sources": [
+      "https://api-docs.deepseek.com/quick_start/pricing",
+      "https://deepseekai.guide/news/deepseek-v4-release-date/"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "deepseek-v4-flash",
+    "name": "DeepSeek V4-Flash",
+    "company": "deepseek",
+    "country": "CN",
+    "type": ["llm", "razonamiento", "multimodal"],
+    "released": "2026-04",
+    "openWeights": true,
+    "license": "MIT",
+    "strengths": [
+      "Extremadamente barato",
+      "Visión y modo de razonamiento",
+      "1 millón de tokens de contexto"
+    ],
+    "limitations": ["Menos capaz que V4-Pro"],
+    "context": 1000000,
+    "pricing": {
+      "unit": "1M tokens",
+      "input": 0.3,
+      "output": 1.2,
+      "currency": "USD",
+      "note": "Precio en hora punta; mitad de precio en horas valle"
+    },
+    "sources": ["https://api-docs.deepseek.com/quick_start/pricing"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "qwen3-8-max",
+    "name": "Qwen3.8-Max",
+    "company": "alibaba",
+    "country": "CN",
+    "type": ["llm", "razonamiento"],
+    "released": "2026-08",
+    "openWeights": true,
+    "license": "Pesos abiertos (ver licencia del modelo)",
+    "strengths": [
+      "Uno de los mayores modelos abiertos",
+      "Multilingüe",
+      "Agentes que manejan aplicaciones"
+    ],
+    "limitations": ["Ejecutarlo en casa exige mucha infraestructura"],
+    "context": null,
+    "pricing": null,
+    "sources": ["https://en.wikipedia.org/wiki/Qwen"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "kimi-k3",
+    "name": "Kimi K3",
+    "company": "moonshot",
+    "country": "CN",
+    "type": ["llm", "razonamiento"],
+    "released": "2026-07",
+    "openWeights": true,
+    "license": "Pesos abiertos (ver licencia del modelo)",
+    "strengths": [
+      "Mayor modelo abierto publicado (2,8 billones de parámetros, MoE)",
+      "Programación y tareas agénticas largas"
+    ],
+    "limitations": ["Requiere infraestructura enorme para alojarlo"],
+    "context": null,
+    "pricing": null,
+    "sources": ["https://llmgateway.io/blog/kimi-k3"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "glm-5-2",
+    "name": "GLM-5.2",
+    "company": "zhipu",
+    "country": "CN",
+    "type": ["llm", "razonamiento"],
+    "released": "2026-06",
+    "openWeights": true,
+    "license": "MIT",
+    "strengths": [
+      "Líder en programación entre los modelos abiertos",
+      "1 millón de tokens de contexto",
+      "Licencia MIT"
+    ],
+    "limitations": [],
+    "context": 1000000,
+    "pricing": null,
+    "sources": ["https://www.morphllm.com/best-open-source-coding-model-2026"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "minimax-m3",
+    "name": "MiniMax M3",
+    "company": "minimax",
+    "country": "CN",
+    "type": ["llm", "multimodal"],
+    "released": "2026-06",
+    "openWeights": true,
+    "license": "Pesos abiertos (ver licencia del modelo)",
+    "strengths": ["Entiende imagen y vídeo", "1 millón de tokens de contexto", "Programación"],
+    "limitations": [],
+    "context": 1000000,
+    "pricing": null,
+    "sources": [
+      "https://www.blog.brightcoding.dev/2026/07/06/glm-52-vs-kimi-k27-vs-minimax-m3-the-ultimate-open-weight-ai-showdown-of-2026"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "mistral-medium-3-5",
+    "name": "Mistral Medium 3.5",
+    "company": "mistral",
+    "country": "EU",
+    "type": ["llm", "multimodal"],
+    "released": "2026-04",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": [
+      "Proveedor europeo",
+      "Agentes y programación",
+      "Despliegue en la nube del cliente"
+    ],
+    "limitations": ["Por detrás de los modelos frontera de EE. UU."],
+    "context": null,
+    "pricing": {
+      "unit": "1M tokens",
+      "input": 1.5,
+      "output": 7.5,
+      "currency": "USD"
+    },
+    "sources": ["https://benchlm.ai/providers/mistral", "https://en.wikipedia.org/wiki/Mistral_AI"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "mistral-large-3",
+    "name": "Mistral Large 3",
+    "company": "mistral",
+    "country": "EU",
+    "type": ["llm"],
+    "released": "2025-12",
+    "openWeights": true,
+    "license": "Apache 2.0",
+    "strengths": ["Modelo europeo de pesos abiertos", "Licencia muy permisiva", "Barato por API"],
+    "limitations": ["Más antiguo que sus competidores"],
+    "context": null,
+    "pricing": {
+      "unit": "1M tokens",
+      "input": 2,
+      "output": 6,
+      "currency": "USD"
+    },
+    "sources": ["https://en.wikipedia.org/wiki/Mistral_AI", "https://benchlm.ai/providers/mistral"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gpt-image-2-5",
+    "name": "GPT Image 2.5",
+    "company": "openai",
+    "country": "US",
+    "type": ["imagen"],
+    "released": "2026-09",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": [
+      "Edición conversando dentro de ChatGPT",
+      "Texto legible en la imagen",
+      "Sigue muy bien instrucciones complejas"
+    ],
+    "limitations": ["Precio por tokens de imagen, variable según calidad y tamaño"],
+    "context": null,
+    "pricing": null,
+    "sources": [
+      "https://en.wikipedia.org/wiki/GPT_Image",
+      "https://developers.openai.com/api/docs/pricing"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "nano-banana-2",
+    "name": "Nano Banana 2 (Gemini 3.1 Flash Image)",
+    "company": "google",
+    "country": "US",
+    "type": ["imagen"],
+    "released": "2026-02",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": [
+      "Calidad alta a velocidad «Flash»",
+      "Edición y coherencia de personajes con imágenes de referencia",
+      "Precio por imagen bajo"
+    ],
+    "limitations": ["Menos control fino que un modelo abierto con LoRA y ControlNet"],
+    "context": null,
+    "pricing": {
+      "unit": "imagen (1K)",
+      "input": null,
+      "output": 0.067,
+      "currency": "USD",
+      "note": "0,034 $ en modo lote"
+    },
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/pricing",
+      "https://openrouter.ai/google/gemini-3.1-flash-image"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "midjourney-v8",
+    "name": "Midjourney V8.x",
+    "company": "midjourney",
+    "country": "US",
+    "type": ["imagen"],
+    "released": "2026-04",
+    "openWeights": false,
+    "license": "Propietaria (suscripción)",
+    "strengths": ["Calidad estética muy alta", "Ideal para concept art y moodboards"],
+    "limitations": ["Sin API generalista", "Poco control para producción en serie"],
+    "context": null,
+    "pricing": null,
+    "sources": ["https://www.gradually.ai/en/flux-vs-midjourney/"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "flux-2",
+    "name": "FLUX.2",
+    "company": "bfl",
+    "country": "EU",
+    "type": ["imagen"],
+    "released": "2025-11",
+    "openWeights": true,
+    "license": "[pro]/[flex]: API de pago · [dev]: no comercial · [klein]: Apache 2.0",
+    "strengths": [
+      "Hasta 10 imágenes de referencia",
+      "Base muy usada para entrenar LoRA",
+      "Se puede alojar en servidores propios"
+    ],
+    "limitations": ["La versión [dev] no permite uso comercial sin licencia"],
+    "context": null,
+    "pricing": null,
+    "sources": ["https://fluxnote.io/guides/flux-2", "https://fal.ai/models/fal-ai/flux-2/lora"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "seedream-5",
+    "name": "Seedream 5.0 Pro",
+    "company": "bytedance",
+    "country": "CN",
+    "type": ["imagen"],
+    "released": "2026-07",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": [
+      "Fusión de varias imágenes de referencia",
+      "Edición de imagen",
+      "Calidad profesional"
+    ],
+    "limitations": ["Proveedor chino: revisar condiciones de datos"],
+    "context": null,
+    "pricing": null,
+    "sources": ["https://kie.ai/blog/what-is-seedream-5"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "firefly-image-5",
+    "name": "Firefly Image 5",
+    "company": "adobe",
+    "country": "US",
+    "type": ["imagen"],
+    "released": "2025-10",
+    "openWeights": false,
+    "license": "Propietaria, con indemnización de propiedad intelectual en planes de pago",
+    "strengths": [
+      "Entrenado con contenido con licencia",
+      "Integrado en Photoshop",
+      "Modelos personalizados con imágenes propias"
+    ],
+    "limitations": ["Calidad estética por detrás de los líderes en algunos estilos"],
+    "context": null,
+    "pricing": null,
+    "sources": ["https://news.adobe.com/news/2025/10/adobe-max-2025-firefly"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "veo-3-1",
+    "name": "Veo 3.1",
+    "company": "google",
+    "country": "US",
+    "type": ["video", "audio"],
+    "released": "2025-10",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": [
+      "Diálogo y sonido sincronizados",
+      "Realismo cinematográfico",
+      "Imágenes de referencia y 4K"
+    ],
+    "limitations": ["Clips cortos", "Caro en máxima calidad"],
+    "context": null,
+    "pricing": {
+      "unit": "segundo de vídeo",
+      "input": null,
+      "output": 0.1,
+      "currency": "USD",
+      "note": "Modelo Fast: de 0,10 $ (720p) a 0,30 $ (4K) por segundo"
+    },
+    "sources": [
+      "https://ai.google.dev/gemini-api/docs/pricing",
+      "https://en.wikipedia.org/wiki/Veo_(text-to-video_model)"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "kling-3",
+    "name": "Kling 3.0",
+    "company": "kuaishou",
+    "country": "CN",
+    "type": ["video", "audio"],
+    "released": "2026-02",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": [
+      "Vídeo y audio en una sola pasada",
+      "Hasta 4K y 60 fps",
+      "Guion de varios planos y referencias"
+    ],
+    "limitations": ["Clips de hasta unos 15 segundos"],
+    "context": null,
+    "pricing": null,
+    "sources": ["https://en.wikipedia.org/wiki/Kling_AI"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "seedance-2-5",
+    "name": "Seedance 2.5",
+    "company": "bytedance",
+    "country": "CN",
+    "type": ["video", "audio"],
+    "released": "2026-07",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": [
+      "Vídeos nativos de hasta 30 segundos",
+      "Hasta 50 referencias multimodales",
+      "4K y edición local"
+    ],
+    "limitations": [
+      "Su versión 2.0 generó polémica por reproducir actores y personajes con derechos"
+    ],
+    "context": null,
+    "pricing": null,
+    "sources": ["https://en.wikipedia.org/wiki/Seedance"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "wan-2-7",
+    "name": "Wan 2.7",
+    "company": "alibaba",
+    "country": "CN",
+    "type": ["video"],
+    "released": "2026-04",
+    "openWeights": true,
+    "license": "Apache 2.0",
+    "strengths": [
+      "Vídeo abierto más controlable",
+      "Primer y último fotograma, referencias, edición por instrucciones",
+      "Se puede alojar y ajustar en casa"
+    ],
+    "limitations": ["Calidad por debajo de los mejores cerrados"],
+    "context": null,
+    "pricing": {
+      "unit": "segundo de vídeo",
+      "input": null,
+      "output": 0.1,
+      "currency": "USD",
+      "note": "Desde 0,10 $/s por API; gratis si se aloja en servidores propios (pagando GPU)"
+    },
+    "sources": [
+      "https://www.cliprise.app/news/wan-2-7-video-release",
+      "https://oakgen.ai/blog/wan-2-7-complete-guide"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "runway-gen-4-5",
+    "name": "Runway Gen-4.5",
+    "company": "runway",
+    "country": "US",
+    "type": ["video"],
+    "released": "2025-12",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": ["Control del movimiento", "Herramientas pensadas para cine y publicidad"],
+    "limitations": ["Sin nuevo modelo de vídeo principal en 2026"],
+    "context": null,
+    "pricing": null,
+    "sources": [
+      "https://techcrunch.com/2026/07/23/runway-bets-on-ai-model-routing-as-generative-media-gets-crowded/"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "hailuo-h3",
+    "name": "MiniMax H3 (Hailuo 3.0)",
+    "company": "minimax",
+    "country": "CN",
+    "type": ["video", "audio"],
+    "released": "2026-07",
+    "openWeights": false,
+    "license": "Propietaria",
+    "strengths": [
+      "Diálogo, efectos y ambiente sincronizados",
+      "Referencias de personaje",
+      "Edición por instrucciones"
+    ],
+    "limitations": ["Resolución nativa 2K"],
+    "context": null,
+    "pricing": null,
+    "sources": ["https://kingy.ai/minimax-h3-vs-m3/"],
+    "verifiedAt": "2026-10-02"
+  }
+]

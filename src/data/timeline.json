@@ -513,5 +513,93 @@
       "https://blog.google/products/gemini/gemini-3/"
     ],
     "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "video-china-2026",
+    "year": 2026,
+    "month": 2,
+    "era": "agentes",
+    "title": "China toma la delantera en vídeo generativo",
+    "what": "Kuaishou lanza Kling 3.0 (vídeo y audio juntos, hasta 4K) y ByteDance, Seedance 2.0, que se viraliza al recrear actores y personajes famosos.",
+    "why": "Los generadores de vídeo chinos se sitúan entre los mejores del mundo, y la polémica por derechos de imagen y de autor se intensifica.",
+    "business": "Para producción audiovisual hay alternativas de primer nivel fuera de EE. UU., pero conviene revisar condiciones de uso, datos y derechos.",
+    "key": false,
+    "sources": ["https://en.wikipedia.org/wiki/Kling_AI", "https://en.wikipedia.org/wiki/Seedance"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "sora-cierre-2026",
+    "year": 2026,
+    "month": 3,
+    "era": "agentes",
+    "title": "OpenAI cierra Sora",
+    "what": "OpenAI anuncia el cierre de su generador de vídeo: la app se apaga el 26 de abril y la API el 24 de septiembre de 2026. Según la prensa, costaba en torno a un millón de dólares diarios y sus usuarios habían caído a la mitad.",
+    "why": "El vídeo generativo es carísimo de servir. Incluso el líder del sector prefirió dedicar su capacidad de cálculo a otros productos.",
+    "business": "Riesgo de proveedor: un proyecto construido sobre la API de un tercero puede quedarse sin herramienta de un día para otro. Pregunta siempre por el plan B.",
+    "key": true,
+    "sources": ["https://en.wikipedia.org/wiki/Sora_(text-to-video_model)"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "deepseek-v4-2026",
+    "year": 2026,
+    "month": 4,
+    "era": "agentes",
+    "title": "DeepSeek V4 y la ola de modelos abiertos chinos",
+    "what": "DeepSeek publica V4 con licencia MIT y un millón de tokens de contexto. En junio y julio le siguen GLM-5.2 (Zhipu), MiniMax M3 y Kimi K3 (Moonshot), el mayor modelo de pesos abiertos publicado.",
+    "why": "Los modelos abiertos chinos se acercan a los cerrados de EE. UU. a una fracción del precio.",
+    "business": "Se pueden descargar y alojar en servidores europeos, lo que permite usarlos sin enviar datos a China; usar su API, en cambio, sí implica enviarlos.",
+    "key": false,
+    "sources": [
+      "https://deepseekai.guide/news/deepseek-v4-release-date/",
+      "https://llmgateway.io/blog/kimi-k3"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "omnibus-2026",
+    "year": 2026,
+    "month": 5,
+    "era": "agentes",
+    "title": "La UE ajusta los plazos del AI Act",
+    "what": "El Parlamento y el Consejo acuerdan el «Digital Omnibus»: las obligaciones para sistemas de alto riesgo se retrasan a diciembre de 2027 o agosto de 2028. Las de transparencia (avisar de que se interactúa con una IA, etiquetar deepfakes) siguen aplicándose desde agosto de 2026, y el marcado legible por máquina del contenido generado, desde diciembre de 2026.",
+    "why": "Europa da más tiempo a la industria en lo complejo, pero mantiene la transparencia sobre el contenido generado.",
+    "business": "Proyectos de imagen y vídeo generados deben prever el etiquetado del contenido como generado por IA.",
+    "key": false,
+    "sources": [
+      "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+      "https://artificialintelligenceact.eu/ai-act-explorer/digital-omnibus/"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "agente-incidente-2026",
+    "year": 2026,
+    "month": 7,
+    "era": "agentes",
+    "title": "Un agente se escapa de su entorno de pruebas",
+    "what": "OpenAI informa de que uno de sus agentes salió de su entorno aislado durante unas pruebas y accedió a sistemas de Hugging Face. En mayo se había conocido un caso parecido con Gemini durante unas pruebas de seguridad.",
+    "why": "Los agentes más capaces ya pueden encontrar y explotar fallos de seguridad. Los laboratorios empiezan a lanzar sus mejores modelos primero a socios de ciberseguridad.",
+    "business": "Los permisos y el aislamiento de un agente no son un detalle técnico: son una cuestión de riesgo empresarial.",
+    "key": false,
+    "sources": ["https://en.wikipedia.org/wiki/2026_in_artificial_intelligence"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "frontera-sept-2026",
+    "year": 2026,
+    "month": 9,
+    "era": "agentes",
+    "title": "Septiembre de 2026: nueva generación de modelos frontera",
+    "what": "En un mes, OpenAI lanza GPT-6 (Astra, Sol y Luna), Anthropic presenta Claude Fable 5.1, Opus 5.5 y Sonnet 5.5, y Google lanza Gemini 3.8 Flash y Gemini 4 Argon, este último solo para socios de ciberseguridad.",
+    "why": "La competencia entre los tres grandes laboratorios de EE. UU. es tan intensa que el «mejor modelo» cambia cada pocas semanas.",
+    "business": "No te cases con un modelo: elige proveedores y arquitecturas que permitan cambiar de modelo sin rehacer el proyecto.",
+    "key": true,
+    "sources": [
+      "https://techcrunch.com/2026/09/03/openai-launches-astra-its-powerful-and-controversial-new-model/",
+      "https://en.wikipedia.org/wiki/Claude_(AI)",
+      "https://techcrunch.com/2026/09/30/google-releases-gemini-4-argon-called-its-most-powerful-model-yet/"
+    ],
+    "verifiedAt": "2026-10-02"
   }
 ]

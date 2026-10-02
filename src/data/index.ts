@@ -2,6 +2,8 @@
 import * as s from "./schemas";
 import timelineRaw from "./timeline.json";
 import glossaryRaw from "./glossary.json";
+import companiesRaw from "./companies.json";
+import modelsRaw from "./models.json";
 
 export const timeline = s.timeline
   .parse(timelineRaw)
@@ -9,6 +11,11 @@ export const timeline = s.timeline
 export const glossary = s.glossary
   .parse(glossaryRaw)
   .sort((a, b) => a.term.localeCompare(b.term, "es"));
+
+export const companies = s.companies.parse(companiesRaw);
+export const models = s.models
+  .parse(modelsRaw)
+  .sort((a, b) => b.released.localeCompare(a.released));
 
 export function glossaryEntry(id: string) {
   const entry = glossary.find((g) => g.id === id);
