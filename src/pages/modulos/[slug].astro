@@ -1,0 +1,97 @@
+---
+import { render } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { BLOCKS } from "@/lib/blocks";
+import { getModules, moduleHref, pad, type Modulo } from "@/lib/modules";
+
+export async function getStaticPaths() {
+  const modules = await getModules();
+  return modules.map((m, i) => ({
+    params: { slug: m.id },
+    props: { entry: m, prev: modules[i - 1], next: modules[i + 1] },
+  }));
+}
+
+interface Props {
+  entry: Modulo;
+  prev?: Modulo;
+  next?: Modulo;
+}
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+const { title, block, summary, minutes, order, verifiedAt } = entry.data;
+---
+
+<BaseLayout title={title} description={summary} block={block} currentSlug={entry.id}>
+  <article class="mx-auto max-w-3xl">
+    <header class="mb-10">
+      <p class="mb-3 flex flex-wrap items-center gap-2 text-sm">
+        <span class="rounded-full bg-[var(--accent-soft)] px-2.5 py-0.5 font-medium text-[var(--accent)]">
+          Bloque {BLOCKS[block].letter} · {BLOCKS[block].label}
+        </span>
+        <span class="text-muted">
+          Módulo {pad(order)} · {minutes} min de lectura
+        </span>
+      </p>
+      <h1 class="font-display text-4xl leading-tight font-semibold tracking-tight text-balance sm:text-5xl">
+        {title}
+      </h1>
+      <p class="mt-4 text-lg text-pretty text-muted">{summary}</p>
+      {verifiedAt && (
+        <p class="mt-4 inline-flex items-center gap-2 rounded-md border border-line px-3 py-1 text-xs text-muted">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3 2" />
+          </svg>
+          Datos verificados a fecha {verifiedAt}. La IA cambia rápido: compruébalos antes de
+          decidir.
+        </p>
+      )}
+    </header>
+
+    <div class="prose-curso prose prose-lg max-w-none">
+      <Content />
+    </div>
+
+    <div class="no-print mt-14 flex justify-center">
+      <button
+        data-mark-read={entry.id}
+        aria-pressed="false"
+        class="inline-flex items-center gap-2 rounded-full border border-line bg-card px-5 py-2.5 text-sm font-medium shadow-sm hover:border-[var(--accent)] aria-pressed:border-[var(--accent)] aria-pressed:bg-[var(--accent-soft)]"
+      >
+        <span data-label>Marcar como leído</span>
+      </button>
+    </div>
+
+    <nav class="no-print mt-10 grid gap-3 sm:grid-cols-2" aria-label="Módulos anterior y siguiente">
+      {prev ? (
+        <a
+          href={moduleHref(prev)}
+          class="rounded-xl border border-line bg-card p-4 hover:border-fg/40"
+        >
+          <span class="text-xs text-muted">← Anterior</span>
+          <span class="mt-1 block font-medium">{prev.data.title}</span>
+        </a>
+      ) : (
+        <span />
+      )}
+      {next && (
+        <a
+          href={moduleHref(next)}
+          class="rounded-xl border border-line bg-card p-4 text-right hover:border-fg/40"
+        >
+          <span class="text-xs text-muted">Siguiente →</span>
+          <span class="mt-1 block font-medium">{next.data.title}</span>
+        </a>
+      )}
+    </nav>
+  </article>
+</BaseLayout>

@@ -1,0 +1,78 @@
+---
+type Variant = "llevar" | "preguntar" | "analogia" | "aviso" | "dato";
+interface Props {
+  variant?: Variant;
+  title?: string;
+}
+
+const STYLES: Record<Variant, { icon: string; title: string; cls: string }> = {
+  llevar: {
+    icon: "★",
+    title: "Para llevar",
+    cls: "border-[var(--accent)] bg-[var(--accent-soft)]",
+  },
+  preguntar: {
+    icon: "?",
+    title: "Qué preguntar en una reunión",
+    cls: "border-fg/70 bg-bg-soft",
+  },
+  analogia: {
+    icon: "≈",
+    title: "Analogía",
+    cls: "border-line bg-card",
+  },
+  aviso: {
+    icon: "!",
+    title: "Ojo",
+    cls: "border-amber-500 bg-amber-50 dark:bg-amber-950/30",
+  },
+  dato: {
+    icon: "i",
+    title: "Dato",
+    cls: "border-sky-500 bg-sky-50 dark:bg-sky-950/30",
+  },
+};
+
+const { variant = "dato", title } = Astro.props;
+const s = STYLES[variant];
+---
+
+<aside class:list={["callout not-prose rounded-2xl border-l-4 p-5 sm:p-6", s.cls]}>
+  <p class="mb-2 flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
+    <span
+      class="grid size-6 place-items-center rounded-full bg-fg text-xs font-bold text-bg"
+      aria-hidden="true"
+    >
+      {s.icon}
+    </span>
+    {title ?? s.title}
+  </p>
+  <div class="callout-body text-base leading-relaxed">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .callout-body :global(ul),
+  .callout-body :global(ol) {
+    margin: 0.5rem 0 0;
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.4rem;
+  }
+  .callout-body :global(ul) {
+    list-style: disc;
+  }
+  .callout-body :global(ol) {
+    list-style: decimal;
+  }
+  .callout-body :global(p + p) {
+    margin-top: 0.6rem;
+  }
+  .callout-body :global(strong) {
+    font-weight: 650;
+  }
+  .callout-body :global(a) {
+    text-decoration: underline;
+  }
+</style>

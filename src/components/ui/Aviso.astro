@@ -1,0 +1,10 @@
+---
+import Callout from "./Callout.astro";
+interface Props {
+  title?: string;
+}
+---
+
+<Callout variant="aviso" title={Astro.props.title}>
+  <slot />
+</Callout>

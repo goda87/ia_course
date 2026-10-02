@@ -47,7 +47,7 @@ Tras recorrer la web, la usuaria debe poder:
 | Animación | **Motion** (antes Framer Motion); **GSAP + ScrollTrigger** solo si hace falta scroll-telling complejo | Animaciones declarativas y accesibles |
 | Estilos | **Tailwind CSS** | Rapidez y consistencia |
 | Diagramas/gráficas | SVG propio animado; **D3** solo para visualizaciones de datos | Control total y ligereza |
-| Lenguaje | **TypeScript** estricto | |
+| Lenguaje | **TypeScript** estricto (v6) | |
 | Gestor de paquetes | **pnpm** | |
 | Despliegue | Estático (GitHub Pages / Netlify / Vercel) | Sin backend |
 
@@ -60,11 +60,12 @@ pnpm install       # instalar dependencias
 pnpm dev           # servidor de desarrollo
 pnpm build         # build de producción (debe pasar sin errores)
 pnpm preview       # previsualizar el build
-pnpm lint          # eslint + astro check
-pnpm format        # prettier
+pnpm lint          # astro check (tipos) + prettier --check
+pnpm format        # prettier --write
+pnpm test          # vitest: valida los datos de src/data contra sus esquemas
 ```
 
-> Si los scripts aún no existen, el primer agente que inicialice el proyecto debe crearlos con estos nombres.
+> TypeScript está fijado en la versión 6 porque `astro check` todavía no soporta TypeScript 7.
 
 ---
 

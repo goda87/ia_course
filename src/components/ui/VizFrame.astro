@@ -1,0 +1,20 @@
+---
+/** Marco común para cada visualización: título, la visualización y qué se está viendo. */
+interface Props {
+  title: string;
+  caption?: string;
+}
+const { title, caption } = Astro.props;
+---
+
+<figure class="not-prose my-10 overflow-hidden rounded-2xl border border-line bg-card shadow-sm">
+  <figcaption class="flex items-center gap-2 border-b border-line px-5 py-3 text-sm font-semibold">
+    <span class="size-2 rounded-full bg-[var(--accent)]" aria-hidden="true"></span>
+    {title}
+    <span class="ml-auto text-xs font-normal text-muted">Interactivo</span>
+  </figcaption>
+  <div class="p-4 sm:p-6">
+    <slot />
+  </div>
+  {caption && <p class="border-t border-line bg-bg-soft px-5 py-3 text-sm text-muted">{caption}</p>}
+</figure>

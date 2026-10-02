@@ -1,0 +1,88 @@
+---
+import { BLOCKS, BLOCK_IDS } from "@/lib/blocks";
+import { getModules, moduleHref, pad } from "@/lib/modules";
+
+interface Props {
+  currentSlug?: string;
+}
+const { currentSlug } = Astro.props;
+const modules = await getModules();
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<aside
+  id="sidebar"
+  class="no-print fixed inset-y-0 left-0 z-40 w-72 -translate-x-full overflow-y-auto border-r border-line bg-bg px-4 py-6 transition-transform data-[open=true]:translate-x-0 lg:sticky lg:top-14 lg:z-0 lg:h-[calc(100vh-3.5rem)] lg:translate-x-0"
+  aria-label="Índice del curso"
+>
+  <a
+    href={`${base}/`}
+    class:list={[
+      "mb-5 block rounded-lg px-3 py-2 text-sm font-medium hover:bg-bg-soft",
+      !currentSlug && "bg-bg-soft",
+    ]}
+  >
+    Inicio y progreso
+    <span class="mt-2 block h-1.5 overflow-hidden rounded-full bg-line" aria-hidden="true">
+      <span data-progress-bar class="block h-full w-0 rounded-full bg-fg transition-all"></span>
+    </span>
+    <span data-progress-label class="mt-1 block text-xs text-muted"></span>
+  </a>
+
+  <nav>
+    {BLOCK_IDS.map((b) => {
+      const items = modules.filter((m) => m.data.block === b);
+      if (!items.length) return null;
+      return (
+        <div class="mb-5" data-block={b}>
+          <p class="mb-1.5 flex items-center gap-2 px-3 text-xs font-semibold tracking-wider text-muted uppercase">
+            <span class="size-2 rounded-full bg-[var(--accent)]" aria-hidden="true" />
+            {BLOCKS[b].label}
+          </p>
+          <ul>
+            {items.map((m) => {
+              const active = m.id === currentSlug;
+              return (
+                <li>
+                  <a
+                    href={moduleHref(m)}
+                    aria-current={active ? "page" : undefined}
+                    class:list={[
+                      "group flex items-start gap-2 rounded-lg px-3 py-1.5 text-sm leading-snug hover:bg-bg-soft",
+                      active && "bg-[var(--accent-soft)] font-medium",
+                    ]}
+                  >
+                    <span class="mt-px w-5 shrink-0 text-xs text-muted tabular-nums">
+                      {pad(m.data.order)}
+                    </span>
+                    <span class="flex-1">{m.data.title}</span>
+                    <span
+                      data-progress-check={m.id}
+                      class="mt-0.5 hidden shrink-0 text-[var(--accent)]"
+                      aria-label="leído"
+                    >
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        aria-hidden="true"
+                      >
+                        <path d="M5 12l5 5L20 7" />
+                      </svg>
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      );
+    })}
+  </nav>
+  <p class="mt-6 px-3 text-xs text-muted" data-total-modules={modules.length}>
+    {modules.length} módulos · lectura total ≈ {modules.reduce((s, m) => s + m.data.minutes, 0)} min
+  </p>
+</aside>

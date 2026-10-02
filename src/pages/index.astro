@@ -1,0 +1,93 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { BLOCKS, BLOCK_IDS } from "@/lib/blocks";
+import { getModules, moduleHref, pad } from "@/lib/modules";
+
+const modules = await getModules();
+const first = modules[0];
+---
+
+<BaseLayout title="IA para quien decide">
+  <section class="mx-auto max-w-5xl">
+    <div class="max-w-3xl">
+      <p class="mb-4 text-sm font-medium tracking-wider text-muted uppercase">
+        Curso interactivo · sin perfil técnico
+      </p>
+      <h1 class="font-display text-4xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl">
+        Todo lo que pasó con la IA mientras no mirabas, explicado para decidir.
+      </h1>
+      <p class="mt-6 text-lg text-pretty text-muted">
+        Qué es un LLM, cómo se genera una imagen desde ruido, qué diferencia a un chatbot de un
+        agente, quién manda en EE. UU. y China, y —lo más importante— qué preguntar y cuánto cuesta
+        cuando alguien te presenta un proyecto de IA.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        {first && (
+          <a
+            href={moduleHref(first)}
+            class="rounded-full bg-fg px-6 py-3 font-medium text-bg hover:opacity-90"
+          >
+            Empezar por el principio
+          </a>
+        )}
+        <a
+          href="#mapa"
+          class="rounded-full border border-line bg-card px-6 py-3 font-medium hover:border-fg/40"
+        >
+          Ver el mapa del curso
+        </a>
+      </div>
+    </div>
+
+    <div id="mapa" class="mt-20 scroll-mt-20">
+      <h2 class="font-display text-2xl font-semibold">Mapa del curso</h2>
+      <p class="mt-1 text-muted">
+        Módulos de 5–15 minutos. Puedes seguir el orden o saltar al que necesites. Tu progreso se
+        guarda en este navegador.
+      </p>
+
+      {BLOCK_IDS.map((b) => {
+        const items = modules.filter((m) => m.data.block === b);
+        if (!items.length) return null;
+        return (
+          <section class="mt-10" data-block={b} aria-labelledby={`bloque-${b}`}>
+            <h3
+              id={`bloque-${b}`}
+              class="mb-4 flex items-center gap-3 text-sm font-semibold tracking-wider uppercase"
+            >
+              <span class="grid size-7 place-items-center rounded-lg bg-[var(--accent)] text-xs text-bg">
+                {BLOCKS[b].letter}
+              </span>
+              {BLOCKS[b].label}
+            </h3>
+            <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {items.map((m) => (
+                <li>
+                  <a
+                    href={moduleHref(m)}
+                    class="group relative flex h-full flex-col rounded-2xl border border-line bg-card p-5 transition hover:-translate-y-0.5 hover:border-[var(--accent)] hover:shadow-md"
+                  >
+                    <span class="flex items-center justify-between text-xs text-muted">
+                      <span class="tabular-nums">Módulo {pad(m.data.order)}</span>
+                      <span>{m.data.minutes} min</span>
+                    </span>
+                    <span class="mt-2 font-display text-lg leading-snug font-semibold">
+                      {m.data.title}
+                    </span>
+                    <span class="mt-2 flex-1 text-sm text-muted">{m.data.summary}</span>
+                    <span
+                      data-progress-check={m.id}
+                      class="mt-3 hidden text-xs font-medium text-[var(--accent)]"
+                    >
+                      ✓ Leído
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>
