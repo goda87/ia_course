@@ -1,0 +1,405 @@
+[
+  {
+    "id": "ia",
+    "term": "Inteligencia artificial (IA)",
+    "short": "Sistemas informáticos que realizan tareas que asociamos a la inteligencia humana: entender lenguaje, reconocer imágenes, decidir, crear.",
+    "module": "mapa-ia"
+  },
+  {
+    "id": "machine-learning",
+    "term": "Machine learning",
+    "aliases": ["aprendizaje automático"],
+    "short": "Forma de crear IA en la que el sistema aprende patrones a partir de ejemplos, en lugar de programar reglas a mano.",
+    "analogy": "En vez de escribir el manual, le enseñas miles de casos resueltos.",
+    "module": "mapa-ia"
+  },
+  {
+    "id": "deep-learning",
+    "term": "Deep learning",
+    "aliases": ["aprendizaje profundo"],
+    "short": "Machine learning con redes neuronales de muchas capas. Es la técnica detrás de toda la IA generativa actual.",
+    "module": "mapa-ia"
+  },
+  {
+    "id": "red-neuronal",
+    "term": "Red neuronal",
+    "short": "Estructura matemática inspirada (muy libremente) en el cerebro: millones de conexiones con «pesos» que se ajustan al aprender.",
+    "module": "mapa-ia"
+  },
+  {
+    "id": "ia-generativa",
+    "term": "IA generativa",
+    "short": "IA que crea contenido nuevo (texto, imagen, vídeo, audio, código) en lugar de solo clasificar o predecir.",
+    "module": "mapa-ia"
+  },
+  {
+    "id": "ia-predictiva",
+    "term": "IA predictiva",
+    "short": "IA que clasifica o estima algo a partir de datos: riesgo de abandono de un cliente, demanda, fraude. Lleva años en las empresas.",
+    "module": "mapa-ia"
+  },
+  {
+    "id": "modelo",
+    "term": "Modelo",
+    "short": "El «cerebro» entrenado: un archivo enorme de números (parámetros) que convierte una entrada en una salida.",
+    "module": "mapa-ia"
+  },
+  {
+    "id": "parametros",
+    "term": "Parámetros",
+    "aliases": ["pesos"],
+    "short": "Los números internos que el modelo ajusta al entrenar. Los grandes modelos tienen cientos de miles de millones o más.",
+    "analogy": "Como los miles de diales de una mesa de mezclas: el entrenamiento los gira hasta que suena bien.",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "entrenamiento",
+    "term": "Entrenamiento",
+    "aliases": ["training"],
+    "short": "Proceso, muy caro y que se hace una vez, en el que el modelo aprende a partir de enormes cantidades de datos.",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "inferencia",
+    "term": "Inferencia",
+    "short": "Usar un modelo ya entrenado para obtener una respuesta. Es lo que pagas cada vez que lo usas.",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "gpu",
+    "term": "GPU",
+    "aliases": ["tarjeta gráfica"],
+    "short": "Chip diseñado para gráficos que resulta ideal para entrenar y ejecutar IA. NVIDIA domina el mercado.",
+    "module": "mapa-ia"
+  },
+  {
+    "id": "token",
+    "term": "Token",
+    "short": "Trozo de texto (una palabra, parte de una palabra o un signo) con el que trabaja un LLM. Los precios y límites se miden en tokens.",
+    "analogy": "En español, 1.000 tokens equivalen aproximadamente a 600–750 palabras.",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "embedding",
+    "term": "Embedding",
+    "short": "Representación de un texto o imagen como una lista de números que captura su significado; cosas parecidas quedan «cerca».",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "transformer",
+    "term": "Transformer",
+    "short": "Arquitectura de red neuronal publicada por Google en 2017, base de los LLM y de muchos modelos de imagen y vídeo.",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "atencion",
+    "term": "Atención",
+    "aliases": ["attention"],
+    "short": "Mecanismo del Transformer que permite a cada palabra «fijarse» en las demás palabras relevantes del texto para entender el contexto.",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "llm",
+    "term": "LLM",
+    "aliases": ["modelo de lenguaje", "gran modelo de lenguaje"],
+    "short": "Large Language Model: modelo entrenado con enormes cantidades de texto para predecir la siguiente palabra. ChatGPT, Claude o Gemini se basan en LLM.",
+    "analogy": "Un autocompletar entrenado con casi todo internet.",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "prompt",
+    "term": "Prompt",
+    "short": "La instrucción o pregunta que se le da a un modelo de IA.",
+    "module": "chatbots-y-agentes"
+  },
+  {
+    "id": "system-prompt",
+    "term": "System prompt",
+    "aliases": ["instrucciones de sistema"],
+    "short": "Instrucciones ocultas que el creador de un producto da al modelo: rol, tono, normas y límites. El usuario normalmente no las ve.",
+    "analogy": "El manual de bienvenida que recibe un empleado antes de atender al público.",
+    "module": "chatbots-y-agentes"
+  },
+  {
+    "id": "ventana-contexto",
+    "term": "Ventana de contexto",
+    "short": "Cantidad máxima de texto (en tokens) que el modelo puede tener en cuenta a la vez: conversación, documentos e instrucciones.",
+    "analogy": "La memoria de trabajo: lo que cabe en la mesa en ese momento.",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "temperatura",
+    "term": "Temperatura",
+    "short": "Ajuste que controla cuánto se arriesga el modelo al elegir palabras: baja = previsible, alta = creativa (y más propensa a errores).",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "alucinacion",
+    "term": "Alucinación",
+    "short": "Cuando un modelo inventa datos, citas o hechos con total seguridad. Es una consecuencia de cómo funcionan, no un fallo puntual.",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "preentrenamiento",
+    "term": "Preentrenamiento",
+    "aliases": ["pretraining"],
+    "short": "Primera fase del entrenamiento de un LLM: leer billones de palabras para aprender idioma y conocimiento general.",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "rlhf",
+    "term": "RLHF",
+    "aliases": ["feedback humano"],
+    "short": "Aprendizaje por refuerzo con retroalimentación humana: personas puntúan respuestas y el modelo aprende a dar las preferidas.",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "fine-tuning",
+    "term": "Fine-tuning",
+    "aliases": ["ajuste fino"],
+    "short": "Reentrenar un modelo ya existente con datos propios para especializarlo en una tarea, estilo o dominio.",
+    "analogy": "Contratar a alguien ya formado y darle un curso intensivo sobre tu empresa.",
+    "module": "proyecto-animacion"
+  },
+  {
+    "id": "lora",
+    "term": "LoRA",
+    "short": "Técnica de ajuste ligero: en vez de reentrenar todo el modelo, se entrena un pequeño «adaptador». Barato y rápido; muy usado para enseñar estilos o personajes.",
+    "analogy": "Un filtro o plantilla que se acopla al modelo original sin modificarlo.",
+    "module": "modelos-difusion"
+  },
+  {
+    "id": "rag",
+    "term": "RAG",
+    "aliases": ["generación aumentada por recuperación"],
+    "short": "Técnica en la que el sistema busca primero en documentos propios y se los pasa al modelo para que responda basándose en ellos.",
+    "analogy": "Un examen a libro abierto: el modelo consulta la documentación antes de contestar.",
+    "module": "chatbots-y-agentes"
+  },
+  {
+    "id": "razonamiento",
+    "term": "Modelo de razonamiento",
+    "aliases": ["reasoning", "thinking"],
+    "short": "LLM que genera un razonamiento interno antes de responder. Más fiable en problemas complejos, pero más lento y caro.",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "multimodal",
+    "term": "Multimodal",
+    "short": "Modelo que entiende o genera varios tipos de contenido: texto, imagen, audio, vídeo.",
+    "module": "como-funciona-llm"
+  },
+  {
+    "id": "difusion",
+    "term": "Modelo de difusión",
+    "short": "Modelo que genera imágenes o vídeo partiendo de ruido aleatorio y eliminándolo paso a paso, guiado por un texto.",
+    "analogy": "Un escultor que va quitando mármol siguiendo una descripción.",
+    "module": "modelos-difusion"
+  },
+  {
+    "id": "espacio-latente",
+    "term": "Espacio latente",
+    "short": "Versión comprimida y abstracta de una imagen con la que trabajan los modelos de difusión para ahorrar cálculo.",
+    "module": "modelos-difusion"
+  },
+  {
+    "id": "controlnet",
+    "term": "ControlNet",
+    "short": "Complemento para modelos de difusión que fija la pose, la composición o los contornos de la imagen generada.",
+    "module": "modelos-difusion"
+  },
+  {
+    "id": "inpainting",
+    "term": "Inpainting",
+    "short": "Regenerar solo una zona de una imagen (cambiar un objeto, corregir una mano) sin tocar el resto.",
+    "module": "modelos-difusion"
+  },
+  {
+    "id": "text-to-image",
+    "term": "Texto a imagen",
+    "aliases": ["text-to-image"],
+    "short": "Generar una imagen a partir de una descripción escrita.",
+    "module": "modelos-difusion"
+  },
+  {
+    "id": "image-to-video",
+    "term": "Imagen a vídeo",
+    "aliases": ["image-to-video"],
+    "short": "Animar una imagen fija generando los fotogramas siguientes. Muy usado para mantener el control sobre el aspecto del plano.",
+    "module": "modelos-difusion"
+  },
+  {
+    "id": "seed",
+    "term": "Semilla",
+    "aliases": ["seed"],
+    "short": "Número que fija el ruido inicial de una generación. Misma semilla + mismo prompt = misma imagen; útil para reproducir resultados.",
+    "module": "modelos-difusion"
+  },
+  {
+    "id": "chatbot",
+    "term": "Chatbot",
+    "short": "Programa con el que se conversa. Los modernos son un LLM con un system prompt y, a veces, acceso a documentos.",
+    "module": "chatbots-y-agentes"
+  },
+  {
+    "id": "agente",
+    "term": "Agente",
+    "short": "Sistema de IA que persigue un objetivo en varios pasos: planifica, usa herramientas, observa el resultado y repite hasta terminar.",
+    "analogy": "Un becario con acceso a herramientas y una lista de tareas, que te consulta en los puntos clave.",
+    "module": "chatbots-y-agentes"
+  },
+  {
+    "id": "tool-use",
+    "term": "Uso de herramientas",
+    "aliases": ["tool use", "function calling"],
+    "short": "Capacidad de un modelo para pedir que se ejecute una acción externa (buscar, calcular, consultar una base de datos, generar una imagen).",
+    "module": "chatbots-y-agentes"
+  },
+  {
+    "id": "mcp",
+    "term": "MCP",
+    "aliases": ["Model Context Protocol"],
+    "short": "Estándar abierto para conectar asistentes de IA con herramientas y datos externos de forma uniforme.",
+    "analogy": "El USB-C de las herramientas de IA.",
+    "module": "chatbots-y-agentes"
+  },
+  {
+    "id": "skill",
+    "term": "Skill",
+    "aliases": ["habilidad"],
+    "short": "Paquete reutilizable de instrucciones, plantillas y scripts que enseña a un agente a hacer una tarea concreta (p. ej. «desglosar un guion»).",
+    "module": "chatbots-y-agentes"
+  },
+  {
+    "id": "subagente",
+    "term": "Subagente",
+    "short": "Agente especializado al que el agente principal delega una parte del trabajo.",
+    "module": "chatbots-y-agentes"
+  },
+  {
+    "id": "human-in-the-loop",
+    "term": "Human-in-the-loop",
+    "aliases": ["humano en el bucle"],
+    "short": "Diseño en el que una persona revisa o aprueba en puntos clave lo que hace la IA.",
+    "module": "chatbots-y-agentes"
+  },
+  {
+    "id": "prompt-injection",
+    "term": "Prompt injection",
+    "short": "Ataque en el que un texto malicioso (en una web, un correo, un documento) da órdenes ocultas a un agente. Riesgo principal de los agentes con herramientas.",
+    "module": "chatbots-y-agentes"
+  },
+  {
+    "id": "guardrails",
+    "term": "Guardarraíles",
+    "aliases": ["guardrails"],
+    "short": "Controles que limitan lo que un sistema de IA puede decir o hacer: filtros, permisos, aprobaciones.",
+    "module": "chatbots-y-agentes"
+  },
+  {
+    "id": "benchmark",
+    "term": "Benchmark",
+    "short": "Prueba estandarizada para comparar modelos. Útiles como orientación, pero no sustituyen a probar con tus propios casos.",
+    "module": "quien-es-quien"
+  },
+  {
+    "id": "evals",
+    "term": "Evals",
+    "aliases": ["evaluaciones"],
+    "short": "Conjunto de pruebas propio de un proyecto para medir si la IA hace bien su trabajo. Su ausencia es una señal de alarma.",
+    "module": "valorar-proyectos"
+  },
+  {
+    "id": "pesos-abiertos",
+    "term": "Pesos abiertos",
+    "aliases": ["open weights", "modelo abierto"],
+    "short": "Modelo cuyos parámetros se pueden descargar, ejecutar y ajustar en servidores propios. No siempre significa «código abierto» ni uso comercial libre: depende de la licencia.",
+    "module": "quien-es-quien"
+  },
+  {
+    "id": "modelo-frontera",
+    "term": "Modelo frontera",
+    "aliases": ["frontier model"],
+    "short": "Los modelos más capaces del momento, normalmente de los grandes laboratorios.",
+    "module": "quien-es-quien"
+  },
+  {
+    "id": "api",
+    "term": "API",
+    "short": "Puerta de acceso para que un programa use un servicio externo. «Usar el modelo por API» = pagar por uso al proveedor sin alojarlo.",
+    "module": "quien-es-quien"
+  },
+  {
+    "id": "moe",
+    "term": "Mixture of Experts (MoE)",
+    "short": "Diseño en el que el modelo tiene muchos «expertos» internos y solo activa algunos en cada respuesta. Abarata el uso de modelos muy grandes.",
+    "module": "quien-es-quien"
+  },
+  {
+    "id": "destilacion",
+    "term": "Destilación",
+    "short": "Entrenar un modelo pequeño y barato para imitar a uno grande.",
+    "module": "quien-es-quien"
+  },
+  {
+    "id": "wrapper",
+    "term": "Envoltorio",
+    "aliases": ["wrapper"],
+    "short": "Producto que es básicamente una interfaz sobre el modelo de otro proveedor. No es malo en sí, pero hay que saber qué valor añade.",
+    "module": "valorar-proyectos"
+  },
+  {
+    "id": "mlops",
+    "term": "MLOps",
+    "short": "Prácticas y equipo para poner modelos en producción y mantenerlos: despliegue, monitorización, versiones, costes.",
+    "module": "proyecto-animacion"
+  },
+  {
+    "id": "dataset",
+    "term": "Dataset",
+    "aliases": ["conjunto de datos"],
+    "short": "Colección de ejemplos con la que se entrena o evalúa un modelo. Su calidad y sus derechos de uso son críticos.",
+    "module": "proyecto-animacion"
+  },
+  {
+    "id": "keyframe",
+    "term": "Keyframe",
+    "aliases": ["fotograma clave"],
+    "short": "Fotograma que define una posición clave de la animación; los intermedios se generan entre ellos.",
+    "module": "proyecto-animacion"
+  },
+  {
+    "id": "in-betweening",
+    "term": "In-betweening",
+    "aliases": ["intercalado"],
+    "short": "Dibujar los fotogramas intermedios entre dos keyframes. Una de las tareas que más se intenta automatizar con IA.",
+    "module": "proyecto-animacion"
+  },
+  {
+    "id": "agi",
+    "term": "AGI",
+    "aliases": ["inteligencia artificial general"],
+    "short": "IA hipotética capaz de igualar a las personas en casi cualquier tarea intelectual. Su definición y su plazo son objeto de debate.",
+    "module": "mapa-ia"
+  },
+  {
+    "id": "ai-act",
+    "term": "AI Act",
+    "aliases": ["Reglamento europeo de IA"],
+    "short": "Reglamento (UE) 2024/1689. Clasifica los usos de la IA por nivel de riesgo y fija obligaciones de transparencia, seguridad y supervisión.",
+    "module": "valorar-proyectos"
+  },
+  {
+    "id": "coste-por-token",
+    "term": "Coste por token",
+    "short": "Forma de facturar de los LLM por API: se paga por millón de tokens de entrada y, más caro, de salida.",
+    "module": "proyecto-agente-cine"
+  },
+  {
+    "id": "copiloto",
+    "term": "Copiloto",
+    "aliases": ["asistente"],
+    "short": "IA integrada en una herramienta que sugiere y ayuda, pero donde la persona sigue al mando de cada paso.",
+    "module": "chatbots-y-agentes"
+  }
+]

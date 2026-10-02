@@ -1,0 +1,517 @@
+[
+  {
+    "id": "turing-1950",
+    "year": 1950,
+    "era": "origenes",
+    "title": "Turing pregunta: ¿pueden pensar las máquinas?",
+    "what": "Alan Turing publica «Computing Machinery and Intelligence» y propone el «juego de la imitación», conocido después como test de Turing.",
+    "why": "Plantea la pregunta que guía todo el campo: si una máquina conversa como una persona, ¿cómo la distinguimos?",
+    "business": "Hoy los chatbots superan con facilidad versiones informales de este test; por eso la pregunta útil ya no es «¿parece humano?» sino «¿acierta y es fiable?».",
+    "key": true,
+    "sources": ["https://es.wikipedia.org/wiki/Prueba_de_Turing"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "dartmouth-1956",
+    "year": 1956,
+    "era": "origenes",
+    "title": "Nace el término «inteligencia artificial»",
+    "what": "En un taller de verano en Dartmouth (EE. UU.), John McCarthy, Marvin Minsky y otros acuñan «artificial intelligence» y fundan el campo.",
+    "why": "Arranca la investigación con un optimismo enorme: creían que en una generación tendrían máquinas tan listas como las personas.",
+    "business": "Primera lección que se repite: las promesas de la IA suelen adelantarse décadas a la realidad.",
+    "key": true,
+    "sources": ["https://es.wikipedia.org/wiki/Conferencia_de_Dartmouth"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "perceptron-1958",
+    "year": 1958,
+    "era": "origenes",
+    "title": "El perceptrón: la primera «neurona» artificial que aprende",
+    "what": "Frank Rosenblatt presenta el perceptrón, un sistema que aprende a clasificar ejemplos ajustando sus conexiones.",
+    "why": "Es el antepasado directo de las redes neuronales que hoy mueven ChatGPT o Midjourney.",
+    "key": false,
+    "sources": ["https://es.wikipedia.org/wiki/Perceptr%C3%B3n"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "eliza-1966",
+    "year": 1966,
+    "era": "origenes",
+    "title": "ELIZA, el primer chatbot",
+    "what": "Joseph Weizenbaum crea en el MIT un programa que imita a un psicoterapeuta reformulando lo que dice el usuario con reglas sencillas.",
+    "why": "Mucha gente sintió que ELIZA «les entendía», aunque no entendía nada. Es el «efecto ELIZA»: atribuimos inteligencia a lo que habla con soltura.",
+    "business": "El efecto ELIZA sigue vivo: que un sistema hable bien no significa que sepa de lo que habla.",
+    "key": true,
+    "sources": ["https://es.wikipedia.org/wiki/ELIZA"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "invierno-1974",
+    "year": 1974,
+    "era": "inviernos",
+    "title": "Primer invierno de la IA",
+    "what": "Los resultados no llegan a la altura de las promesas y los gobiernos de EE. UU. y Reino Unido recortan la financiación.",
+    "why": "Demuestra que la IA avanza por ciclos de euforia y desencanto.",
+    "business": "Útil para leer el momento actual: hay inversión récord, pero también preguntas sobre si los ingresos justificarán el gasto.",
+    "key": false,
+    "sources": ["https://es.wikipedia.org/wiki/Invierno_de_la_IA"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "sistemas-expertos-1980",
+    "year": 1980,
+    "era": "inviernos",
+    "title": "La moda de los sistemas expertos",
+    "what": "Las empresas adoptan programas basados en miles de reglas «si pasa esto, haz aquello» escritas por expertos humanos.",
+    "why": "Funcionan en tareas muy acotadas, pero son caros de mantener y frágiles fuera de su terreno. A finales de los 80 llega el segundo invierno.",
+    "business": "Contraste clave: la IA de reglas se programa; la IA moderna se entrena con ejemplos.",
+    "key": false,
+    "sources": ["https://es.wikipedia.org/wiki/Sistema_experto"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "backprop-1986",
+    "year": 1986,
+    "era": "inviernos",
+    "title": "Retropropagación: cómo enseñar a una red neuronal",
+    "what": "Rumelhart, Hinton y Williams popularizan la retropropagación, el método para que una red neuronal corrija sus errores capa a capa.",
+    "why": "Es la técnica con la que se siguen entrenando, en esencia, todos los modelos actuales.",
+    "key": false,
+    "sources": ["https://es.wikipedia.org/wiki/Propagaci%C3%B3n_hacia_atr%C3%A1s"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "deep-blue-1997",
+    "year": 1997,
+    "month": 5,
+    "era": "inviernos",
+    "title": "Deep Blue gana a Kasparov",
+    "what": "El ordenador de IBM vence al campeón mundial de ajedrez Garri Kaspárov en un match a seis partidas.",
+    "why": "Gran golpe mediático, aunque Deep Blue no aprendía: calculaba millones de jugadas por fuerza bruta.",
+    "key": true,
+    "sources": ["https://es.wikipedia.org/wiki/Deep_Blue_(computadora)"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "imagenet-2009",
+    "year": 2009,
+    "era": "deep-learning",
+    "title": "ImageNet: los datos importan",
+    "what": "Fei-Fei Li y su equipo publican ImageNet, una base de millones de imágenes etiquetadas que se convierte en la gran competición de visión artificial.",
+    "why": "Demuestra que con muchos datos de calidad los modelos mejoran de forma espectacular.",
+    "business": "Los datos propios y bien etiquetados siguen siendo el activo más valioso de muchos proyectos de IA.",
+    "key": false,
+    "sources": ["https://es.wikipedia.org/wiki/ImageNet"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "siri-2011",
+    "year": 2011,
+    "era": "deep-learning",
+    "title": "Watson gana en Jeopardy! y llega Siri",
+    "what": "IBM Watson gana el concurso de preguntas Jeopardy! y Apple lanza Siri en el iPhone 4S.",
+    "why": "La IA entra en la conversación pública y en el bolsillo, aunque estos asistentes eran todavía muy limitados.",
+    "key": false,
+    "sources": [
+      "https://es.wikipedia.org/wiki/Watson_(inteligencia_artificial)",
+      "https://es.wikipedia.org/wiki/Siri"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "alexnet-2012",
+    "year": 2012,
+    "month": 9,
+    "era": "deep-learning",
+    "title": "AlexNet: despega el deep learning",
+    "what": "Una red neuronal profunda entrenada con tarjetas gráficas (GPU) arrasa en la competición ImageNet.",
+    "why": "Es el pistoletazo de salida de la IA moderna: redes grandes + muchos datos + GPU.",
+    "business": "Aquí empieza la dependencia de las GPU que ha convertido a NVIDIA en una de las empresas más valiosas del mundo.",
+    "key": true,
+    "sources": ["https://en.wikipedia.org/wiki/AlexNet"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gan-2014",
+    "year": 2014,
+    "era": "deep-learning",
+    "title": "GAN: las primeras imágenes inventadas creíbles",
+    "what": "Ian Goodfellow propone las redes generativas antagónicas: una red genera imágenes y otra intenta detectar si son falsas.",
+    "why": "Primeras caras de personas que no existen. Son el precedente de los deepfakes y de la generación de imágenes.",
+    "key": false,
+    "sources": ["https://es.wikipedia.org/wiki/Red_generativa_antag%C3%B3nica"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "openai-2015",
+    "year": 2015,
+    "month": 12,
+    "era": "deep-learning",
+    "title": "Se funda OpenAI",
+    "what": "Sam Altman, Elon Musk y otros fundan OpenAI como laboratorio sin ánimo de lucro para desarrollar IA general «en beneficio de la humanidad».",
+    "why": "Será la empresa que, siete años después, lance ChatGPT.",
+    "key": false,
+    "sources": ["https://es.wikipedia.org/wiki/OpenAI"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "alphago-2016",
+    "year": 2016,
+    "month": 3,
+    "era": "deep-learning",
+    "title": "AlphaGo vence a Lee Sedol",
+    "what": "El sistema de DeepMind (Google) gana 4-1 al maestro de go Lee Sedol, un juego considerado demasiado intuitivo para las máquinas.",
+    "why": "AlphaGo aprendió jugando contra sí mismo y realizó jugadas que los expertos calificaron de creativas.",
+    "key": true,
+    "sources": ["https://es.wikipedia.org/wiki/AlphaGo_versus_Lee_Sedol"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "transformer-2017",
+    "year": 2017,
+    "month": 6,
+    "era": "transformer",
+    "title": "«Attention Is All You Need»: nace el Transformer",
+    "what": "Ocho investigadores de Google publican la arquitectura Transformer, basada en un mecanismo llamado «atención».",
+    "why": "Es la base de prácticamente toda la IA generativa actual: la «T» de GPT significa Transformer.",
+    "business": "Un artículo científico abierto de Google acabó alimentando a sus competidores: en IA, las ideas circulan muy rápido.",
+    "key": true,
+    "sources": [
+      "https://arxiv.org/abs/1706.03762",
+      "https://es.wikipedia.org/wiki/Transformador_(modelo_de_aprendizaje_autom%C3%A1tico)"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gpt1-bert-2018",
+    "year": 2018,
+    "era": "transformer",
+    "title": "GPT-1 y BERT: modelos que leen todo internet",
+    "what": "OpenAI presenta GPT-1 y Google, BERT. Ambos se «preentrenan» con enormes cantidades de texto antes de especializarse.",
+    "why": "Nace la receta actual: primero aprender el idioma en general, luego ajustar para tareas concretas.",
+    "key": false,
+    "sources": [
+      "https://en.wikipedia.org/wiki/GPT-1",
+      "https://es.wikipedia.org/wiki/BERT_(modelo_de_lenguaje)"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gpt2-2019",
+    "year": 2019,
+    "month": 2,
+    "era": "transformer",
+    "title": "GPT-2, «demasiado peligroso» para publicarlo",
+    "what": "OpenAI anuncia GPT-2 pero retrasa publicar la versión completa por miedo a la desinformación automatizada.",
+    "why": "Primer gran debate público sobre los riesgos de los textos generados.",
+    "key": false,
+    "sources": ["https://en.wikipedia.org/wiki/GPT-2"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gpt3-2020",
+    "year": 2020,
+    "month": 5,
+    "era": "transformer",
+    "title": "GPT-3 y las «leyes de escala»",
+    "what": "OpenAI presenta GPT-3, con 175.000 millones de parámetros, capaz de escribir, traducir o programar a partir de unos pocos ejemplos.",
+    "why": "Confirma que hacer los modelos más grandes los hace mucho más capaces. Empieza la carrera por el tamaño y el cómputo.",
+    "business": "Primeras startups construidas sobre la API de un modelo ajeno (redacción publicitaria, por ejemplo).",
+    "key": true,
+    "sources": ["https://es.wikipedia.org/wiki/GPT-3", "https://arxiv.org/abs/2005.14165"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "ddpm-2020",
+    "year": 2020,
+    "month": 6,
+    "era": "transformer",
+    "title": "Modelos de difusión: imágenes a partir de ruido",
+    "what": "Un artículo de Berkeley (DDPM) demuestra que se pueden generar imágenes de gran calidad aprendiendo a quitar ruido paso a paso.",
+    "why": "Es la técnica que, dos años después, harán famosa DALL·E 2, Midjourney y Stable Diffusion.",
+    "key": false,
+    "sources": ["https://arxiv.org/abs/2006.11239"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "alphafold-2020",
+    "year": 2020,
+    "month": 11,
+    "era": "transformer",
+    "title": "AlphaFold resuelve el plegamiento de proteínas",
+    "what": "DeepMind predice la forma 3D de las proteínas con precisión cercana a la experimental, un problema abierto durante 50 años.",
+    "why": "La IA demuestra impacto científico real, más allá de juegos y chatbots. Le valdrá el Nobel de Química de 2024.",
+    "key": false,
+    "sources": ["https://es.wikipedia.org/wiki/AlphaFold"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "dalle-clip-2021",
+    "year": 2021,
+    "month": 1,
+    "era": "transformer",
+    "title": "DALL·E y CLIP: texto e imagen se conectan",
+    "what": "OpenAI presenta DALL·E, que dibuja a partir de una frase, y CLIP, que relaciona textos con imágenes.",
+    "why": "CLIP será la pieza que permita a los modelos de difusión «entender» lo que se les pide.",
+    "key": false,
+    "sources": ["https://openai.com/index/dall-e/", "https://openai.com/index/clip/"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "copilot-2021",
+    "year": 2021,
+    "month": 6,
+    "era": "transformer",
+    "title": "GitHub Copilot: la IA empieza a programar",
+    "what": "GitHub (Microsoft) lanza un asistente que sugiere código mientras el programador escribe, basado en un modelo de OpenAI.",
+    "why": "Primer gran producto profesional de IA generativa. La programación será el campo donde la IA avance más rápido.",
+    "key": false,
+    "sources": ["https://en.wikipedia.org/wiki/GitHub_Copilot"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "dalle2-2022",
+    "year": 2022,
+    "month": 4,
+    "era": "generativa",
+    "title": "DALL·E 2 y Midjourney: estalla la imagen generativa",
+    "what": "OpenAI lanza DALL·E 2 (abril) y Midjourney abre su beta en Discord (julio). Cualquiera puede crear imágenes de gran calidad escribiendo una frase.",
+    "why": "Primer contacto masivo del público con la IA generativa. Arranca el debate con ilustradores y artistas.",
+    "business": "Las agencias y departamentos de marketing empiezan a usarlas para bocetos, moodboards y conceptos.",
+    "key": true,
+    "sources": ["https://es.wikipedia.org/wiki/DALL-E", "https://es.wikipedia.org/wiki/Midjourney"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "stable-diffusion-2022",
+    "year": 2022,
+    "month": 8,
+    "era": "generativa",
+    "title": "Stable Diffusion: un generador de imágenes abierto",
+    "what": "Stability AI y colaboradores publican un modelo de difusión que cualquiera puede descargar y ejecutar en su propio ordenador.",
+    "why": "Abre la puerta a personalizar modelos (estilos, personajes, productos) con técnicas como LoRA y ControlNet.",
+    "business": "Base de muchos proyectos de imagen «entrenados específicamente» para una marca o un estilo, como el proyecto de animación.",
+    "key": true,
+    "sources": ["https://es.wikipedia.org/wiki/Stable_Diffusion"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "chatgpt-2022",
+    "year": 2022,
+    "month": 11,
+    "era": "generativa",
+    "title": "ChatGPT: el momento que lo cambió todo",
+    "what": "El 30 de noviembre OpenAI lanza ChatGPT gratis. En dos meses se estima que llega a 100 millones de usuarios, el producto de consumo de crecimiento más rápido hasta entonces.",
+    "why": "La IA deja de ser cosa de laboratorios: cualquiera puede conversar con un modelo de lenguaje. Empieza la carrera entre grandes tecnológicas.",
+    "business": "A partir de aquí casi todas las empresas abren proyectos de «IA generativa». Es el inicio del periodo que conviene repasar con calma.",
+    "key": true,
+    "sources": ["https://es.wikipedia.org/wiki/ChatGPT"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gpt4-2023",
+    "year": 2023,
+    "month": 3,
+    "era": "generativa",
+    "title": "GPT-4, Claude y la llegada de la competencia",
+    "what": "OpenAI lanza GPT-4, que aprueba exámenes profesionales y entiende imágenes. El mismo mes Anthropic presenta Claude y Google abre Bard (luego Gemini).",
+    "why": "Salto de calidad enorme: los modelos pasan de curiosidad a herramienta de trabajo.",
+    "key": true,
+    "sources": [
+      "https://es.wikipedia.org/wiki/GPT-4",
+      "https://en.wikipedia.org/wiki/Claude_(language_model)"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "llama-2023",
+    "year": 2023,
+    "month": 2,
+    "era": "generativa",
+    "title": "Llama: los modelos de pesos abiertos",
+    "what": "Meta publica LLaMA y, en julio, Llama 2 con licencia de uso comercial. Mistral (Francia) se suma en otoño.",
+    "why": "Las empresas pueden descargar un LLM, ajustarlo y alojarlo en sus servidores sin depender de una API.",
+    "business": "Nace la disyuntiva «API cerrada frente a modelo abierto en casa», clave para valorar coste, privacidad y control.",
+    "key": false,
+    "sources": ["https://es.wikipedia.org/wiki/Llama_(modelo_de_lenguaje)"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gemini-2023",
+    "year": 2023,
+    "month": 12,
+    "era": "generativa",
+    "title": "Gemini: Google entra de lleno",
+    "what": "Google DeepMind presenta Gemini, una familia de modelos multimodales (texto, imagen, audio y vídeo).",
+    "why": "Google, inventor del Transformer, se pone al nivel de OpenAI. La IA multimodal se vuelve el estándar.",
+    "key": false,
+    "sources": ["https://es.wikipedia.org/wiki/Gemini_(modelo_de_lenguaje)"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "sora-2024",
+    "year": 2024,
+    "month": 2,
+    "era": "generativa",
+    "title": "Sora: el vídeo generativo convence",
+    "what": "OpenAI muestra vídeos de hasta un minuto generados a partir de texto. Llegarán después Kling (Kuaishou, China), Veo (Google), Runway Gen-3 y otros.",
+    "why": "El vídeo pasa de clips deformes a planos casi cinematográficos en un año.",
+    "business": "La industria audiovisual y publicitaria empieza a evaluar seriamente la IA para previsualización y producción.",
+    "key": true,
+    "sources": [
+      "https://es.wikipedia.org/wiki/Sora_(modelo_de_texto_a_video)",
+      "https://en.wikipedia.org/wiki/Kling_AI"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gpt4o-2024",
+    "year": 2024,
+    "month": 5,
+    "era": "generativa",
+    "title": "Modelos que ven, oyen y hablan en tiempo real",
+    "what": "OpenAI presenta GPT-4o, que conversa por voz con naturalidad y entiende imágenes al vuelo. Claude 3.5 Sonnet (junio) destaca en programación.",
+    "why": "La interfaz con la IA deja de ser solo texto.",
+    "key": false,
+    "sources": [
+      "https://en.wikipedia.org/wiki/GPT-4o",
+      "https://www.anthropic.com/news/claude-3-5-sonnet"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "o1-2024",
+    "year": 2024,
+    "month": 9,
+    "era": "agentes",
+    "title": "Modelos de razonamiento: pensar antes de responder",
+    "what": "OpenAI lanza o1, un modelo que dedica tiempo a «razonar» internamente antes de contestar y mejora mucho en matemáticas, ciencia y programación.",
+    "why": "Nueva forma de mejorar la IA: no solo modelos más grandes, sino dejarles más tiempo de cálculo para pensar.",
+    "business": "Más calidad a cambio de más tiempo y más coste por respuesta: hay que elegir modelo según la tarea.",
+    "key": true,
+    "sources": ["https://openai.com/index/learning-to-reason-with-llms/"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "nobel-2024",
+    "year": 2024,
+    "month": 10,
+    "era": "agentes",
+    "title": "Dos premios Nobel para la IA",
+    "what": "Hopfield y Hinton reciben el Nobel de Física por las redes neuronales; Hassabis y Jumper (DeepMind) comparten el de Química por AlphaFold.",
+    "why": "Reconocimiento científico de máximo nivel a la IA moderna.",
+    "key": false,
+    "sources": [
+      "https://www.nobelprize.org/prizes/physics/2024/summary/",
+      "https://www.nobelprize.org/prizes/chemistry/2024/summary/"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "computer-use-mcp-2024",
+    "year": 2024,
+    "month": 11,
+    "era": "agentes",
+    "title": "Agentes que usan herramientas: MCP y «uso del ordenador»",
+    "what": "Anthropic presenta en octubre un Claude capaz de manejar un ordenador (ratón y teclado) y en noviembre publica MCP, un estándar abierto para conectar la IA con herramientas y datos.",
+    "why": "La IA pasa de responder a actuar: buscar, rellenar, enviar, programar. MCP lo adoptan después OpenAI, Google y Microsoft.",
+    "business": "Un «agente» de un proveedor puede conectarse a los sistemas de la empresa (CRM, documentos, calendario) de forma estándar.",
+    "key": true,
+    "sources": [
+      "https://www.anthropic.com/news/model-context-protocol",
+      "https://www.anthropic.com/news/3-5-models-and-computer-use"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "deepseek-2025",
+    "year": 2025,
+    "month": 1,
+    "era": "agentes",
+    "title": "DeepSeek R1: el «momento Sputnik» chino",
+    "what": "La startup china DeepSeek publica R1, un modelo de razonamiento abierto comparable a los mejores de EE. UU., que afirma haber entrenado con una fracción del coste. NVIDIA llega a perder cerca de 600.000 millones de dólares en bolsa en un día.",
+    "why": "China demuestra que puede competir en la frontera, con modelos abiertos y muy baratos, pese a las restricciones de exportación de chips.",
+    "business": "Caen los precios de la IA y se multiplican las alternativas abiertas, sobre todo chinas (DeepSeek, Qwen, Kimi, GLM).",
+    "key": true,
+    "sources": [
+      "https://en.wikipedia.org/wiki/DeepSeek",
+      "https://api-docs.deepseek.com/news/news250120"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "claude-code-2025",
+    "year": 2025,
+    "month": 2,
+    "era": "agentes",
+    "title": "Agentes de programación",
+    "what": "Anthropic lanza Claude Code, un agente que programa de forma autónoma desde el terminal; le siguen Codex (OpenAI), Gemini CLI (Google) y herramientas como Cursor.",
+    "why": "El primer tipo de agente que funciona de verdad a escala: escribe, prueba y corrige código durante horas.",
+    "business": "El patrón «agente + instrucciones + herramientas + skills» se extiende a otros oficios: marketing, legal, finanzas, producción audiovisual.",
+    "key": true,
+    "sources": ["https://www.anthropic.com/news/claude-3-7-sonnet"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "ai-act-2025",
+    "year": 2025,
+    "month": 2,
+    "era": "agentes",
+    "title": "Entra en aplicación el AI Act europeo",
+    "what": "Desde el 2 de febrero de 2025 se prohíben ciertos usos de la IA en la UE; desde el 2 de agosto de 2025 aplican obligaciones a los modelos de uso general. Otras obligaciones se aplican de forma escalonada en años posteriores.",
+    "why": "Primera ley integral de IA del mundo. Afecta a quien desarrolla y a quien usa IA en Europa.",
+    "business": "Cualquier proyecto que valores en la UE debe tener en cuenta su nivel de riesgo y las obligaciones de transparencia (por ejemplo, señalar contenido generado por IA).",
+    "key": false,
+    "sources": [
+      "https://digital-strategy.ec.europa.eu/es/policies/regulatory-framework-ai",
+      "https://eur-lex.europa.eu/eli/reg/2024/1689/oj"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "image-gen-2025",
+    "year": 2025,
+    "month": 3,
+    "era": "agentes",
+    "title": "Imágenes conversacionales: «al estilo Ghibli»",
+    "what": "OpenAI integra la generación de imágenes en GPT-4o; la moda de convertir fotos «al estilo Studio Ghibli» se vuelve viral. Google responde con «Nano Banana» (Gemini 2.5 Flash Image) en agosto.",
+    "why": "Las imágenes se editan conversando («cambia el fondo», «mismo personaje, otra pose») y respetan mucho mejor el texto y la coherencia.",
+    "business": "Reabre el debate sobre estilos de artistas y derechos de autor, muy relevante para estudios de animación.",
+    "key": false,
+    "sources": [
+      "https://openai.com/index/introducing-4o-image-generation/",
+      "https://developers.googleblog.com/en/introducing-gemini-2-5-flash-image/"
+    ],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "veo3-2025",
+    "year": 2025,
+    "month": 5,
+    "era": "agentes",
+    "title": "Vídeo generativo con sonido",
+    "what": "Google presenta Veo 3, que genera vídeo con diálogos, efectos y música sincronizados. OpenAI lanza Sora 2 y su app social en septiembre.",
+    "why": "El vídeo generado empieza a ser difícil de distinguir del real en planos cortos.",
+    "business": "Previsualización, publicidad y redes sociales adoptan la herramienta; crecen la preocupación por deepfakes y los requisitos de etiquetado.",
+    "key": true,
+    "sources": ["https://deepmind.google/models/veo/", "https://openai.com/index/sora-2/"],
+    "verifiedAt": "2026-10-02"
+  },
+  {
+    "id": "gpt5-2025",
+    "year": 2025,
+    "month": 8,
+    "era": "agentes",
+    "title": "GPT-5 y la nueva generación de modelos frontera",
+    "what": "OpenAI lanza GPT-5 en agosto; en otoño llegan Claude Sonnet 4.5 y Opus 4.5 (Anthropic) y Gemini 3 (Google).",
+    "why": "Los modelos punteros combinan conversación, razonamiento y uso de herramientas en un solo sistema, y trabajan de forma autónoma durante más tiempo.",
+    "key": false,
+    "sources": [
+      "https://openai.com/index/introducing-gpt-5/",
+      "https://www.anthropic.com/news/claude-opus-4-5",
+      "https://blog.google/products/gemini/gemini-3/"
+    ],
+    "verifiedAt": "2026-10-02"
+  }
+]

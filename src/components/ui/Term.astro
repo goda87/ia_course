@@ -1,0 +1,42 @@
+---
+/**
+ * Término del glosario con definición emergente.
+ * Uso en MDX: <Term id="token" /> o <Term id="token">tokens</Term>
+ */
+import { glossaryEntry } from "@/data";
+
+interface Props {
+  id: string;
+}
+const { id } = Astro.props;
+const entry = glossaryEntry(id);
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const tipId = `tip-${id}-${Math.random().toString(36).slice(2, 7)}`;
+const hasSlot = Astro.slots.has("default");
+---
+
+<span class="term group relative inline">
+  <a href={`${base}/modulos/glosario/#${id}`} class="term-link" aria-describedby={tipId}>
+    {hasSlot ? <slot /> : entry.term}
+  </a>
+  <span
+    id={tipId}
+    role="tooltip"
+    class="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 hidden w-72 -translate-x-1/2 rounded-xl border border-line bg-card p-3 text-left text-sm leading-snug font-normal text-fg shadow-lg group-focus-within:block group-hover:block"
+  >
+    <strong class="mb-1 block">{entry.term}</strong>
+    {entry.short}
+  </span>
+</span>
+
+<style>
+  .term-link {
+    text-decoration: underline dotted;
+    text-decoration-color: var(--accent, var(--muted));
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+    color: inherit;
+    font-weight: inherit;
+    cursor: help;
+  }
+</style>
