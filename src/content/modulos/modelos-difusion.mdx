@@ -1,0 +1,143 @@
+---
+title: Cómo funciona un modelo de difusión
+order: 4
+block: funciona
+summary: Cómo se crea una imagen o un vídeo a partir de ruido, qué herramientas permiten controlar el resultado y por qué la animación es el caso más difícil.
+minutes: 14
+---
+
+import DiffusionCanvas from "@/components/viz/DiffusionCanvas.tsx";
+import PipelineFlow from "@/components/viz/PipelineFlow.tsx";
+import ControlTools from "@/components/viz/ControlTools.tsx";
+import ConsistencyStrip from "@/components/viz/ConsistencyStrip.tsx";
+import VizFrame from "@/components/ui/VizFrame.astro";
+import ParaLlevar from "@/components/ui/ParaLlevar.astro";
+import QuePreguntar from "@/components/ui/QuePreguntar.astro";
+import Analogia from "@/components/ui/Analogia.astro";
+import Callout from "@/components/ui/Callout.astro";
+import Term from "@/components/ui/Term.astro";
+
+Midjourney, Stable Diffusion, FLUX, Imagen, Veo o Kling se basan, total o parcialmente, en la misma idea: los **<Term id="difusion">modelos de difusión</Term>**. La idea es tan extraña como brillante: **se aprende a crear imágenes aprendiendo a quitar ruido**.
+
+<Analogia>
+  Imagina una foto cubierta de nieve de televisor. Un restaurador experto, que ha visto millones de
+  fotos, puede adivinar qué había debajo y limpiar un poco. Si repite la operación treinta veces, la
+  foto aparece. Ahora imagina que empieza con nieve **pura**, sin foto debajo, y que alguien le
+  susurra «un zorro naranja saludando». Acabará «restaurando» una imagen que nunca existió.
+</Analogia>
+
+## Del ruido a la imagen
+
+Prueba los dos modos. En **entrenar** verás lo que el modelo estudia; en **generar**, lo que hace cuando le pides una imagen.
+
+<VizFrame
+  title="Difusión paso a paso"
+  caption="Simulación visual. Un modelo real trabaja en un espacio comprimido y decide en cada paso qué ruido quitar; aquí se muestra el efecto, no el cálculo."
+>
+  <DiffusionCanvas client:visible />
+</VizFrame>
+
+Fíjate en tres cosas:
+
+1. **Primero aparece lo general** (colores, composición) y **al final el detalle** (ojos, contornos). Por eso los modelos fallan más en detalles finos: manos, texto, dedos.
+2. **El texto guía cada paso.** El mismo ruido con otro prompt da otra imagen.
+3. **La <Term id="seed">semilla</Term>** fija el ruido inicial: misma semilla y mismo prompt dan la misma imagen; cambiarla da otra composición. Es la forma de reproducir un resultado.
+
+## Las piezas del sistema
+
+Un generador de imágenes no es un único bloque. Pulsa cada paso:
+
+<VizFrame
+  title="De la frase a la imagen"
+  caption="La mayoría de modelos actuales siguen este esquema, aunque cambien las piezas concretas."
+>
+  <PipelineFlow
+    client:visible
+    autoplay={3500}
+    steps={[
+      {
+        icon: "✍️",
+        title: "Prompt",
+        text: "Escribes lo que quieres: sujeto, estilo, encuadre, luz. Puedes añadir imágenes de referencia.",
+      },
+      {
+        icon: "🔤",
+        title: "Codificador de texto",
+        text: "Un modelo de lenguaje convierte la frase en números que capturan su significado (embeddings). Cuanto mejor es este codificador, mejor entiende prompts complejos y textos dentro de la imagen.",
+      },
+      {
+        icon: "🌫️",
+        title: "Ruido inicial",
+        text: "Se genera ruido aleatorio a partir de una semilla. No en la imagen a tamaño completo, sino en un «espacio latente»: una versión comprimida mucho más pequeña, para ahorrar cálculo.",
+      },
+      {
+        icon: "🧽",
+        title: "Eliminación de ruido",
+        text: "La red principal (hoy suele ser un Transformer, como en los LLM) quita ruido en 20–50 pasos, guiada por el texto. Es la parte que más GPU consume.",
+      },
+      {
+        icon: "🖼️",
+        title: "Decodificador",
+        text: "Convierte la versión comprimida en la imagen final en alta resolución.",
+      },
+    ]}
+  />
+</VizFrame>
+
+<Callout variant="dato" title="No todo es difusión">
+  Algunos generadores recientes (por ejemplo, los integrados en ChatGPT o Gemini) generan la imagen
+  de otra forma, más parecida a cómo un LLM escribe texto, o combinan ambas técnicas. Eso les
+  permite **editar conversando** («ahora de perfil», «cambia el fondo») y escribir texto legible.
+  Para valorar proyectos, lo importante no es la técnica exacta sino **cuánto control** ofrecen.
+</Callout>
+
+## Cómo se controla el resultado
+
+Escribir un prompt es como dar un briefing de una línea: el resultado es sorprendente pero impredecible. Para trabajo profesional hacen falta herramientas que den **control**. Estas son las más importantes:
+
+<VizFrame
+  title="La caja de herramientas"
+  caption="Estas técnicas se combinan. Un flujo profesional de animación suele usar varias a la vez."
+>
+  <ControlTools client:visible />
+</VizFrame>
+
+- **<Term id="lora">LoRA</Term>** y otras formas de <Term id="fine-tuning">ajuste fino</Term> enseñan al modelo algo nuevo (un estilo, un personaje).
+- **<Term id="controlnet">ControlNet</Term>** y similares fijan pose, composición o contornos.
+- **Imagen a imagen** e **<Term id="inpainting" />** parten de una imagen existente para transformarla o retocarla.
+- **Referencias de personaje o estilo**: los modelos más recientes aceptan imágenes de referencia directamente, sin entrenar nada.
+
+## El reto del vídeo y la animación
+
+Generar una imagen bonita es relativamente fácil. Generar **24 imágenes por segundo** que sean coherentes entre sí es mucho más difícil: el personaje debe ser idéntico en cada fotograma y moverse de forma natural.
+
+<VizFrame
+  title="El problema de la consistencia"
+  caption="Personaje ilustrativo. En la práctica, las variaciones son más sutiles pero igual de molestas: un tono que cambia, un detalle del vestuario que aparece y desaparece."
+>
+  <ConsistencyStrip client:visible />
+</VizFrame>
+
+Los modelos de vídeo (Veo, Sora, Kling, Runway, Wan, Seedance…) generan todos los fotogramas a la vez, lo que mejora mucho la coherencia. Aun así:
+
+- Los clips son **cortos** (normalmente segundos, no minutos) y hay que encadenarlos.
+- Controlar con precisión **la actuación, el timing y la cámara** sigue siendo difícil: justo lo que más importa en animación.
+- El **estilo 2D tradicional** (línea limpia, colores planos, poses muy marcadas) es más difícil de mantener que el realismo, porque hay menos ejemplos de entrenamiento y los errores se notan más.
+- **Coste**: el vídeo consume muchísima más GPU que la imagen. Cada segundo generado, y cada intento descartado, se paga.
+
+Lo verás aplicado al proyecto de animación en el módulo 07.
+
+<QuePreguntar>
+  - ¿Qué modelo base usáis y con qué licencia? ¿Permite uso comercial? - ¿Cómo garantizáis que el
+  personaje sea idéntico en todos los planos? - ¿Cuánto control tiene el artista: pose, cámara,
+  timing? ¿O solo escribe prompts? - ¿Qué porcentaje de lo generado se descarta o hay que retocar a
+  mano? - ¿Con qué imágenes se ha entrenado o ajustado el modelo y quién tiene sus derechos?
+</QuePreguntar>
+
+<ParaLlevar>
+  - Un modelo de difusión crea imágenes quitando ruido paso a paso, guiado por un texto. - Primero
+  salen las formas generales y al final los detalles: por eso fallan más en manos, texto o rasgos
+  finos. - El control profesional se consigue con LoRA (estilo/personaje), ControlNet
+  (pose/composición), imagen a imagen, inpainting y referencias. - En vídeo y animación el gran reto
+  es la **consistencia** entre fotogramas, y el coste se dispara.
+</ParaLlevar>

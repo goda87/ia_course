@@ -1,0 +1,149 @@
+---
+title: Cómo funciona un LLM
+order: 3
+block: funciona
+summary: Tokens, probabilidades, atención y entrenamiento. Lo que pasa dentro de ChatGPT, Claude o Gemini, explicado sin una sola fórmula.
+minutes: 15
+---
+
+import Tokenizer from "@/components/viz/Tokenizer.tsx";
+import NextToken from "@/components/viz/NextToken.tsx";
+import Embeddings from "@/components/viz/Embeddings.tsx";
+import Attention from "@/components/viz/Attention.tsx";
+import TrainingPhases from "@/components/viz/TrainingPhases.tsx";
+import ContextWindow from "@/components/viz/ContextWindow.tsx";
+import VizFrame from "@/components/ui/VizFrame.astro";
+import ParaLlevar from "@/components/ui/ParaLlevar.astro";
+import QuePreguntar from "@/components/ui/QuePreguntar.astro";
+import Analogia from "@/components/ui/Analogia.astro";
+import Aviso from "@/components/ui/Aviso.astro";
+import Callout from "@/components/ui/Callout.astro";
+import Term from "@/components/ui/Term.astro";
+
+Un <Term id="llm" /> (_Large Language Model_, gran modelo de lenguaje) hace, en el fondo, **una sola cosa**: dado un texto, predice cuál es la palabra más probable que viene después. Luego la añade y repite. Palabra a palabra, escribe correos, informes, código o poemas.
+
+Parece demasiado simple para explicar lo que hacen. El truco está en la escala: para predecir bien la siguiente palabra en cualquier texto de internet, el modelo tiene que haber aprendido gramática, hechos, estilos, razonamientos… Vamos por partes.
+
+<Analogia>
+  Un LLM es como el autocompletar del móvil, pero entrenado con casi todo lo que se ha escrito y con
+  una memoria de trabajo enorme. No consulta una base de datos: **genera** cada respuesta.
+</Analogia>
+
+## 1. El texto se trocea en tokens
+
+Los modelos no leen letras ni palabras exactas: leen **<Term id="token">tokens</Term>**, trozos de texto. Las palabras frecuentes son un token; las largas o raras se dividen en varios.
+
+<VizFrame
+  title="El tokenizador"
+  caption="Esto importa porque los modelos cobran por token y su memoria se mide en tokens. Como referencia, en español 1.000 tokens equivalen aproximadamente a 600–750 palabras."
+>
+  <Tokenizer client:visible />
+</VizFrame>
+
+## 2. Predecir la siguiente palabra
+
+Para cada posición, el modelo calcula la probabilidad de **todas** las palabras posibles. Luego elige una. Cómo elige depende de un ajuste llamado <Term id="temperatura" />.
+
+<VizFrame
+  title="¿Qué palabra viene después?"
+  caption="Probabilidades ilustrativas. Prueba los tres ejemplos: el tercero explica de dónde salen las alucinaciones."
+>
+  <NextToken client:visible />
+</VizFrame>
+
+Por eso **la misma pregunta puede dar respuestas distintas** cada vez, y por eso los modelos pueden equivocarse con total aplomo: no «saben» si algo es verdad, saben qué es plausible.
+
+<Aviso title="Alucinaciones">
+  Una <Term id="alucinacion" /> es cuando el modelo inventa un dato, una cita o una fuente con total
+  seguridad. No es un error puntual que se vaya a arreglar del todo: es consecuencia de cómo
+  funcionan. Se reduce mucho con buenas prácticas:
+
+- dar al modelo los documentos relevantes para que responda basándose en ellos (lo que se llama <Term id="rag">RAG</Term>, en el módulo 05),
+- pedir citas comprobables y comprobarlas,
+- dejarle buscar en la web o usar herramientas de cálculo,
+- y que una persona revise lo importante.
+
+</Aviso>
+
+## 3. El significado como un mapa
+
+Internamente, cada token se convierte en una larga lista de números: un <Term id="embedding" />. Lo interesante es que palabras con significado parecido acaban con números parecidos, como si estuvieran **cerca en un mapa**.
+
+<VizFrame
+  title="El mapa de significados"
+  caption="Representación simplificada a dos dimensiones. Pulsa una palabra para ver sus vecinas, o prueba la «aritmética de significados»."
+>
+  <Embeddings client:visible />
+</VizFrame>
+
+Esta idea tiene aplicaciones muy prácticas: los buscadores «semánticos» de documentos de empresa encuentran textos por su significado, no por coincidencia de palabras. Es la base del RAG.
+
+## 4. La atención: entender el contexto
+
+El gran invento del <Term id="transformer" /> (2017) es la <Term id="atencion" />: cada palabra «mira» a las demás para decidir qué significa en esa frase concreta.
+
+<VizFrame
+  title="¿A qué presta atención cada palabra?"
+  caption="La misma palabra («era») se relaciona con cosas distintas según el contexto."
+>
+  <Attention client:visible />
+</VizFrame>
+
+Un modelo grande tiene decenas de capas de atención, cada una con muchas «cabezas» que se fijan en relaciones distintas: gramática, quién hace qué, tono, referencias a párrafos anteriores…
+
+## 5. Cómo se entrena
+
+Los <Term id="parametros">parámetros</Term> del modelo (cientos de miles de millones de números) se ajustan durante el <Term id="entrenamiento" />, que tiene tres grandes fases:
+
+<VizFrame
+  title="Las tres fases del entrenamiento"
+  caption="Las empresas que construyen productos casi nunca hacen la fase 1: parten de un modelo ya preentrenado."
+>
+  <TrainingPhases client:visible />
+</VizFrame>
+
+<Callout variant="dato" title="Lo que significa para tus proyectos">
+  Cuando un equipo dice «hemos entrenado nuestro propio modelo», casi siempre ha hecho algo de la
+  fase 2 (ajustar un modelo existente con sus datos, lo que se llama <Term id="fine-tuning" />) o,
+  aún más a menudo, ninguna: usa un modelo de un proveedor con buenas instrucciones. Las tres
+  opciones son legítimas, pero cuestan y aportan cosas muy distintas.
+</Callout>
+
+## 6. La memoria de trabajo: la ventana de contexto
+
+Un LLM no recuerda nada entre conversaciones por sí mismo. En cada respuesta lee **todo** lo que tiene delante: instrucciones, conversación y documentos. Ese espacio tiene un límite: la <Term id="ventana-contexto" />.
+
+<VizFrame
+  title="Llenar la ventana de contexto"
+  caption="Las ventanas actuales van desde unos cien mil tokens hasta más de un millón según el modelo: de unos cientos a más de mil páginas. Pero cuanto más llena, más caro y más fácil que el modelo pase por alto detalles."
+>
+  <ContextWindow client:visible />
+</VizFrame>
+
+Cuando un producto dice que su IA «recuerda» tus preferencias, en realidad guarda notas y se las vuelve a pasar al modelo en cada conversación.
+
+## 7. Modelos que razonan
+
+Desde finales de 2024 existen los **<Term id="razonamiento">modelos de razonamiento</Term>**: antes de responder, generan un razonamiento interno (a veces visible como «pensando…»), prueban caminos y se corrigen. Son mucho mejores en matemáticas, programación, análisis y planificación.
+
+La contrapartida: **tardan más y cuestan más**, porque esos tokens de «pensamiento» también se pagan. Hoy la mayoría de modelos permiten regular cuánto piensan según la tarea.
+
+## 8. Más allá del texto
+
+Los modelos actuales son <Term id="multimodal">multimodales</Term>: entienden imágenes, documentos escaneados, gráficos, audio y, algunos, vídeo. Puedes darles una foto de una pizarra o un PDF de 200 páginas y hacerles preguntas. Para **generar** imágenes y vídeo, en cambio, se suelen usar otro tipo de modelos: los de difusión, del siguiente módulo.
+
+<QuePreguntar>
+  - ¿Qué modelo usáis y por qué ese? ¿Habéis comparado con otros? - ¿Cómo evitáis o detectáis las
+  alucinaciones? ¿El sistema cita fuentes? - ¿Qué información recibe el modelo en cada petición?
+  ¿Cabe todo en la ventana de contexto? - ¿Usáis un modelo de razonamiento? ¿Cuánto encarece y
+  ralentiza cada respuesta?
+</QuePreguntar>
+
+<ParaLlevar>
+  - Un LLM predice la siguiente palabra (token) una y otra vez. Su conocimiento sale del
+  entrenamiento con cantidades enormes de texto. - Las respuestas son probabilísticas: pueden variar
+  y pueden ser falsas con total seguridad (alucinaciones). - La «atención» le permite entender cada
+  palabra según su contexto. - Se entrena en tres fases; las empresas normalmente parten de un
+  modelo ya hecho. - Solo «recuerda» lo que cabe en su ventana de contexto en cada momento. - Los
+  modelos de razonamiento son más fiables en problemas complejos, a cambio de tiempo y coste.
+</ParaLlevar>

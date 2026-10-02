@@ -13,10 +13,15 @@ const entry = glossaryEntry(id);
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const tipId = `tip-${id}-${Math.random().toString(36).slice(2, 7)}`;
 const hasSlot = Astro.slots.has("default");
+// En mitad de frase: «una alucinación», no «una Alucinación». Siglas y nombres con mayúsculas internas se mantienen.
+const display =
+  /^\p{Lu}\p{Ll}/u.test(entry.term) && !/\p{Lu}/u.test(entry.term.slice(1))
+    ? entry.term[0]!.toLowerCase() + entry.term.slice(1)
+    : entry.term;
 ---
 
 <!-- prettier-ignore -->
-<span class="term group relative inline"><a href={`${base}/modulos/glosario/#${id}`} class="term-link" aria-describedby={tipId}>{hasSlot ? <slot /> : entry.term}</a><span
+<span class="term group relative inline"><a href={`${base}/modulos/glosario/#${id}`} class="term-link" aria-describedby={tipId}>{hasSlot ? <slot /> : display}</a><span
     id={tipId}
     role="tooltip"
     class="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 hidden w-72 -translate-x-1/2 rounded-xl border border-line bg-card p-3 text-left text-sm leading-snug font-normal text-fg shadow-lg group-focus-within:block group-hover:block"

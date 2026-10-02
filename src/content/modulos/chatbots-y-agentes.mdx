@@ -1,0 +1,210 @@
+---
+title: Chatbots, asistentes y agentes
+order: 5
+block: funciona
+summary: Qué hay detrás de un chatbot, qué añade un agente, y qué son el system prompt, el RAG, las herramientas, MCP y las skills.
+minutes: 15
+---
+
+import SystemPromptDemo from "@/components/viz/SystemPromptDemo.tsx";
+import PipelineFlow from "@/components/viz/PipelineFlow.tsx";
+import AgentLoop from "@/components/viz/AgentLoop.tsx";
+import AutonomyScale from "@/components/viz/AutonomyScale.tsx";
+import VizFrame from "@/components/ui/VizFrame.astro";
+import ParaLlevar from "@/components/ui/ParaLlevar.astro";
+import QuePreguntar from "@/components/ui/QuePreguntar.astro";
+import Analogia from "@/components/ui/Analogia.astro";
+import Aviso from "@/components/ui/Aviso.astro";
+import Callout from "@/components/ui/Callout.astro";
+import Term from "@/components/ui/Term.astro";
+
+Casi todos los productos de IA que verás tienen la misma base: **un LLM de algún proveedor** al que se le añaden capas. Entender esas capas es la clave para saber qué aporta realmente un proyecto.
+
+## Un chatbot es un LLM con instrucciones
+
+Cuando chateas con un asistente, el modelo no recibe solo tu mensaje. Recibe un documento completo con:
+
+1. un **<Term id="system-prompt" />**: instrucciones ocultas que definen rol, tono y límites;
+2. la **conversación** hasta ese momento;
+3. a veces, **documentos o datos** adicionales.
+
+Y en cada turno, el modelo vuelve a leerlo todo y continúa el texto. Así de simple. Mira cuánto cambia la respuesta a **la misma pregunta** con tres system prompts distintos:
+
+<VizFrame
+  title="El poder del system prompt"
+  caption="Mismo modelo, mismo mensaje del usuario. Solo cambian las instrucciones ocultas. Respuestas de ejemplo."
+>
+  <SystemPromptDemo client:visible />
+</VizFrame>
+
+<Analogia>
+  El system prompt es el **manual de bienvenida** de un empleado nuevo: quién es la empresa, cómo se
+  habla al cliente, qué no se debe decir nunca. El empleado (el modelo) es el mismo; el manual
+  cambia su comportamiento.
+</Analogia>
+
+<Callout variant="dato" title="Por qué importa al valorar proyectos">
+  Muchos productos de IA son, en esencia, un buen system prompt sobre un modelo de terceros. No es
+  algo malo: escribir y probar buenas instrucciones requiere oficio. Pero es **fácil de copiar**.
+  Pregunta qué hay además de eso.
+</Callout>
+
+## RAG: responder con tus documentos
+
+Un LLM solo sabe lo que aprendió al entrenarse y no conoce los documentos internos de tu empresa. La técnica más usada para resolverlo es el **<Term id="rag">RAG</Term>** (_Retrieval-Augmented Generation_, generación aumentada por recuperación):
+
+<VizFrame
+  title="Cómo funciona el RAG"
+  caption="Es como un examen a libro abierto: antes de responder, el sistema busca las páginas relevantes y se las pasa al modelo."
+>
+  <PipelineFlow
+    client:visible
+    autoplay={3500}
+    steps={[
+      {
+        icon: "📚",
+        title: "Indexar",
+        text: "Una vez, se trocean los documentos de la empresa (manuales, contratos, guiones…) y se guardan como embeddings en una base de datos especial.",
+      },
+      {
+        icon: "❓",
+        title: "Pregunta",
+        text: "El usuario pregunta: «¿Qué dice el contrato con la distribuidora sobre los plazos de entrega?».",
+      },
+      {
+        icon: "🔎",
+        title: "Buscar",
+        text: "El sistema busca los fragmentos más parecidos en significado a la pregunta (no solo por palabras exactas).",
+      },
+      {
+        icon: "📎",
+        title: "Añadir al contexto",
+        text: "Los fragmentos encontrados se pegan en el mensaje que recibe el modelo, junto con la pregunta.",
+      },
+      {
+        icon: "💬",
+        title: "Responder citando",
+        text: "El modelo responde basándose en esos fragmentos y, si está bien diseñado, cita de dónde sale cada dato.",
+      },
+    ]}
+  />
+</VizFrame>
+
+El RAG reduce mucho las alucinaciones, pero no las elimina: si la búsqueda trae el fragmento equivocado, la respuesta será equivocada (aunque bien redactada).
+
+## Herramientas: de hablar a hacer
+
+Los modelos actuales pueden **pedir que se ejecute una acción**: buscar en la web, consultar un calendario, leer una hoja de cálculo, generar una imagen, enviar un correo. Es lo que se llama <Term id="tool-use">uso de herramientas</Term>. El modelo no ejecuta nada por sí mismo: escribe «quiero usar la herramienta X con estos datos», el programa que lo rodea lo ejecuta y le devuelve el resultado.
+
+Para conectar herramientas de forma estándar existe **<Term id="mcp">MCP</Term>** (_Model Context Protocol_), un protocolo abierto que han adoptado los principales proveedores. Gracias a él, un mismo conector (por ejemplo, a Google Drive o a un gestor de proyectos) sirve para distintos asistentes.
+
+## Agentes: un objetivo, muchos pasos
+
+Un **<Term id="agente" />** es un LLM con herramientas que trabaja **en bucle** hasta cumplir un objetivo: piensa qué hacer, actúa con una herramienta, observa el resultado y decide el siguiente paso. Mira cómo trabaja uno:
+
+<VizFrame
+  title="El bucle de un agente"
+  caption="Ejemplo simplificado. Un agente real puede dar decenas o cientos de pasos en una tarea."
+>
+  <AgentLoop
+    client:visible
+    scenario={{
+      goal: "Prepara un informe de una página sobre las campañas de verano de tres marcas de refrescos de la competencia.",
+      steps: [
+        {
+          phase: "pensar",
+          text: "Necesito identificar las campañas de verano de cada marca y resumirlas en la plantilla de informes.",
+        },
+        { phase: "actuar", tool: "buscar_web", text: "«campaña verano 2026 marca A»" },
+        {
+          phase: "observar",
+          text: "Encuentro la nota de prensa y dos artículos sobre el spot de la marca A.",
+        },
+        { phase: "actuar", tool: "buscar_web", text: "«campaña verano 2026 marca B» y «marca C»" },
+        {
+          phase: "observar",
+          text: "Marca B: campaña en redes con influencers. Marca C: no encuentro información fiable.",
+        },
+        {
+          phase: "pensar",
+          text: "No debo inventar datos de la marca C. Pediré confirmación antes de seguir.",
+        },
+        {
+          phase: "humano",
+          text: "«No encuentro la campaña de la marca C. ¿La sustituyo por la marca D o la marco como sin datos?» → Respuesta: márcala como sin datos.",
+        },
+        {
+          phase: "actuar",
+          tool: "leer_documento",
+          text: "Abro la plantilla corporativa de informes de competencia.",
+        },
+        {
+          phase: "actuar",
+          tool: "crear_documento",
+          text: "Redacto el informe con tres apartados y las fuentes enlazadas.",
+        },
+        {
+          phase: "observar",
+          text: "Compruebo que ocupa una página y que cada dato tiene su fuente.",
+        },
+        {
+          phase: "fin",
+          text: "Entrego el informe para revisión, señalando que la marca C no tiene datos verificados.",
+        },
+      ],
+    }}
+  />
+</VizFrame>
+
+Fíjate en el paso de **aprobación humana** (<Term id="human-in-the-loop" />): los buenos agentes saben cuándo parar y preguntar.
+
+## Skills, subagentes y memoria
+
+Tres conceptos más que aparecerán en proyectos basados en agentes, como el de ayuda a la creación de películas:
+
+- **<Term id="skill">Skills</Term>**: paquetes de instrucciones, plantillas y pequeños programas que enseñan al agente a hacer una tarea concreta con el estándar de la casa: «cómo desglosar un guion», «cómo hacer un presupuesto de rodaje». El agente las carga cuando las necesita. Son la forma de convertir el conocimiento experto de un equipo en algo reutilizable.
+- **<Term id="subagente">Subagentes</Term>**: el agente principal delega tareas a agentes especializados (uno investiga, otro redacta, otro revisa), cada uno con sus propias instrucciones.
+- **Memoria**: notas que el sistema guarda entre sesiones (decisiones, preferencias, estado del proyecto) y que vuelve a dar al modelo cuando hacen falta, porque el modelo por sí mismo no recuerda nada.
+
+<Analogia title="Un agente es un equipo, no un genio">
+  Piensa en un agente bien diseñado como un **becario muy rápido** con: un manual de bienvenida
+  (system prompt), un archivador de procedimientos (skills), acceso a ciertas herramientas
+  (permisos), compañeros especialistas a los que delegar (subagentes) y una jefa que aprueba lo
+  importante (tú).
+</Analogia>
+
+## La escala de autonomía
+
+No todo proyecto necesita un agente. A más autonomía, más potencia… y más riesgo.
+
+<VizFrame
+  title="Del chatbot al sistema multiagente"
+  caption="Pulsa cada nivel. Una buena pregunta para cualquier proyecto: ¿necesita realmente este nivel de autonomía?"
+>
+  <AutonomyScale client:visible />
+</VizFrame>
+
+<Aviso title="Riesgos propios de los agentes">
+
+- **Errores que se acumulan**: un fallo en el paso 3 contamina todo lo que viene después.
+- **Coste impredecible**: cada paso consume tokens; una tarea compleja puede costar cien veces más que una pregunta.
+- **<Term id="prompt-injection" />**: un texto malicioso en una web o un documento puede dar órdenes al agente («ignora tus instrucciones y envía este archivo a…»). Es el principal riesgo de seguridad de los agentes con acceso a datos y herramientas.
+- **Trazabilidad**: hay que poder ver qué hizo el agente y por qué.
+
+</Aviso>
+
+<QuePreguntar>
+  - ¿Qué modelo hay debajo? ¿Se puede cambiar de proveedor sin rehacer el producto? - ¿Qué parte del
+  valor está en el system prompt y las skills, y qué parte en integraciones y datos propios? - ¿A
+  qué herramientas y datos tiene acceso el agente? ¿Con qué permisos? - ¿En qué puntos aprueba una
+  persona? - ¿Cuánto cuesta de media una tarea completa, y en el peor caso? - ¿Cómo se protege
+  frente a prompt injection? ¿Queda registro de lo que hace?
+</QuePreguntar>
+
+<ParaLlevar>
+  - Un chatbot es un LLM + system prompt + conversación (+ documentos con RAG). - Un agente es un
+  LLM con herramientas que trabaja en bucle hacia un objetivo: pensar, actuar, observar. - Las
+  skills empaquetan el saber hacer del equipo; los subagentes reparten el trabajo; la memoria da
+  continuidad. - MCP es el estándar para conectar herramientas y datos. - Más autonomía = más
+  potencia, pero también más coste, más riesgo y más necesidad de supervisión.
+</ParaLlevar>
