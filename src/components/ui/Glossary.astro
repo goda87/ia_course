@@ -1,0 +1,12 @@
+---
+import GlossarySearch from "@/components/interactive/GlossarySearch.tsx";
+import { glossary } from "@/data";
+import { getModules } from "@/lib/modules";
+
+const modules = Object.fromEntries((await getModules()).map((m) => [m.id, m.data.title]));
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<div class="not-prose">
+  <GlossarySearch client:idle items={glossary} modules={modules} base={base} />
+</div>

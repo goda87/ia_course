@@ -1,0 +1,190 @@
+---
+title: Cómo valorar cualquier proyecto de IA
+order: 9
+block: aplicacion
+summary: Una lista de comprobación interactiva para revisar propuestas, las señales de alarma más habituales y lo básico del AI Act que debes conocer.
+minutes: 12
+verifiedAt: "2026-10-02"
+---
+
+import Checklist from "@/components/interactive/Checklist.tsx";
+import VizFrame from "@/components/ui/VizFrame.astro";
+import ParaLlevar from "@/components/ui/ParaLlevar.astro";
+import Aviso from "@/components/ui/Aviso.astro";
+import Callout from "@/components/ui/Callout.astro";
+import Term from "@/components/ui/Term.astro";
+
+Todo lo anterior se resume en una herramienta práctica. Úsala en la próxima reunión de presentación de un proyecto: marca cada punto, toma notas y, al final, **imprímela o guárdala como PDF** para el informe.
+
+<VizFrame
+  title="Lista de comprobación de proyectos de IA"
+  caption="Se guarda en este navegador. Para valorar otro proyecto, imprime o guarda la actual y pulsa «Reiniciar»."
+>
+  <Checklist
+    client:visible
+    sections={[
+      {
+        title: "El problema y el valor",
+        items: [
+          {
+            id: "problema",
+            text: "Está claro qué problema resuelve y cómo se resolvía antes.",
+            hint: "Si la IA es el punto de partida y no el problema, mala señal.",
+          },
+          {
+            id: "metrica",
+            text: "Hay una métrica de éxito concreta (horas ahorradas, coste por unidad, calidad medida).",
+            hint: "«Mejorar la eficiencia» no es una métrica.",
+          },
+          {
+            id: "alternativa",
+            text: "Se ha comparado con alternativas más sencillas (una herramienta existente, un proceso mejor, un chat genérico).",
+          },
+        ],
+      },
+      {
+        title: "La tecnología",
+        items: [
+          {
+            id: "modelo",
+            text: "Sabemos qué modelo o modelos usa y por qué esos.",
+            hint: "API de un tercero, modelo abierto ajustado o modelo propio.",
+          },
+          {
+            id: "propio",
+            text: "Está claro qué es propio (datos, flujos, integraciones, skills) y qué es de terceros.",
+            hint: "Para detectar un simple envoltorio.",
+          },
+          { id: "cambio", text: "Se puede cambiar de modelo o proveedor sin rehacer el producto." },
+          {
+            id: "autonomia",
+            text: "El nivel de autonomía (chatbot, copiloto, agente) es el adecuado para la tarea.",
+          },
+        ],
+      },
+      {
+        title: "Calidad y evaluación",
+        items: [
+          {
+            id: "evals",
+            text: "Existe un conjunto de pruebas con casos reales para medir la calidad.",
+            hint: "Sin evals, nadie sabe si una versión nueva es mejor o peor.",
+          },
+          {
+            id: "demo",
+            text: "Hemos visto funcionar el sistema con nuestros propios casos, no solo una demo preparada.",
+          },
+          {
+            id: "errores",
+            text: "Se sabe qué pasa cuando se equivoca: cómo se detecta, quién revisa y cuánto cuesta corregir.",
+          },
+          { id: "humano", text: "Hay revisión humana en los puntos críticos." },
+        ],
+      },
+      {
+        title: "Costes",
+        items: [
+          {
+            id: "coste-unidad",
+            text: "Conocemos el coste por unidad (por imagen, por segundo, por tarea, por usuario).",
+            hint: "Y cómo escala con el volumen.",
+          },
+          {
+            id: "coste-oculto",
+            text: "Están contemplados los costes ocultos: datos, iteración, retoque humano, mantenimiento.",
+          },
+          {
+            id: "roi",
+            text: "El ahorro esperado se compara con el coste total, no solo con el de la IA.",
+          },
+        ],
+      },
+      {
+        title: "Datos, derechos y regulación",
+        items: [
+          {
+            id: "datos",
+            text: "Sabemos dónde se procesan los datos y si hay datos personales o confidenciales.",
+            hint: "RGPD, residencia en la UE, uso de los datos para entrenar.",
+          },
+          { id: "licencias", text: "Las licencias de los modelos permiten nuestro uso comercial." },
+          {
+            id: "dataset",
+            text: "Los datos de entrenamiento o ajuste son nuestros o tenemos sus derechos.",
+          },
+          {
+            id: "ai-act",
+            text: "Se ha identificado el nivel de riesgo según el AI Act y las obligaciones de transparencia.",
+          },
+          {
+            id: "seguridad",
+            text: "Los permisos del sistema están acotados y hay protección frente a prompt injection.",
+          },
+        ],
+      },
+      {
+        title: "Riesgo de proveedor y continuidad",
+        items: [
+          {
+            id: "plan-b",
+            text: "Hay un plan B si el proveedor sube precios, cambia condiciones o cierra el servicio.",
+          },
+          {
+            id: "equipo",
+            text: "El equipo tiene capacidad para mantenerlo cuando salgan modelos nuevos (cada pocos meses).",
+          },
+          {
+            id: "piloto",
+            text: "Hay un piloto acotado, con criterios claros para decidir si se continúa.",
+          },
+        ],
+      },
+    ]}
+  />
+</VizFrame>
+
+## Señales de alarma
+
+<Aviso title="Desconfía cuando oigas…">
+
+- **«Hemos entrenado nuestro propio modelo»** sin más detalle. Pregunta exactamente qué han hecho: casi siempre es un ajuste de un modelo existente, que está bien, pero no es lo mismo.
+- **«Sustituye al 100 % a…»** cualquier profesión creativa o técnica. Hoy la IA ayuda; la calidad final sigue necesitando personas.
+- **Cifras sin metodología**: «ahorra un 80 % de tiempo», ¿medido cómo, con qué tareas, con cuántos usuarios?
+- **Demos que no se pueden repetir** con tus propios casos.
+- **«Usamos el mejor modelo del mercado»** como argumento principal: ese modelo está a disposición de cualquiera y dejará de ser el mejor en semanas.
+- **Ninguna mención a la revisión humana, los errores o los costes de uso.**
+- **Dependencia total de un único proveedor** sin plan alternativo.
+
+</Aviso>
+
+## Lo básico del AI Act
+
+El <Term id="ai-act">Reglamento europeo de IA</Term> clasifica los usos por nivel de riesgo. Para un departamento de innovación en el sector creativo, lo esencial es:
+
+<Callout variant="dato" title="Niveles de riesgo, en resumen">
+
+- **Prohibido** (desde febrero de 2025): manipulación subliminal, puntuación social, ciertos usos de reconocimiento biométrico, entre otros. Raramente afecta a proyectos creativos.
+- **Alto riesgo**: IA en selección de personal, educación, crédito, infraestructuras críticas… Tras el acuerdo de mayo de 2026, estas obligaciones se aplican desde diciembre de 2027 o agosto de 2028 según el caso.
+- **Transparencia** (desde agosto de 2026): avisar cuando alguien interactúa con una IA, etiquetar los deepfakes y el contenido manipulado. El marcado legible por máquina del contenido generado se exige desde diciembre de 2026. **Es lo que más afecta a los proyectos de imagen y vídeo.**
+- **Riesgo mínimo**: el resto, sin obligaciones específicas más allá de la buena práctica.
+
+Esto es un resumen orientativo, no asesoramiento jurídico. Ante un proyecto concreto, consulta con el área legal.
+
+</Callout>
+
+## Cómo plantear la decisión
+
+Una forma sencilla de presentar tu valoración:
+
+1. **Qué propone** el proyecto, en una frase y sin jerga.
+2. **En qué nivel está** (de la escalera del módulo 07 o de la escala de autonomía del módulo 05).
+3. **Qué está bien resuelto** y **qué dudas o alarmas** hay (de la lista de comprobación).
+4. **Coste estimado** y **ahorro esperado**, con sus supuestos.
+5. **Recomendación**: seguir, seguir con condiciones (normalmente un piloto acotado con métricas) o no seguir.
+
+<ParaLlevar>
+  - Valora el problema y el valor antes que la tecnología. - Exige ver el sistema funcionando con
+  tus casos, conocer el coste por unidad y saber qué pasa cuando se equivoca. - Licencias, datos, AI
+  Act y plan B frente al proveedor son parte de la valoración, no un trámite posterior. - Ante la
+  duda, un piloto acotado con métricas claras es casi siempre la mejor recomendación.
+</ParaLlevar>

@@ -43,3 +43,24 @@ describe("datos de src/data", () => {
     },
   );
 });
+
+describe("coherencia entre datos y contenido", () => {
+  const modDir = join(import.meta.dirname, "../src/content/modulos");
+  const slugs = new Set(readdirSync(modDir).map((f) => f.replace(/\.mdx$/, "")));
+
+  it("cada término del glosario apunta a un módulo existente", () => {
+    for (const g of load("glossary.json") as { id: string; module?: string }[]) {
+      if (g.module) expect(slugs.has(g.module), `${g.id} → ${g.module}`).toBe(true);
+    }
+  });
+
+  it("cada <Term id> usado en los módulos existe en el glosario", () => {
+    const ids = new Set((load("glossary.json") as { id: string }[]).map((g) => g.id));
+    for (const f of readdirSync(modDir)) {
+      const src = readFileSync(join(modDir, f), "utf8");
+      for (const m of src.matchAll(/<Term id="([^"]+)"/g)) {
+        expect(ids.has(m[1]!), `${f}: ${m[1]}`).toBe(true);
+      }
+    }
+  });
+});
